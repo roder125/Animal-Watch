@@ -14,7 +14,7 @@ export class AddAnimalPage {
 
   animal = {} as Animal;
 
-  constructor(private db: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, private animalList: AnimalListService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private animalList: AnimalListService) {
   }
 
   ionViewDidLoad() {
@@ -26,9 +26,10 @@ export class AddAnimalPage {
       console.log("Keine gültigen eingaben");
     }
     else{
-      this.animalList.addAnimal(animal).then((animal)=>{
-      this.navCtrl.pop();
-      });
+      this.animalList.addAnimal(animal)
+        .then((animal)=>{
+          this.navCtrl.pop();
+        });
     }
     
   }

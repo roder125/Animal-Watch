@@ -1,10 +1,11 @@
+import { LocalstorageService } from './../../services/localstorage/localstorage.service';
+import { AuthentificationService } from './../../services/authentification/authentification.service';
 import { Animal } from './../../models/add-animals/animal.interface';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { AddAnimalPage } from '../add-animal/add-animal';
@@ -19,15 +20,16 @@ export class HomePage {
   animalList$: Observable<Animal[]>;
   search: string;
 
-  constructor(private fireAuth: AngularFireAuth, public navCtrl: NavController, private animalList: AnimalListService) {
-    this.user = fireAuth.auth.currentUser;
+  constructor(public navCtrl: NavController, private animalList: AnimalListService,
+              private authService: AuthentificationService,private storageService: LocalstorageService) {
     this.showList();
   }
 
   logout(){
-    this.user.logout;
+    this.authService.logout();
+    this.storageService.saveLocal("","");
     this.navCtrl.setRoot(LoginPage);
-    LoginPage.resetLoginInformation(this.user);
+
   }
 
   showList(){

@@ -1,11 +1,11 @@
+import { LocalstorageService } from './../../services/localstorage/localstorage.service';
 import { AuthentificationService } from './../../services/authentification/authentification.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { HomePage } from '../home/home';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Storage } from '@ionic/storage';
-import { RegisterPage } from '../register/register';
 
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { RegisterPage } from '../register/register';
+import { HomePage } from "../home/home"
 
 @IonicPage()
 @Component({
@@ -14,80 +14,71 @@ import { RegisterPage } from '../register/register';
 })
 export class LoginPage {
 
-  email: string;
-  password: string;
-  keepLoggedIn: boolean;
-  stayLoggedIn: boolean;
-  savedEmail: string;
-  savedPassword: string;
-  public static storage : Storage;
-
-  constructor(private storage: Storage, private fireAuth: AngularFireAuth,private alertCtrl: AlertController, 
-              public navCtrl: NavController, public navParams: NavParams, private authS: AuthentificationService) {             
-                LoginPage.storage = storage;
+  email;
+  password;
+  loginUser;
+  keepLoggedIn;
+  savedEmail;
+  savedPassword;
+   
+  constructor(private alertCtrl: AlertController,public navCtrl: NavController, 
+              public navParams: NavParams, private authService: AuthentificationService, private storageService: LocalstorageService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-    
   }
-  /**
-   * Wenn Einloggdaten im lokalen Speicher vorhanden sind, wird automatisch mit diesen eingeloggt
-   */
-  ionViewWillEnter(){
-    let pEmail = this.storage.get('email')
 
-    let pPassword = this.storage.get('password')
+  /**
+   * Bevor die Seite geladen wird, wir geprüft, ob Login Daten gespeichert wurden
+   * Wenn ja, wird automatisch eingeloggt
+   */
+  ionViewWillEnter() {
+    let pEmail = this.storageService.getSavedEmail();
+    let pPassword = this.storageService.getSavedPassword();
 
     Promise.all([pEmail, pPassword])
     .then((data =>{      
       this.savedEmail = data[0];
-      console.log(data);
+      console.log(this.savedEmail);
       this.savedPassword = data[1];
-      console.log(data);
+      console.log(this.savedPassword);
       return;
     }))
     .then(()=>{
-      if(this.savedEmail != "" || this.savedPassword != ""){
-        this.authS.login(this.savedEmail, this.savedPassword);
-        this.fireAuth.auth.signInWithEmailAndPassword(this.savedEmail, this.savedPassword)
-        .then((data)=>{
-            var currentUser = this.fireAuth.auth.currentUser;
-            if(currentUser.emailVerified == false){
-                this.alert("Email wurde noch nicht verifiziert: " + this.fireAuth.auth.currentUser.email);
+      if(this.savedEmail != "" && this.savedPassword != ""){
+        this.authService.login(this.savedEmail, this.savedPassword)
+        .then(currentUser => {
+          console.log(currentUser);
+          // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
+          if(currentUser.emailVerified == false){
+            this.alert("Email has not verified yet " + currentUser.email);
+          }
+          else{
+            console.log("Got some Data", currentUser)
+            // Wenn User eingeloggt bleiben möchte, werden Anmeldedaten im lokalen Speicher gespeichert
+            if(this.keepLoggedIn == true){
+              console.log("Eingaben gespeichert " + this.email, this.password);
+              this.storageService.saveLocal(this.email, this.password);
             }
-            else{     
-                console.log("Got some Data", data)
-                // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
-                this.navCtrl.setRoot(HomePage);
-                // user is logged in
-            }
+            // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
+            this.navCtrl.setRoot(HomePage);
+            // user is logged in
+          }
         })
         .catch(error => {
-            console.log("Got an error", error)
-            // Bei fehlerhaftem einloggen wird die error Nachricht angezeigt
-            this.alert(error.message)
+          console.log("Got an error", error)
+          // Bei fehlerhaftem einloggen wird die error Nachricht angezeigt
+          this.alert(error.message)
         });
       }
-    });   
+      else{
+        //Mache nichts
+      }    
+    })
   }
 
   /**
-   * Wenn Angemeldet bleiben ausgewählt ist, wird die ingegebene Email und das Passwort in lokalen Storage gespeichert 
-   */
-  updateCheckbox(){  
-    if(this.keepLoggedIn == true){
-      console.log(this.keepLoggedIn);
-      this.storage.set('email', this.email);
-      this.storage.set('password', this.password);
-    }
-    else{
-      this.storage.set('email', "");
-      this.storage.set('password', "");
-    }
-  }
-
-    /**
    * Methode zum erzeugen einer InfoBox bzw. eines Alerts
    * @param message 
    */
@@ -98,25 +89,29 @@ export class LoginPage {
       buttons: ['OK']
     }).present();
   }
-
-    /**
+  /**
    * Methode zum einloggen
-   * this.fire.auth.signInWithEmailAndPassword() erwartet eine richtige Email und Passwort
+   * this.fire.auth.signInWithEmailAndPassword() erwartet eine rcihtige Email und Password
    */
-  login(){  
-      this.fireAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-      .then(data => {
-        var currentUser = this.fireAuth.auth.currentUser;
-        // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
-        if(currentUser.emailVerified == false){
-          this.alert("Email wurde noch nicht verifiziert: " + this.fireAuth.auth.currentUser.email);
+  login(){
+    this.authService.login(this.email, this.password)
+      .then(currentUser => {
+      console.log(currentUser);
+      // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
+      if(currentUser.emailVerified == false){
+        this.alert("Email has not verified yet " + currentUser.email);
+      }
+      else{
+        console.log("Got some Data", currentUser)
+        // Wenn User eingeloggt bleiben möchte, werden Anmeldedaten im lokalen Speicher gespeichert
+        if(this.keepLoggedIn == true){
+          console.log("Eingaben gespeichert " + this.email, this.password);
+          this.storageService.saveLocal(this.email, this.password);
         }
-        else{     
-          console.log("Got some Data", data)
-          // Bei erfolgreichem einloggen wird der User angezeigt und die neue    Seite LoggedIn angezeigt
-          this.alert("Hello " + this.fireAuth.auth.currentUser.email);
-          this.navCtrl.setRoot(HomePage);
-          // user is logged in
+        // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
+        this.alert("Hello " + currentUser.email);
+        this.navCtrl.setRoot(HomePage);
+        // user is logged in
         }
       })
       .catch(error => {
@@ -127,20 +122,10 @@ export class LoginPage {
   }
 
   /**
-   * Öffnet Register Page
+   * Öffnet die Register Page
    */
-  register(){
-    this.navCtrl.push(RegisterPage);
+  register() {
+  	this.navCtrl.push(RegisterPage);
   }
-
-  /**
-   * setzt gespeicherte Logindaten zurück, welche sich im lokal Storage befinden
-   * @param user 
-   */
-  public static resetLoginInformation(user: any){
-    console.log("auszuloggender User ist: " + user.email);
-    LoginPage.storage.set('email', "");
-    LoginPage.storage.set('password', "");
-  }
-
 }
+

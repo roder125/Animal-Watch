@@ -1,3 +1,4 @@
+import { LocalstorageService } from './../services/localstorage/localstorage.service';
 import { AuthentificationService } from './../services/authentification/authentification.service';
 import { AnimalListService } from './../services/animal-list/animal-list.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -57,6 +58,7 @@ export const environment = {
     AngularFireDatabase,
     AnimalListService,
     AuthentificationService,
+    LocalstorageService
   ]
 })
 export class AppModule {}

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { AuthentificationService } from './../../services/authentification/authentification.service';
+
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @IonicPage()
@@ -10,10 +11,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class RegisterPage {
 
-  email: string;
-  password: string;
+  email;
+  password;
 
-  constructor(private alertCtrl: AlertController, private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl: AlertController, public navCtrl: NavController, 
+              public navParams: NavParams, private authService: AuthentificationService) {
   }
 
   ionViewDidLoad() {
@@ -38,10 +40,10 @@ export class RegisterPage {
    * Außerdem wird eine verifizierungs Email geschickt 
    */
   register() {
-    this.fire.auth.createUserWithEmailAndPassword(this.email, this.password)
-    .then (data =>{
-      this.fire.auth.currentUser.sendEmailVerification();
-      this.alert("User is created: " + data.email + "\n" + "A verification Email has ben send to your Email address.");
+    this.authService.register(this.email, this.password)
+    .then (user =>{
+      user.currentUser.sendEmailVerification();
+      this.alert("User is created: " + user.email + "\n" + "A verification Email has ben send to your Email address.");
       this.navCtrl.pop();
     })
     .catch(error =>{
@@ -49,5 +51,4 @@ export class RegisterPage {
       this.alert("User is created " + error);
     });
   }
-
 }
