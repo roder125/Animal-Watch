@@ -1,14 +1,28 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="sGreen">
     <ion-title>
-      Ionic Blank
+      Home
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only clear (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+  </ion-buttons>  
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-searchbar placeholder="Suchen" [(ngModel)]="search"></ion-searchbar>
+ <ion-list>
+   <button ion-item *ngFor="let animal of animalList$ | async">
+     <h2>{{animal.animalName}}</h2>
+     <p>{{animal.animalAge}}</p>
+   </button>
+ </ion-list>
+ <ion-buttons end class="btnPos">
+   <button ion-button round color="sGreen" class="btnStyle" (click)="addAnimal()">
+     <ion-icon name="add">
+     </ion-icon>
+   </button>
+ </ion-buttons>
 </ion-content>

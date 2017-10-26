@@ -1,0 +1,27 @@
+
+<ion-header>
+
+  <ion-navbar color="sGreen">
+    <ion-title>Mein Tier vermitteln</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="animal.animalName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Alter</ion-label>
+      <ion-input type="number" [(ngModel)]="animal.animalAge"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-buttons text-center>
+        <button ion-button block color="sGreen" (click)="addAnimal(animal)">Speichern</button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>

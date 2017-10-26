@@ -1,0 +1,36 @@
+
+<ion-header>
+  
+    <ion-navbar color="sGreen">
+      <ion-title>Anmelden</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-list>
+        <ion-item id="email">
+          <ion-icon name="contact" item-start></ion-icon>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="email"></ion-input>
+        </ion-item>
+        
+        <ion-item id="password">
+          <ion-icon name="key" item-start></ion-icon>
+          <ion-label floating>Passwort</ion-label>
+          <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+  
+        <ion-item id="buttons">
+          <ion-buttons text-center>
+            <button ion-button color="lGrey" (click)="register()">Registrieren</button>
+          </ion-buttons>
+        </ion-item>   
+      </ion-list>
+  
+      <ion-card color="light">
+        <ion-card-content>
+          Erstellen Sie einen neuen Accout und bestätigen sie die Email Addresse.
+        </ion-card-content>
+      </ion-card>
+  </ion-content>
