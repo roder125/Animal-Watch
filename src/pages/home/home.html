@@ -11,12 +11,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-searchbar placeholder="Suchen" [(ngModel)]="search"></ion-searchbar>
  <ion-list>
    <button ion-item *ngFor="let animal of animalList$ | async">
-     <h2>{{animal.animalName}}</h2>
-     <p>{{animal.animalAge}}</p>
+      <ion-avatar item-start>
+        <img src={{animal.image}}>
+      </ion-avatar>
+     <h2>{{animal.name}}</h2>
+     <p>{{animal.age}}</p>
    </button>
  </ion-list>
  <ion-buttons end class="btnPos">
