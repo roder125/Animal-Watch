@@ -8,7 +8,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class AnimalListService{
 
-    private animalListRef = this.db.list<Animal>('animal-list');
+    private animalListRef = this.db.list<any>('animal-list');
 
     constructor(private db: AngularFireDatabase){}
 
@@ -19,7 +19,11 @@ export class AnimalListService{
         return this.animalListRef;
     }
 
-    addAnimal(animal: Animal){
-        return this.animalListRef.push(animal);
+    addAnimal(name, age, imageUrl){
+        return this.animalListRef.push({
+            name: name,
+            age: age,
+            image: imageUrl
+        });
     }
 }

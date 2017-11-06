@@ -1,3 +1,4 @@
+import { CameraSerive } from './../services/camera/camera.service';
 import { LocalstorageService } from './../services/localstorage/localstorage.service';
 import { AuthentificationService } from './../services/authentification/authentification.service';
 import { AnimalListService } from './../services/animal-list/animal-list.service';
@@ -9,7 +10,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { IonicStorageModule } from '@ionic/storage';
-import { AngularFireDatabase } from 'angularfire2/database'; 
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -58,7 +60,9 @@ export const environment = {
     AngularFireDatabase,
     AnimalListService,
     AuthentificationService,
-    LocalstorageService
+    LocalstorageService,
+    CameraSerive,
+    Camera
   ]
 })
 export class AppModule {}
