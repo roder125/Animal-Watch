@@ -45,10 +45,8 @@ export class AddAnimalPage {
       console.log("Keine gültigen eingaben");
     }
     else{
+      this.navCtrl.pop();
       this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.imageUrl)
-        .then((animal)=>{
-          this.navCtrl.pop();
-        });
     }
     
   }

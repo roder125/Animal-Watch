@@ -2,13 +2,14 @@ import { LocalstorageService } from './../../services/localstorage/localstorage.
 import { AuthentificationService } from './../../services/authentification/authentification.service';
 import { Animal } from './../../models/add-animals/animal.interface';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Slides } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { AddAnimalPage } from '../add-animal/add-animal';
+
 
 @Component({
   selector: 'page-home',
@@ -16,6 +17,8 @@ import { AddAnimalPage } from '../add-animal/add-animal';
 })
 export class HomePage {
 
+  @ViewChild('pageSlider') pageSlider: Slides;
+  tabs: any = '0';
   user;
   animalList$: Observable<Animal[]>;
   search: string;
@@ -24,6 +27,14 @@ export class HomePage {
               private authService: AuthentificationService,private storageService: LocalstorageService) {
     this.showList();
   }
+
+  selectTab(index) {
+    this.pageSlider.slideTo(index);
+  }
+
+  changeWillSlide($event) {
+    this.tabs = $event._snapIndex.toString();
+   }
 
   logout(){
     this.authService.logout();

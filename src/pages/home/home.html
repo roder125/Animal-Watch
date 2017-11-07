@@ -1,31 +1,52 @@
-<ion-header>
+<ion-header class="header">
   <ion-navbar color="sGreen">
     <ion-title>
-      Home
+      Animal-Watch
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only clear (click)="logout()">
         <ion-icon name="log-out"></ion-icon>
       </button>
-  </ion-buttons>  
-  </ion-navbar>
+    </ion-buttons>
+  </ion-navbar> 
+    <ion-toolbar color="sGreen">
+      <ion-segment color="light" [(ngModel)]="tabs">
+        <ion-segment-button (click)="selectTab(0)" value="0">Tier finden</ion-segment-button>
+        <ion-segment-button (click)="selectTab(1)" value="1">Favouriten</ion-segment-button>
+        <ion-segment-button (click)="selectTab(2)" value="2">Meine Einträge</ion-segment-button>
+      </ion-segment>
+    </ion-toolbar> 
 </ion-header>
 
 <ion-content>
-  <ion-searchbar placeholder="Suchen" [(ngModel)]="search"></ion-searchbar>
- <ion-list>
-   <button ion-item *ngFor="let animal of animalList$ | async">
-      <ion-avatar item-start>
-        <img src={{animal.image}}>
-      </ion-avatar>
-     <h2>{{animal.name}}</h2>
-     <p>{{animal.age}}</p>
-   </button>
- </ion-list>
- <ion-buttons end class="btnPos">
-   <button ion-button round color="sGreen" class="btnStyle" (click)="addAnimal()">
-     <ion-icon name="add">
-     </ion-icon>
-   </button>
- </ion-buttons>
+    <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)">
+      <ion-slide>
+          <!--<ion-searchbar placeholder="Suchen" [(ngModel)]="search"></ion-searchbar>-->
+        <ion-list>
+          <button ion-item *ngFor="let animal of animalList$ | async">
+            <ion-avatar item-start>
+              <img src={{animal.image}}>
+            </ion-avatar>
+            <h2>{{animal.name}}</h2>
+            <p>{{animal.age}}</p>
+          </button>
+        </ion-list>
+
+        <ion-buttons end class="btnPos">
+          <button ion-button round color="sGreen" class="btnStyle" (click)="addAnimal()">
+            <ion-icon name="add">
+            </ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-slide>
+
+      <ion-slide>
+        <h1>ContentTab 2</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <h1>ContentTab 3</h1>
+      </ion-slide>
+      
+    </ion-slides>
 </ion-content>
