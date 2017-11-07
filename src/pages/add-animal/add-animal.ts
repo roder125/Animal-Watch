@@ -46,7 +46,8 @@ export class AddAnimalPage {
     }
     else{
       this.navCtrl.pop();
-      this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.imageUrl)
+      // animal.imageUrl muss nachtäglich hinzugefügt werden
+      this.animalList.addAnimal(animal.animalName, animal.animalAge)
     }
     
   }
