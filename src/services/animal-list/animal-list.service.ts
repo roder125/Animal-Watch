@@ -6,7 +6,7 @@ import { Injectable } from "@angular/core";
 
 
 @Injectable()
-export class AnimalListService{
+export class AnimalListService{    
 
     private animalListRef = this.db.list<any>('animal-list');
 
