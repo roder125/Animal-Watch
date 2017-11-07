@@ -1,3 +1,4 @@
+import { AnimalDetailsPage } from './../animal-details/animal-details';
 import { LocalstorageService } from './../../services/localstorage/localstorage.service';
 import { AuthentificationService } from './../../services/authentification/authentification.service';
 import { Animal } from './../../models/add-animals/animal.interface';
@@ -60,14 +61,13 @@ export class HomePage {
   showList(){
     this.animalList$ = this.animalList
     .getShoppingList()  // DB List
-    .auditTrail(["child_added"])  // Access to Key and Value
-    
+    .auditTrail(["child_added"])  // Access to Key and Value  
     .map(changes => {
       return changes.map( c => ({
         key: c.payload.key, ... c.payload.val()
       }))
     });
-    this.savedList = this.animalList$;
+    //this.savedList = this.animalList$;
 
     console.log("Daten der Datenbank");
     console.log(this.animalList$);

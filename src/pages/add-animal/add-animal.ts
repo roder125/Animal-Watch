@@ -14,6 +14,7 @@ import { Animal } from '../../models/add-animals/animal.interface';
 export class AddAnimalPage {
 
   animal = {} as Animal;
+  date: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private animalList: AnimalListService, private cameraService: CameraSerive) {
   }
@@ -46,10 +47,12 @@ export class AddAnimalPage {
     }
     else{
       this.navCtrl.pop();
+      this.date = new Date().setDate(0);
+      animal.entryDate =  this.date;
+      console.log("date: " + animal.entryDate);
       // animal.imageUrl muss nachtäglich hinzugefügt werden
-      this.animalList.addAnimal(animal.animalName, animal.animalAge)
+      this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate)
     }
-    
   }
 
 }

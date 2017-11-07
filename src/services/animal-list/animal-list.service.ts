@@ -20,10 +20,11 @@ export class AnimalListService{
     }
 
     // , imageUrl muss noch hinzugefügt werden
-    addAnimal(name, age){
+    addAnimal(name, age, date){
         return this.animalListRef.push({
             name: name,
             age: age,
+            date: date
             //image: imageUrl
         });
     }

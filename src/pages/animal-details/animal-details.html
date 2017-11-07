@@ -1,0 +1,28 @@
+
+<ion-header>
+
+  <ion-navbar color="brownLike">
+    <ion-title>{{animal.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-slides #pageSlider>
+    <ion-slide>
+      Bild
+    </ion-slide>
+    <ion-slide>
+      Bild
+    </ion-slide>
+  </ion-slides>
+  <div id="ageDiv">
+    <h5>Alter: {{animal.age}}</h5>
+  </div>
+  <div id="saveButtonDiv">
+    <button ion-button block color="lGrey">
+      <p>merken</p>
+    </button>
+  </div>
+</ion-content>

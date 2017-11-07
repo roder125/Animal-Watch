@@ -1,3 +1,4 @@
+
 import { CameraSerive } from './../services/camera/camera.service';
 import { LocalstorageService } from './../services/localstorage/localstorage.service';
 import { AuthentificationService } from './../services/authentification/authentification.service';
@@ -18,6 +19,7 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { RegisterPage } from '../pages/register/register';
 import { AddAnimalPage } from '../pages/add-animal/add-animal';
+
 
 export const environment = {
   firebase: {

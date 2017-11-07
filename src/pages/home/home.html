@@ -1,5 +1,5 @@
 <ion-header class="header">
-  <ion-navbar color="sGreen">
+  <ion-navbar color="brownLike">
 
     <ion-searchbar placeholder="Suchen" animated="true" [(ngModel)]="search"></ion-searchbar>
     
@@ -9,7 +9,7 @@
       </button>
     </ion-buttons>
   </ion-navbar> 
-    <ion-toolbar color="sGreen">
+    <ion-toolbar color="brownLike">
       <ion-segment color="light" [(ngModel)]="tabs">
         <ion-segment-button (click)="selectTab(0)" value="0">Tier finden</ion-segment-button>
         <ion-segment-button (click)="selectTab(1)" value="1">Favouriten</ion-segment-button>
@@ -24,7 +24,9 @@
           <!--<ion-searchbar placeholder="Suchen" [(ngModel)]="search"></ion-searchbar>-->
         <ion-scroll scrollY="true" style="height: 80vh; width: 100%">
           <ion-list>
-            <button ion-item (click)="showDetails()" *ngFor="let animal of savedList | async">
+            <button ion-item *ngFor="let animal of animalList$ | async" 
+                    navPush="AnimalDetailsPage" [navParams]="{animal: animal}">
+
               <ion-avatar item-start>
                 <img src={{animal.image}}>
               </ion-avatar>
@@ -34,7 +36,7 @@
           </ion-list>
         </ion-scroll>
         <ion-buttons end class="btnPos">
-          <button ion-button round color="sGreen" class="btnStyle" (click)="addAnimal()">
+          <button ion-button round color="brownLike" class="btnStyle" (click)="addAnimal()">
             <ion-icon name="add">
             </ion-icon>
           </button>
