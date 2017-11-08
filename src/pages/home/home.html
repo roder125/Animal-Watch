@@ -24,14 +24,15 @@
           <!--<ion-searchbar placeholder="Suchen" [(ngModel)]="search"></ion-searchbar>-->
         <ion-scroll scrollY="true" style="height: 80vh; width: 100%">
           <ion-list>
-            <button ion-item *ngFor="let animal of animalList$ | async" 
+            <button ion-item *ngFor="let animal of animalList$ | async"
                     navPush="AnimalDetailsPage" [navParams]="{animal: animal}">
-
+                    
               <ion-avatar item-start>
                 <img src={{animal.image}}>
               </ion-avatar>
               <h2>{{animal.name}}</h2>
-              <p>{{animal.age}}</p>
+              <p>Alter: {{animal.age}}</p>
+              <p>{{animal.downloadUrl}}</p>
             </button>
           </ion-list>
         </ion-scroll>

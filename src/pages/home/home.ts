@@ -58,6 +58,7 @@ export class HomePage {
     });
   }
   */
+
   showList(){
     this.animalList$ = this.animalList
     .getShoppingList()  // DB List
@@ -74,7 +75,6 @@ export class HomePage {
     console.log("----------------------------------");
     this.animalList.getShoppingList().auditTrail(["child_changed"]).subscribe(console.log);  
   }
-  
   /**
    * Fügt ein Tier in die Datenbank ein
    */

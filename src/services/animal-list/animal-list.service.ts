@@ -9,22 +9,36 @@ import * as firebase from 'firebase';
 export class AnimalListService{    
 
     private animalListRef = this.db.list<any>('animal-list');
+    
 
     constructor(private db: AngularFireDatabase){
     }
 
-    private basePath:string = '/uploads';
+    url;
 
+    /**
+     * Fügt ein Bild in den Storage von Firebase ein und speicher die download Url
+     * @param result 
+     * @param name 
+     */
     // https://angularfirebase.com/lessons/angular-file-uploads-to-firebase-storage/
-    pushImageUpload(result){
-        var pictures = firebase.storage().ref("pictures");
+    pushImageUpload(result, name){
+        var storageRef = firebase.storage().ref(`pictures/${name}`);
         var image = `data:image/jpeg;base64,${result}`;
-        pictures.putString(image, "data_url");
+        return storageRef.putString(image, "data_url")
+            .then((data)=>{
+                let downloadUrl = data.downloadURL;
+                this.url = downloadUrl;
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
     }
 
-    shoppingList(){
-        firebase.database().ref("animal-list")
+    getDownloadUrl(){
+        return this.url;
     }
+
     /**
      * Return die animal-list der Datanbank
      */
@@ -33,11 +47,12 @@ export class AnimalListService{
     }
 
     // , imageUrl muss noch hinzugefügt werden
-    addAnimal(name, age, date){
+    addAnimal(name, age, date, url){
         return this.animalListRef.push({
             name: name,
             age: age,
-            date: date
+            date: date,
+            downloadUrl: url
             //image: imageUrl
         });
     }
