@@ -26,6 +26,7 @@ export class HomePage {
   savedList: Observable<any[]>;
   animalList$: Observable<SnapshotAction[]>;
   search: string;
+  image;
 
   constructor(public navCtrl: NavController, private animalList: AnimalListService,
               private authService: AuthentificationService,private storageService: LocalstorageService) {
@@ -46,13 +47,14 @@ export class HomePage {
     this.navCtrl.setRoot(LoginPage);
 
   }
-/*
+
+  /*
   showList(){
-    this.animalList$ = this.animalList
+    this.savedList = this.animalList
     .getShoppingList()  // DB List
     .snapshotChanges()  // Access to Key and Value
-    .map(changes => {
-      return changes.map( c => ({
+    .map(data => {
+      return data.map( c => ({
         key: c.payload.key, ... c.payload.val()
       }))
     });
@@ -73,8 +75,14 @@ export class HomePage {
     console.log("Daten der Datenbank");
     console.log(this.animalList$);
     console.log("----------------------------------");
-    this.animalList.getShoppingList().auditTrail(["child_changed"]).subscribe(console.log);  
+    this.animalList.getShoppingList().auditTrail().subscribe(console.log); 
+    //-------------------------------------------------------------------------------------------------------- 
+    var storageImage = this.animalList.getPicture()
+      .then((data)=>{
+        this.image = data; 
+      })
   }
+
   /**
    * Fügt ein Tier in die Datenbank ein
    */

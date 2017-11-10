@@ -23,9 +23,9 @@ export class AnimalListService{
      */
     // https://angularfirebase.com/lessons/angular-file-uploads-to-firebase-storage/
     pushImageUpload(result, name){
-        var storageRef = firebase.storage().ref(`pictures/${name}`);
+        var storageRef$ = firebase.storage().ref(`pictures/${name}`);
         var image = `data:image/jpeg;base64,${result}`;
-        return storageRef.putString(image, "data_url")
+        return storageRef$.putString(image, "data_url")
             .then((data)=>{
                 let downloadUrl = data.downloadURL;
                 this.url = downloadUrl;
@@ -33,6 +33,11 @@ export class AnimalListService{
             .catch((error)=>{
                 console.log(error);
             });
+    }
+
+    getPicture(){
+        var storageRef$ = firebase.storage().ref(`pictures/123`);
+        return storageRef$.getDownloadURL();
     }
 
     getDownloadUrl(){
