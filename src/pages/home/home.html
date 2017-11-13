@@ -22,7 +22,7 @@
     <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)">
       <ion-slide>
           <!--<ion-searchbar placeholder="Suchen" [(ngModel)]="search"></ion-searchbar>-->
-        <ion-scroll scrollY="true" style="height: 80vh; width: 100%">
+        <ion-scroll scrollY="true" style="height: 83vh; width: 100% ;">
           <ion-list>
             <button ion-item *ngFor="let animal of animalList$ | async"
                     navPush="AnimalDetailsPage" [navParams]="{animal: animal}">

@@ -48,6 +48,7 @@ export class AnimalListService{
      * Return die animal-list der Datanbank
      */
     getShoppingList(){
+        this.animalListRef = this.db.list<any>('animal-list', ref => ref.orderByChild('date'));
         return this.animalListRef;
     }
 

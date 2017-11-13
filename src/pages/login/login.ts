@@ -47,7 +47,8 @@ export class LoginPage {
     }))
     .then(()=>{
       if(this.savedEmail != "" && this.savedPassword != ""){
-        this.authService.login(this.savedEmail, this.savedPassword)
+       // this.authService.login(this.savedEmail, this.savedPassword)
+        this.authService.login("roderick.schuessler8@googlemail.com", "123456")
         .then(currentUser => {
           console.log(currentUser);
           // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
