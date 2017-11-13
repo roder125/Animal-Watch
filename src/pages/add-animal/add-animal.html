@@ -11,9 +11,6 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <button ion-button block color="lGrey"(click)="getPicture()">Stelle ein Foto rein</button>
-    </ion-item>
-    <ion-item>
       <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="animal.animalName"></ion-input>
     </ion-item>
@@ -22,8 +19,13 @@
       <ion-input type="number" [(ngModel)]="animal.animalAge"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label floating>Beschreibung, {{textLeft}} Zeichen übrig</ion-label>
+      <ion-textarea rows="10" maxLength="500" type="text" [(ngModel)]="animal.description" (ionChange)='textCounter()'></ion-textarea>
+    </ion-item>
+    <ion-item  no-lines>
       <ion-buttons text-center>
-        <button ion-button block color="lGrey" (click)="addAnimal(animal)">Speichern</button>
+        <button ion-button full color="lGrey"(click)="getPicture()">Stelle ein Foto rein</button>
+        <button ion-button full color="lGrey" (click)="addAnimal(animal)">Speichern</button>
       </ion-buttons>
     </ion-item>
   </ion-list>

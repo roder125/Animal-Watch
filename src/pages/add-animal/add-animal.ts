@@ -16,12 +16,21 @@ export class AddAnimalPage {
   animal = {} as Animal;
   date: any;
   downloadUrl: any;
+  textLeft = 500;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private animalList: AnimalListService, private cameraService: CameraSerive) {
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddAnimalPage');
+  }
+
+  textCounter(){
+    var maxLen = 500;
+    this.textLeft = 0;
+    this.textLeft = maxLen - this.animal.description.length;
+    console.log("Buchstaben übrig: " + this.textLeft);
   }
 
   /**
@@ -65,7 +74,7 @@ export class AddAnimalPage {
           this.downloadUrl = this.animalList.getDownloadUrl();
           console.log("add animal-page: " + this.downloadUrl);
           // animal.imageUrl muss nachtäglich hinzugefügt werden
-          this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, this.downloadUrl);
+          this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, this.downloadUrl, animal.description);
         });
 
     }

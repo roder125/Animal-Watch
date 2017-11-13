@@ -1,12 +1,11 @@
 page-animal-details {
 
     ion-slides{
-        height: 30vh;
-        width: 100%;
-        background-color: grey; 
+        height: 380px;
+        width: 380px;
     }
 
-    #ageDiv{
-        padding-top: 15px;
+    #description{
+        white-space: pre-wrap;
     }
 }

@@ -52,12 +52,13 @@ export class AnimalListService{
     }
 
     // , imageUrl muss noch hinzugefügt werden
-    addAnimal(name, age, date, url){
+    addAnimal(name, age, date, url, description){
         return this.animalListRef.push({
             name: name,
             age: age,
             date: date,
-            downloadUrl: url
+            downloadUrl: url,
+            description: description
             //image: imageUrl
         });
     }

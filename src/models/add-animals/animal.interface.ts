@@ -4,4 +4,5 @@ export interface Animal{
     animalAge: number;
     imageUrl: string;
     entryDate: any;
+    description: string;
 }

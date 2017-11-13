@@ -11,7 +11,10 @@ export class CameraSerive{
 
     takePicture(){
         const options: CameraOptions = {
-            quality: 100,
+            quality: 80,
+            targetWidth: 380,
+            targetHeight: 380,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,

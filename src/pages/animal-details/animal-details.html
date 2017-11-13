@@ -9,20 +9,27 @@
 
 
 <ion-content padding>
-  <ion-slides #pageSlider>
+  <ion-slides id="ionSlide">
     <ion-slide>
       <img src={{animal.downloadUrl}} alt="kein Bild">
     </ion-slide>
     <ion-slide>
-      Bild
+      <img src={{animal.downloadUrl}} alt="kein Bild">
     </ion-slide>
   </ion-slides>
-  <div id="ageDiv">
-    <h5>Alter: {{animal.age}}</h5>
-  </div>
-  <div id="saveButtonDiv">
-    <button ion-button block color="lGrey">
-      <p>merken</p>
-    </button>
+  <ion-list>
+    <ion-item>
+      <h2>Alter: {{animal.age}}</h2>
+    </ion-item>
+    <ion-item>
+      <div id="description">{{animal.description}}</div>
+    </ion-item>
+  </ion-list>
+  <div>
+    <ion-buttons text-center>
+      <button ion-button full color="lGrey">
+        merken
+      </button>
+    </ion-buttons>
   </div>
 </ion-content>

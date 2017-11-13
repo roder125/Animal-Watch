@@ -109,7 +109,6 @@ export class LoginPage {
           this.storageService.saveLocal(this.email, this.password);
         }
         // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
-        this.alert("Hello " + currentUser.email);
         this.navCtrl.setRoot(HomePage);
         // user is logged in
         }
