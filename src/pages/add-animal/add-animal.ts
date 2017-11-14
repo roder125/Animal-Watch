@@ -34,6 +34,7 @@ export class AddAnimalPage {
 
   }
 
+  //https://ionicacademy.com/ionic-tokeninput/
   addTalk() {
     this.talks.push({name: this.name, topics: this.topics});
   }
