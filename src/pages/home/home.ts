@@ -71,14 +71,21 @@ export class HomePage {
     this.animalList$ = this.animalList
     .getShoppingList()  // DB List
     .auditTrail()  // Access to Key and Value  ["child_added"]
+    /*
     .map(changes => {
-      /* 
+     /*  
       changes.forEach(snapshot => {
         var data = snapshot.payload.val();
         
       })
-      */
+      
       return changes.map( c => ({
+        key: c.payload.key, ... c.payload.val()
+      }))
+    });
+    */
+    .map(data => {
+      return data.reverse().map( c => ({
         key: c.payload.key, ... c.payload.val()
       }))
     });

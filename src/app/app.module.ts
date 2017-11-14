@@ -13,6 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { IonicStorageModule } from '@ionic/storage';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { Camera } from '@ionic-native/camera';
+import { RlTagInputModule } from 'angular2-tag-input';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -49,7 +50,8 @@ export const environment = {
     IonicStorageModule.forRoot({
       name: '__mydb',
          driverOrder: ['indexeddb', 'sqlite', 'websql']
-    })
+    }),
+    RlTagInputModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
