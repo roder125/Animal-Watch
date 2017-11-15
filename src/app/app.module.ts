@@ -20,6 +20,7 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { RegisterPage } from '../pages/register/register';
 import { AddAnimalPage } from '../pages/add-animal/add-animal';
+import { SearchResultPage } from '../pages/search-result/search-result';
 
 
 export const environment = {
@@ -39,7 +40,8 @@ export const environment = {
     LoginPage,
     HomePage,
     RegisterPage,
-    AddAnimalPage
+    AddAnimalPage,
+    SearchResultPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ export const environment = {
     LoginPage,
     HomePage,
     RegisterPage,
-    AddAnimalPage
+    AddAnimalPage,
+    SearchResultPage
   ],
   providers: [
     StatusBar,

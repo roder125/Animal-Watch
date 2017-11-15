@@ -1,8 +1,9 @@
 <ion-header class="header">
   <ion-navbar color="brownLike">
-
+    <!--
     <ion-searchbar animated="true" placeholder="Suchen" animated="true" [(ngModel)]="search"></ion-searchbar>
-    
+    -->
+    <button ion-button (click)="search()">Suche</button>
     <ion-buttons end>
       <button ion-button icon-only clear (click)="logout()">
         <ion-icon name="log-out"></ion-icon>
@@ -21,8 +22,7 @@
 <ion-content>
     <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)">
       <ion-slide>
-          <!--<ion-searchbar placeholder="Suchen" [(ngModel)]="search"></ion-searchbar>-->
-        <ion-scroll scrollY="true" style="height: 83vh; width: 100% ;">
+        <ion-scroll id="list" scrollY="true">
           <ion-list>
             <button ion-item *ngFor="let animal of animalList$ | async"
                     navPush="AnimalDetailsPage" [navParams]="{animal: animal}">
@@ -35,6 +35,11 @@
             </button>
           </ion-list>
         </ion-scroll>
+        <ion-list>
+            <ion-item *ngFor="let item of resultArray">
+                {{item.name}}
+              </ion-item>
+        </ion-list>
         <ion-buttons end class="btnPos">
           <button ion-button round color="brownLike" class="btnStyle" (click)="addAnimal()">
             <ion-icon name="add">
