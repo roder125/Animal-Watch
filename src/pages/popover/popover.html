@@ -1,0 +1,30 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Suche</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Tierart</ion-label>
+      <ion-input type="text" [(ngModel)]="animalSpecies"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Rasse</ion-label>
+      <ion-input type="text" [(ngModel)]="animalBreed"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="animalName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button full ion-button color="brownLike" (click)="search()">suchen</button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

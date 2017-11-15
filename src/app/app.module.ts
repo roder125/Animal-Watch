@@ -1,3 +1,4 @@
+import { PopoverPage } from './../pages/popover/popover';
 
 import { CameraSerive } from './../services/camera/camera.service';
 import { LocalstorageService } from './../services/localstorage/localstorage.service';
@@ -41,7 +42,8 @@ export const environment = {
     HomePage,
     RegisterPage,
     AddAnimalPage,
-    SearchResultPage
+    SearchResultPage,
+    PopoverPage
   ],
   imports: [
     BrowserModule,
@@ -63,6 +65,7 @@ export const environment = {
     RegisterPage,
     AddAnimalPage,
     SearchResultPage,
+    PopoverPage,
   ],
   providers: [
     StatusBar,

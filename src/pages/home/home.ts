@@ -5,13 +5,14 @@ import { AuthentificationService } from './../../services/authentification/authe
 import { Animal } from './../../models/add-animals/animal.interface';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Slides, List } from 'ionic-angular';
+import { NavController, Slides, List, PopoverController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { AddAnimalPage } from '../add-animal/add-animal';
 import { AngularFireAction, SnapshotAction, AngularFireList } from 'angularfire2/database';
+import { PopoverPage } from '../popover/popover';
 
 @Component({
   selector: 'page-home',
@@ -27,13 +28,23 @@ export class HomePage {
   image;
   noImage;
 
-  constructor(public navCtrl: NavController, private animalListService: AnimalListService,
+  constructor(public navCtrl: NavController, private animalListService: AnimalListService, public popoverCtrl: PopoverController,
               private authService: AuthentificationService,private storageService: LocalstorageService) {
     this.showList();
   }
   
   ionViewDidLoad() {
     
+  }
+  /**
+   * Öffnet das Popover für die Suche
+   * @param event 
+   */
+  presentPopover(event){
+    let popover = this.popoverCtrl.create(PopoverPage);
+    popover.present({
+      ev: event
+    });
   }
 
   /**
