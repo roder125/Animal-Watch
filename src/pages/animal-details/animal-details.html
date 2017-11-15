@@ -8,19 +8,17 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ion-slides pager="true" effect="slide" zoom="true">
+      <ion-slide>
+        <img src={{animal.downloadUrl}} alt="kein Bild">
+      </ion-slide>
+      <ion-slide>
+        <img src={{animal.downloadUrl}} alt="kein Bild">
+      </ion-slide>
+  </ion-slides>
   
   <ion-list>
-    <ion-item no-lines>
-        <ion-slides id="ionSlide">
-          <ion-slide>
-            <img src={{animal.downloadUrl}} alt="kein Bild">
-          </ion-slide>
-          <ion-slide>
-            <img src={{animal.downloadUrl}} alt="kein Bild">
-          </ion-slide>
-        </ion-slides>
-    </ion-item>
     <ion-item>
       <h2>Alter: {{animal.age}}</h2>
     </ion-item>

@@ -50,16 +50,13 @@ export class LoginPage {
        // this.authService.login(this.savedEmail, this.savedPassword)
         this.authService.login("roderick.schuessler8@googlemail.com", "123456")
         .then(currentUser => {
-          console.log(currentUser);
           // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
           if(currentUser.emailVerified == false){
             this.alert("Email has not verified yet " + currentUser.email);
           }
           else{
-            console.log("Got some Data", currentUser)
             // Wenn User eingeloggt bleiben möchte, werden Anmeldedaten im lokalen Speicher gespeichert
             if(this.keepLoggedIn == true){
-              console.log("Eingaben gespeichert " + this.email, this.password);
               this.storageService.saveLocal(this.email, this.password);
             }
             // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
@@ -68,7 +65,6 @@ export class LoginPage {
           }
         })
         .catch(error => {
-          console.log("Got an error", error)
           // Bei fehlerhaftem einloggen wird die error Nachricht angezeigt
           this.alert(error.message)
         });
@@ -97,16 +93,13 @@ export class LoginPage {
   login(){
     this.authService.login(this.email, this.password)
       .then(currentUser => {
-      console.log(currentUser);
       // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
       if(currentUser.emailVerified == false){
         this.alert("Email has not verified yet " + currentUser.email);
       }
       else{
-        console.log("Got some Data", currentUser)
         // Wenn User eingeloggt bleiben möchte, werden Anmeldedaten im lokalen Speicher gespeichert
         if(this.keepLoggedIn == true){
-          console.log("Eingaben gespeichert " + this.email, this.password);
           this.storageService.saveLocal(this.email, this.password);
         }
         // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
@@ -115,7 +108,6 @@ export class LoginPage {
         }
       })
       .catch(error => {
-        console.log("Got an error", error)
         // Bei fehlerhaftem einloggen wird die error Nachricht angezeigt
         this.alert(error.message)
       });

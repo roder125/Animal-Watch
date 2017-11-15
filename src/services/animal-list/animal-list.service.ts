@@ -8,7 +8,7 @@ import * as firebase from 'firebase';
 @Injectable()
 export class AnimalListService{    
 
-    private animalListRef;
+    private animalListRef = this.db.list<any>('animal-list');
     
 
     constructor(private db: AngularFireDatabase){
@@ -50,16 +50,17 @@ export class AnimalListService{
      */
     getShoppingList(){
         //this.animalListRef = this.db.list<any>('animal-list', ref => ref.orderByChild('date'));
-        this.animalListRef = this.db.list<any>('animal-list');
         return this.animalListRef;
     }
 
 
-    // , imageUrl muss noch hinzugefügt werden
-    addAnimal(name, age, date, url, description){
+    // imageUrl muss noch hinzugefügt werden
+    addAnimal(name, age, date, url, description, species, breed){
         return this.animalListRef.push({
             name: name,
             age: age,
+            species: species,
+            breed: breed,
             date: date,
             downloadUrl: url,
             description: description

@@ -13,23 +13,26 @@
     <ion-item>
       <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="animal.animalName"></ion-input>
-    </ion-item>
-    <ion-item>
-      <rl-tag-input
-        [(ngModel)]="topics"
-        [addOnBlur]="false"
-        [autocomplete]="true"
-        [autocompleteItems]="preparedTags"
-        placeholder="Topics">
-      </rl-tag-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Rasse</ion-label>
-      <ion-input type="text" [(ngModel)]="animal.animalBreed"></ion-input>
-    </ion-item>
+    </ion-item> 
     <ion-item>
       <ion-label floating>Alter</ion-label>
       <ion-input type="number" [(ngModel)]="animal.animalAge"></ion-input>
+    </ion-item>
+    <ion-item>
+      <rl-tag-input
+        [(ngModel)]="species"
+        [addOnBlur]="false"
+        [autocomplete]="true"
+        [autocompleteItems]="preparedTags"
+        placeholder="Tierart">
+      </rl-tag-input>
+    </ion-item>
+    <ion-item>
+      <rl-tag-input
+        [(ngModel)]="breed"
+        [addOnBlur]="false"
+        placeholder="Rasse">
+      </rl-tag-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Beschreibung, {{textLeft}} Zeichen übrig</ion-label>

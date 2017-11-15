@@ -33,6 +33,10 @@ export class HomePage {
               private authService: AuthentificationService,private storageService: LocalstorageService) {
     this.showList();
   }
+  
+  ionViewDidLoad() {
+    
+  }
 
   selectTab(index) {
     this.pageSlider.slideTo(index);
@@ -48,7 +52,6 @@ export class HomePage {
     this.navCtrl.setRoot(LoginPage);
 
   }
-
   /*
   showList(){
     this.animalList$ = this.animalList
@@ -72,20 +75,18 @@ export class HomePage {
     .getShoppingList()  // DB List
     .auditTrail()  // Access to Key and Value  ["child_added"]
     /*
-    .map(changes => {
-     /*  
+    .map(changes => { 
       changes.forEach(snapshot => {
         var data = snapshot.payload.val();
         
-      })
-      
+      })   
       return changes.map( c => ({
         key: c.payload.key, ... c.payload.val()
       }))
     });
     */
     .map(data => {
-      return data.reverse().map( c => ({
+      return data.slice().reverse().map( c => ({
         key: c.payload.key, ... c.payload.val()
       }))
     });
