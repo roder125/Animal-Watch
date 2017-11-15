@@ -62,7 +62,7 @@ export const environment = {
     HomePage,
     RegisterPage,
     AddAnimalPage,
-    SearchResultPage
+    SearchResultPage,
   ],
   providers: [
     StatusBar,

@@ -1,17 +1,21 @@
 
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="brownLike">
     <ion-title>Suchergebnisse</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      {{animal.name}}
-    </ion-item>
+<ion-content>
+  <ion-list>     
+    <button ion-item *ngFor="let animal of resultArray" navPush="AnimalDetailsPage" [navParams]="{animal: animal}">
+      <ion-thumbnail item-start>
+        <img src={{animal.downloadUrl}} alt="kein Bild">
+      </ion-thumbnail>
+      <h2>{{animal.name}}</h2>
+      <p>{{animal.age}}</p>
+    </button>
   </ion-list>
 </ion-content>

@@ -56,7 +56,7 @@ export class AnimalListService{
     /**
      * Returnt das Result einer Datenbankabfrage
      */
-    getSearchResult(tag: string){
+    getListRef(){
         var ref =firebase.database().ref("animal-list");
         return ref;
     }

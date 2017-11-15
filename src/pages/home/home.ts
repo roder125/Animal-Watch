@@ -103,11 +103,13 @@ export class HomePage {
   }
 
   search(){
+    /*
     this.animalListService.getSearchResult("tag").orderByChild("name").equalTo("Skotty").on("child_added",(snapshot) =>{
       var val = snapshot.val();
       this.resultArray.push(val);
-    })
-    console.log(this.resultArray)
-    //this.navCtrl.push(SearchResultPage);
+    });*/
+    var tag = "species"
+    var species = "Hund"
+    this.navCtrl.push(SearchResultPage, {tag: tag, species: species});
   }
 }
