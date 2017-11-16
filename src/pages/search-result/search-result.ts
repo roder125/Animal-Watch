@@ -1,3 +1,4 @@
+import { SnapshotAction } from 'angularfire2/database';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -10,6 +11,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SearchResultPage {
 
   resultArray = [];
+  saveArray = [];
+
   speciesTag = this.navParams.get("speciesTag");
   animalSpecies = this.navParams.get("aninmalSpecies");
  
@@ -35,35 +38,43 @@ export class SearchResultPage {
     if(this.animalSpecies != undefined && this.animalBreed != undefined){
       this.listService.getListRef().orderByChild("species").equalTo(this.animalSpecies).on("child_added",(snapshot) =>{
         var val = snapshot.val();
-        this.resultArray.push(val);
+        this.reverseArray(val);
       });
       this.listService.getListRef().orderByChild("breed").equalTo(this.animalBreed).on("child_added",(snapshot) =>{
         var val = snapshot.val();
-        this.resultArray.push(val);
+        this.reverseArray(val);
       });
     }
     // es wird nur nach Tierart gesucht
     if(this.animalSpecies != undefined){
       this.listService.getListRef().orderByChild("species").equalTo(this.animalSpecies).on("child_added",(snapshot) =>{
         var val = snapshot.val();
-        this.resultArray.push(val);
+        this.reverseArray(val);  
       });
     }
     // es wird nur nach Rasse gesucht
     if(this.animalBreed != undefined){
       this.listService.getListRef().orderByChild("breed").equalTo(this.animalBreed).on("child_added",(snapshot) =>{
         var val = snapshot.val();
-        this.resultArray.push(val);
+        this.reverseArray(val);
       });
     }
     // es wird nur nach dem Namen gesucht
     if(this.animalName != undefined){
       this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
-        this.resultArray.push(val);
+        this.reverseArray(val);
       });
-    }
-     
+    }    
+  }
+
+  /**
+   * Dreht das Array um, welches angezeigt werden soll, sodass neuere Einträge oben stehen
+   * @param val 
+   */
+  reverseArray(val){
+    this.saveArray.push(val);
+    this.resultArray = this.saveArray.slice().reverse();
   }
 
 }
