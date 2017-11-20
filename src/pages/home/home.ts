@@ -112,7 +112,9 @@ export class HomePage {
     });
   }
   
-  
+  /**
+   * Zeigt die Einträge, die ein User gemacht hat
+   */
   showMyEntryList(){
     var uId = this.authService.getUserId()
     this.animalListService.getListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {

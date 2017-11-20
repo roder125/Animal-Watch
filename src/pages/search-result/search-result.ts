@@ -1,4 +1,3 @@
-import { AnimalDetailsPage } from './../animal-details/animal-details';
 import { SnapshotAction } from 'angularfire2/database';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component } from '@angular/core';
@@ -103,9 +102,5 @@ export class SearchResultPage {
   reverseArray(val){
     this.saveArray.push(val);
     this.resultArray = this.saveArray.slice().reverse();
-  }
-
-  showDetails(animal){
-    this.navCtrl.push(AnimalDetailsPage, {animal: animal})
   }
 }
