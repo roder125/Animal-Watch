@@ -1,3 +1,4 @@
+import { AnimalDetailsPage } from './../pages/animal-details/animal-details';
 import { PopoverPage } from './../pages/popover/popover';
 
 import { CameraSerive } from './../services/camera/camera.service';
@@ -43,7 +44,8 @@ export const environment = {
     RegisterPage,
     AddAnimalPage,
     SearchResultPage,
-    PopoverPage
+    PopoverPage,
+    AnimalDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ export const environment = {
     AddAnimalPage,
     SearchResultPage,
     PopoverPage,
+    AnimalDetailsPage
   ],
   providers: [
     StatusBar,

@@ -27,9 +27,7 @@
       <ion-slide>
         <ion-scroll id="list" scrollY="true">
           <ion-list>
-            <button ion-item *ngFor="let animal of animalList$ | async"
-                    navPush="AnimalDetailsPage" [navParams]="{animal: animal}">
-                    
+            <button ion-item *ngFor="let animal of animalArray" (click)="showDetails(animal)">       
               <ion-thumbnail item-start>
                 <img src={{animal.downloadUrl}} alt="kein Bild">
               </ion-thumbnail>
@@ -50,7 +48,17 @@
       </ion-slide>
 
       <ion-slide>
-        <h1>ContentTab 3</h1>
+        <ion-scroll id="list" scrollY="true">
+          <ion-list>
+            <button ion-item *ngFor="let animal of myEntryArray" (click)="showDetails(animal)">       
+              <ion-thumbnail item-start>
+                <img src={{animal.downloadUrl}} alt="kein Bild">
+              </ion-thumbnail>
+              <h2>{{animal.name}}</h2>
+              <p>Alter: {{animal.age}}</p>
+            </button>
+          </ion-list>
+        </ion-scroll>
       </ion-slide>
       
     </ion-slides>

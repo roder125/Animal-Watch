@@ -1,8 +1,8 @@
 page-home {
     #list{
-        display:block;
-        top: 3vh !important;
-        margin-bottom: 5vh !important;
+        //display:block;
+        //top: 3vh !important;
+        //margin-bottom: 5vh !important;
         width: 100% !important;
         height:80vh !important;
     }
@@ -12,11 +12,6 @@ page-home {
         bottom: 15px;
         right: 15px;    
       }
-    .btnStyle {
-        height: 50px;
-        width: 50px;
-        border-radius: 50% !important;
-    }
     ion-searchbar {
         margin: 0 auto;
         position: absolute;

@@ -1,3 +1,4 @@
+import { AnimalDetailsPage } from './../animal-details/animal-details';
 import { SnapshotAction } from 'angularfire2/database';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component } from '@angular/core';
@@ -34,33 +35,60 @@ export class SearchResultPage {
    * Ergebis der Suche werden in Array gespeichert und ausgegeben
    */
   showResultList(){
-    // es wird nach der Tierart und Rasse gesucht
-    if(this.animalSpecies != undefined && this.animalBreed != undefined){
-      this.listService.getListRef().orderByChild("species").equalTo(this.animalSpecies).on("child_added",(snapshot) =>{
+    // es wird nach Tierart, Rasse und Name gesucht
+    if(this.animalSpecies != undefined && this.animalBreed != undefined && this.animalName != undefined){
+      this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
-        this.reverseArray(val);
+        if(val.breed == this.animalBreed){
+          if(val.species == this.animalSpecies){
+            this.reverseArray(val);
+          }
+        }
       });
+    }
+    // es wird nach der Tierart und Rasse gesucht
+    else if(this.animalSpecies != undefined && this.animalBreed != undefined){
       this.listService.getListRef().orderByChild("breed").equalTo(this.animalBreed).on("child_added",(snapshot) =>{
         var val = snapshot.val();
-        this.reverseArray(val);
+        if(val.species == this.animalSpecies){
+          this.reverseArray(val);
+        }
+      });
+    }
+    //es wird nach Tierart und Name gesucht
+    else if(this.animalSpecies != undefined && this.animalName != undefined){
+      this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
+        var val = snapshot.val();
+        if(val.species == this.animalSpecies){
+          this.reverseArray(val);
+        }
+      });
+    }
+    // es wird nach Rasse und Name gesucht
+    else if(this.animalBreed != undefined && this.animalName != undefined){
+      this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
+        var val = snapshot.val();
+        if(val.breed == this.animalBreed){
+          this.reverseArray(val);
+        }
       });
     }
     // es wird nur nach Tierart gesucht
-    if(this.animalSpecies != undefined){
+    else if(this.animalSpecies != undefined){
       this.listService.getListRef().orderByChild("species").equalTo(this.animalSpecies).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         this.reverseArray(val);  
       });
     }
     // es wird nur nach Rasse gesucht
-    if(this.animalBreed != undefined){
+    else if(this.animalBreed != undefined){
       this.listService.getListRef().orderByChild("breed").equalTo(this.animalBreed).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         this.reverseArray(val);
       });
     }
     // es wird nur nach dem Namen gesucht
-    if(this.animalName != undefined){
+    else if(this.animalName != undefined){
       this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         this.reverseArray(val);
@@ -77,4 +105,7 @@ export class SearchResultPage {
     this.resultArray = this.saveArray.slice().reverse();
   }
 
+  showDetails(animal){
+    this.navCtrl.push(AnimalDetailsPage, {animal: animal})
+  }
 }

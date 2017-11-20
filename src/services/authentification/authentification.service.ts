@@ -34,4 +34,8 @@ export class AuthentificationService{
         return this.fireAuth.auth.currentUser.email;
     }
 
+    getUserId(){
+        return this.fireAuth.auth.currentUser.uid;
+    }
+
 }

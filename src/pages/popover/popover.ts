@@ -26,6 +26,9 @@ export class PopoverPage {
   ionViewDidLoad() {
 
   }
+  cancel(){
+    this.navCtrl.pop();
+  }
 
   /**
    * Öffnet die Searchresult Page und übergibt Suchparameter
@@ -47,6 +50,6 @@ export class PopoverPage {
       nameTag: nameTag, 
       animalName: this.animalName
     });
-    this.viewCtrl.dismiss();
+    //this.viewCtrl.dismiss();
   }
 }

@@ -24,17 +24,20 @@ export class HomePage {
   tabs: any = '0';
   animalList$: Observable<SnapshotAction[]>;
   result$ : Observable<any[]>;
-  resultArray = [];
+  animalArray = [];
+  myEntryArray = [];
+  saveArray = [];
   image;
   noImage;
 
   constructor(public navCtrl: NavController, private animalListService: AnimalListService, public popoverCtrl: PopoverController,
               private authService: AuthentificationService,private storageService: LocalstorageService) {
-    this.showList();
+    
   }
   
   ionViewDidLoad() {
-    
+    this.showList();
+    this.showMyEntryList();
   }
   /**
    * Öffnet das Popover für die Suche
@@ -88,7 +91,7 @@ export class HomePage {
    * Zeigt die Liste  aus der Datenbank an, mit Hilde des Services
    */
   showList(){
-    this.animalList$ = this.animalListService
+    this.animalListService
     .getShoppingList()  // DB List
     .auditTrail()  // Access to Key and Value  ["child_added"]
     /*
@@ -97,14 +100,27 @@ export class HomePage {
         var data = snapshot.payload.val();
         
       })
-    */
     .map(data => {
       return data.slice().reverse().map( c => ({
+        key: c.payload.key, ... c.payload.val()
+      }))
+    });*/
+    .subscribe(data => {
+      this.animalArray = data.slice().reverse().map( c => ({
         key: c.payload.key, ... c.payload.val()
       }))
     });
   }
   
+  
+  showMyEntryList(){
+    var uId = this.authService.getUserId()
+    this.animalListService.getListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {
+      var val = snapshot.val();
+      this.saveArray.push(val);
+      this.myEntryArray = this.saveArray.slice().reverse();
+    });
+  }
 
   /**
    * Fügt ein Tier in die Datenbank ein
@@ -113,14 +129,7 @@ export class HomePage {
     this.navCtrl.push(AddAnimalPage);
   }
 
-  search(){
-    /*
-    this.animalListService.getSearchResult("tag").orderByChild("name").equalTo("Skotty").on("child_added",(snapshot) =>{
-      var val = snapshot.val();
-      this.resultArray.push(val);
-    });*/
-    var tag = "species"
-    var species = "Hund"
-    this.navCtrl.push(SearchResultPage, {tag: tag, species: species});
+  showDetails(animal){
+    this.navCtrl.push( AnimalDetailsPage, {animal: animal});
   }
 }

@@ -22,9 +22,11 @@
       <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="animalName"></ion-input>
     </ion-item>
-    <ion-item>
-      <button full ion-button color="brownLike" (click)="search()">suchen</button>
-    </ion-item>
   </ion-list>
+
+  <ion-buttons>
+    <button full ion-button color="brownLike" (click)="search()">suchen</button>
+    <button full ion-button color="brownLike" (click)="cancel()">abbrechen</button>
+  </ion-buttons>
 
 </ion-content>

@@ -63,15 +63,16 @@ export class AnimalListService{
 
 
     // imageUrl muss noch hinzugefügt werden
-    addAnimal(name, age, date, url, description, species, breed){
+    addAnimal(name, age, date, url, description, species, breed, uId){
         return this.animalListRef$.push({
-            name: name,
-            age: age,
-            species: species,
-            breed: breed,
-            date: date,
-            downloadUrl: url,
-            description: description
+            name:           name,
+            age:            age,
+            species:        species,
+            breed:          breed,
+            date:           date,
+            downloadUrl:    url,
+            description:    description,
+            uId:            uId
             //image: imageUrl
         });
     }
