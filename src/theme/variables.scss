@@ -49,6 +49,7 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
+$loading-ios-background: transparent;
 
 
 
@@ -56,13 +57,18 @@ $colors: (
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
+$loading-md-background: rgba(255, 255, 255, 0);
+$loading-md-box-shadow: rgba(255, 255, 255, 0);
+$loading-md-text-color: white;
+$loading-md-spinner-crescent-color: rgb(218, 121, 56);
+$loading-md-box-shadow-color: none;
 
 
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
 
+$loading-wp-background: transparent;
 
 
 

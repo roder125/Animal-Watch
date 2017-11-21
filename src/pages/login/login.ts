@@ -52,9 +52,9 @@ export class LoginPage {
           return;
         }))
         .then(()=>{
-          if(this.savedEmail != "" && this.savedPassword != ""){
+          if(this.savedEmail != "" && this.savedPassword != "" || this.savedEmail != undefined && this.savedPassword != undefined ){
            // this.authService.login(this.savedEmail, this.savedPassword)
-            this.authService.login("roderick.schuessler8@googlemail.com", "123456")
+            this.authService.login(this.savedEmail, this.savedPassword)
             .then(currentUser => {
               // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
               if(currentUser.emailVerified == false){

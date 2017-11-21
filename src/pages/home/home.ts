@@ -75,7 +75,7 @@ export class HomePage {
    */
   showList(){
     let loader = this.loadCtrl.create({
-      content: "lädt...",
+      content:  "lädt..",
     });
 
     loader.present()
