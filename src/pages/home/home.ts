@@ -101,6 +101,7 @@ export class HomePage {
           }))
           loader.dismiss();
         });
+        loader.dismiss();
       });
   }
   
@@ -126,7 +127,6 @@ export class HomePage {
 
   showDetails(animal){
     this.navCtrl.push( AnimalDetailsPage, {animal: animal});
-    console.log(animal.key);
   }
 
   /**
@@ -135,9 +135,5 @@ export class HomePage {
    */
   showMyEntryDetails(animal){
     this.navCtrl.push(MyEntryDetailsPage,{animal: animal});
-    console.log(animal.downloadUrl);
-    console.log(animal.name);
-    console.log(animal.key);
-
   }
 }

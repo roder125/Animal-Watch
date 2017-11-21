@@ -27,7 +27,7 @@
   </ion-list>
   <div>
     <ion-buttons text-center>
-      <button ion-button full color="lGrey">
+      <button ion-button full color="lGrey" (click)="delete(animal.key, animal.name)">
         {{animal.name}} wurde erfolgreich vermittelt<br/>(Eintrag löschen)
       </button>
     </ion-buttons>
