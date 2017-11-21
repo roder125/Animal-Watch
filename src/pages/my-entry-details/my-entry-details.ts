@@ -1,3 +1,4 @@
+import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AnimalListService } from '../../services/animal-list/animal-list.service';
@@ -28,6 +29,7 @@ export class MyEntryDetailsPage {
   delete(key, name){
     this.databaseService.deleteAnimal(key, name)
       .then((data)=>{
+        this.navCtrl.setRoot(HomePage);
         this.showSuccesToast(name);
       })
       .catch((data)=>{

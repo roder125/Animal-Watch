@@ -13,7 +13,7 @@ export class CameraSerive{
         const options: CameraOptions = {
             quality: 100,
             targetWidth: 1240,
-            targetHeight: 874,
+            targetHeight: 600,
             //sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,

@@ -83,7 +83,7 @@ export class HomePage {
       .then(()=>{
         this.animalListService
         .getShoppingList()  // DB List
-        .auditTrail()  // Access to Key and Value  ["child_added"]
+        .snapshotChanges()  // Access to Key and Value  ["child_added"]
         /*
         .map(changes => { 
           changes.forEach(snapshot => {
