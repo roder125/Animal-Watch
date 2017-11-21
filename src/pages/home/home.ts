@@ -69,23 +69,6 @@ export class HomePage {
     this.storageService.saveLocal("","");
     this.navCtrl.setRoot(LoginPage);
   }
-  /*
-  showList(){
-    this.animalList$ = this.animalList
-    .getShoppingList()  // DB List
-    .snapshotChanges()  // Access to Key and Value
-    .map(changes => {
-        changes.forEach(snapshot => {
-          console.log("Key :"+snapshot.key);
-          var url = snapshot.payload.val();
-          console.log("Value :"+ url.downloadUrl);
-        })
-        return changes.map( c => ({
-        key: c.payload.key, ... c.payload.val()
-      }))
-    });
-  }
-  */
   
   /**
    * Zeigt die Liste  aus der Datenbank an, mit Hilde des Services
