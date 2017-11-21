@@ -5,7 +5,7 @@ import { AuthentificationService } from './../../services/authentification/authe
 import { Animal } from './../../models/add-animals/animal.interface';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Slides, List, PopoverController } from 'ionic-angular';
+import { NavController, Slides, List, PopoverController, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { Observable } from 'rxjs/Observable';
@@ -31,7 +31,7 @@ export class HomePage {
   noImage;
 
   constructor(public navCtrl: NavController, private animalListService: AnimalListService, public popoverCtrl: PopoverController,
-              private authService: AuthentificationService,private storageService: LocalstorageService) {
+              private authService: AuthentificationService,private storageService: LocalstorageService, public loadCtrl: LoadingController) {
     
   }
   
@@ -91,25 +91,33 @@ export class HomePage {
    * Zeigt die Liste  aus der Datenbank an, mit Hilde des Services
    */
   showList(){
-    this.animalListService
-    .getShoppingList()  // DB List
-    .auditTrail()  // Access to Key and Value  ["child_added"]
-    /*
-    .map(changes => { 
-      changes.forEach(snapshot => {
-        var data = snapshot.payload.val();
-        
-      })
-    .map(data => {
-      return data.slice().reverse().map( c => ({
-        key: c.payload.key, ... c.payload.val()
-      }))
-    });*/
-    .subscribe(data => {
-      this.animalArray = data.slice().reverse().map( c => ({
-        key: c.payload.key, ... c.payload.val()
-      }))
+    let loader = this.loadCtrl.create({
+      content: "lädt...",
     });
+
+    loader.present()
+      .then(()=>{
+        this.animalListService
+        .getShoppingList()  // DB List
+        .auditTrail()  // Access to Key and Value  ["child_added"]
+        /*
+        .map(changes => { 
+          changes.forEach(snapshot => {
+            var data = snapshot.payload.val();
+            
+          })
+        .map(data => {
+          return data.slice().reverse().map( c => ({
+            key: c.payload.key, ... c.payload.val()
+          }))
+        });*/
+        .subscribe(data => {
+          this.animalArray = data.slice().reverse().map( c => ({
+            key: c.payload.key, ... c.payload.val()
+          }))
+          loader.dismiss();
+        });
+      });
   }
   
   /**

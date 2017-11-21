@@ -2,7 +2,7 @@ import { LocalstorageService } from './../../services/localstorage/localstorage.
 import { AuthentificationService } from './../../services/authentification/authentification.service';
 
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { RegisterPage } from '../register/register';
 import { HomePage } from "../home/home"
@@ -21,12 +21,12 @@ export class LoginPage {
   savedEmail;
   savedPassword;
    
-  constructor(private alertCtrl: AlertController,public navCtrl: NavController, 
+  constructor(private alertCtrl: AlertController,public navCtrl: NavController, public loadCtrl: LoadingController,
               public navParams: NavParams, private authService: AuthentificationService, private storageService: LocalstorageService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    
   }
 
   /**
@@ -34,45 +34,52 @@ export class LoginPage {
    * Wenn ja, wird automatisch eingeloggt
    */
   ionViewWillEnter() {
-    let pEmail = this.storageService.getSavedEmail();
-    let pPassword = this.storageService.getSavedPassword();
+    let loader = this.loadCtrl.create({
+      content: "anmelden...",
+    });
 
-    Promise.all([pEmail, pPassword])
-    .then((data =>{      
-      this.savedEmail = data[0];
-      console.log(this.savedEmail);
-      this.savedPassword = data[1];
-      console.log(this.savedPassword);
-      return;
-    }))
-    .then(()=>{
-      if(this.savedEmail != "" && this.savedPassword != ""){
-       // this.authService.login(this.savedEmail, this.savedPassword)
-        this.authService.login("roderick.schuessler8@googlemail.com", "123456")
-        .then(currentUser => {
-          // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
-          if(currentUser.emailVerified == false){
-            this.alert("Email has not verified yet " + currentUser.email);
+    loader.present()
+      .then(()=>{
+        let pEmail = this.storageService.getSavedEmail();
+        let pPassword = this.storageService.getSavedPassword();
+    
+        Promise.all([pEmail, pPassword])
+        .then((data =>{      
+          this.savedEmail = data[0];
+          console.log(this.savedEmail);
+          this.savedPassword = data[1];
+          console.log(this.savedPassword);
+          return;
+        }))
+        .then(()=>{
+          if(this.savedEmail != "" && this.savedPassword != ""){
+           // this.authService.login(this.savedEmail, this.savedPassword)
+            this.authService.login("roderick.schuessler8@googlemail.com", "123456")
+            .then(currentUser => {
+              // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
+              if(currentUser.emailVerified == false){
+                this.alert("Email has not verified yet " + currentUser.email);
+                loader.dismiss();
+              }
+              else{
+                loader.dismiss();
+                // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
+                this.navCtrl.setRoot(HomePage);
+                // user is logged in
+              }
+            })
+            .catch(error => {
+              // Bei fehlerhaftem einloggen wird die error Nachricht angezeigt
+              this.alert(error.message)
+              loader.dismiss();
+            });
           }
           else{
-            // Wenn User eingeloggt bleiben möchte, werden Anmeldedaten im lokalen Speicher gespeichert
-            if(this.keepLoggedIn == true){
-              this.storageService.saveLocal(this.email, this.password);
-            }
-            // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
-            this.navCtrl.setRoot(HomePage);
-            // user is logged in
-          }
+            //Mache nichts
+            loader.dismiss();
+          }    
         })
-        .catch(error => {
-          // Bei fehlerhaftem einloggen wird die error Nachricht angezeigt
-          this.alert(error.message)
-        });
-      }
-      else{
-        //Mache nichts
-      }    
-    })
+      });  
   }
 
   /**
