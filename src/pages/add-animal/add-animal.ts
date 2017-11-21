@@ -2,7 +2,7 @@ import { AuthentificationService } from './../../services/authentification/authe
 import { CameraSerive } from './../../services/camera/camera.service';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 // Animal Interface importieren
 import { Animal } from '../../models/add-animals/animal.interface';
@@ -31,7 +31,7 @@ export class AddAnimalPage {
   ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthentificationService,
-              private animalList: AnimalListService, private cameraService: CameraSerive) {
+              private animalList: AnimalListService, private cameraService: CameraSerive, public toastCtrl: ToastController) {
 
   }
   
@@ -70,7 +70,6 @@ export class AddAnimalPage {
       console.log("Keine gültigen eingaben");
     }
     else{
-      this.navCtrl.pop();
       this.date = new Date().setDate(0);
       animal.entryDate =  this.date;
       animal.animalSpecies = this.species.toString().replace(" ", "");;
@@ -91,8 +90,29 @@ export class AddAnimalPage {
           animal.imageUrl = this.animalList.getDownloadUrl();
           // animal.imageUrl muss nachtäglich hinzugefügt werden
           this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, animal.imageUrl, animal.description, animal.animalSpecies, animal.animalBreed, uId);
-        });
+          this.navCtrl.pop();
+          this.presentSuccessToast();
+        })
+        .catch(error => {
+          this.presentErrorToast();
+        })
     }
+  }
+
+  presentSuccessToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Tier wurde erfolgreich hinzugefügt',
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  presentErrorToast(){
+    let toast = this.toastCtrl.create({
+      message: 'Es gab einen Fehler, bitte kontrolieren Sie Ihre Eingaben und versuchen sie es erneut.',
+      duration: 4000
+    });
+    toast.present();
   }
 
 }
