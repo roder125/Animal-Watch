@@ -1,3 +1,4 @@
+import { MyEntryDetailsPage } from './../pages/my-entry-details/my-entry-details';
 import { AnimalDetailsPage } from './../pages/animal-details/animal-details';
 import { PopoverPage } from './../pages/popover/popover';
 
@@ -45,7 +46,8 @@ export const environment = {
     AddAnimalPage,
     SearchResultPage,
     PopoverPage,
-    AnimalDetailsPage
+    AnimalDetailsPage,
+    MyEntryDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ export const environment = {
     AddAnimalPage,
     SearchResultPage,
     PopoverPage,
-    AnimalDetailsPage
+    AnimalDetailsPage,
+    MyEntryDetailsPage
   ],
   providers: [
     StatusBar,

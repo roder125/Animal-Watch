@@ -1,3 +1,4 @@
+import { MyEntryDetailsPage } from './../my-entry-details/my-entry-details';
 import { SearchResultPage } from './../search-result/search-result';
 import { AnimalDetailsPage } from './../animal-details/animal-details';
 import { LocalstorageService } from './../../services/localstorage/localstorage.service';
@@ -108,10 +109,11 @@ export class HomePage {
    */
   showMyEntryList(){
     var uId = this.authService.getUserId()
-    this.animalListService.getListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {
-      var val = snapshot.val();
-      this.saveArray.push(val);
-      this.myEntryArray = this.saveArray.slice().reverse();
+    this.animalListService.getListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {  
+      this.saveArray.push(snapshot);
+      this.myEntryArray = this.saveArray.slice().reverse().map( c => ({
+        key: c.key, ... c.val()
+      }));    
     });
   }
 
@@ -124,5 +126,18 @@ export class HomePage {
 
   showDetails(animal){
     this.navCtrl.push( AnimalDetailsPage, {animal: animal});
+    console.log(animal.key);
+  }
+
+  /**
+   * Zeigt die Details der eigenen Einträge
+   * @param animal 
+   */
+  showMyEntryDetails(animal){
+    this.navCtrl.push(MyEntryDetailsPage,{animal: animal});
+    console.log(animal.downloadUrl);
+    console.log(animal.name);
+    console.log(animal.key);
+
   }
 }

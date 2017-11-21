@@ -50,7 +50,7 @@
       <ion-slide>
         <ion-scroll id="list" scrollY="true">
           <ion-list>
-            <button ion-item *ngFor="let animal of myEntryArray" (click)="showDetails(animal)">       
+            <button ion-item *ngFor="let animal of myEntryArray" (click)="showMyEntryDetails(animal)">       
               <ion-thumbnail item-start>
                 <img src={{animal.downloadUrl}} alt="kein Bild">
               </ion-thumbnail>

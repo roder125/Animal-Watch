@@ -1,0 +1,36 @@
+<ion-header>
+  
+    <ion-navbar color="brownLike">
+      <ion-title>{{animal.name}}</ion-title>
+    </ion-navbar>
+  
+</ion-header>
+  
+  
+  <ion-content>
+    <ion-slides pager="true" effect="slide" zoom="true">
+      <ion-slide>
+        <img src={{animal.downloadUrl}} alt="kein Bild">
+      </ion-slide>
+      <ion-slide>
+        <img src={{animal.downloadUrl}} alt="kein Bild">
+      </ion-slide>
+  </ion-slides>
+    
+  <ion-list>
+    <ion-item>
+      <h2>Alter: {{animal.age}}</h2>
+    </ion-item>
+    <ion-item>
+      <div id="description">{{animal.description}}</div>
+    </ion-item>
+  </ion-list>
+  <div>
+    <ion-buttons text-center>
+      <button ion-button full color="lGrey">
+        {{animal.name}} wurde erfolgreich vermittelt<br/>(Eintrag löschen)
+      </button>
+    </ion-buttons>
+  </div>
+</ion-content>
+
