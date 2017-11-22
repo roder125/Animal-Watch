@@ -9,26 +9,26 @@
   
 <ion-content padding>
   <ion-list>
-      <ion-item id="email">
+      <ion-item>
         <ion-icon name="contact" item-start></ion-icon>
         <ion-label floating>Email</ion-label>
         <ion-input type="text" [(ngModel)]="email"></ion-input>
       </ion-item>
       
-      <ion-item id="password">
+      <ion-item>
         <ion-icon name="key" item-start></ion-icon>
         <ion-label floating>Passwort</ion-label>
         <ion-input type="password" [(ngModel)]="password"></ion-input>
-      </ion-item> 
-    </ion-list>
+      </ion-item>
 
-    <ion-buttons text-center>
-      <button id="button"ion-button block color="lGrey" (click)="register()">Registrieren</button>
-    </ion-buttons>
+      <ion-buttons text-center no-lines>
+          <button id="button" full ion-button block color="lGrey" (click)="register()">Registrieren</button>
+      </ion-buttons>
+    </ion-list>
 
     <ion-card color="light">
       <ion-card-content>
-        Erstellen Sie einen neuen Accout und bestätigen sie die Email Addresse.
+        Erstellen Sie einen neuen Accout und bestätigen Sie die Email Addresse.
       </ion-card-content>
     </ion-card>
 </ion-content>

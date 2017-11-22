@@ -35,25 +35,27 @@ export class LoginPage {
    */
   ionViewWillEnter() {
     let loader = this.loadCtrl.create({
-      content: "anmelden...",
+      content: "anmelden",
     });
+    let pEmail = this.storageService.getSavedEmail();
+    let pPassword = this.storageService.getSavedPassword();
 
-    loader.present()
-      .then(()=>{
-        let pEmail = this.storageService.getSavedEmail();
-        let pPassword = this.storageService.getSavedPassword();
-    
-        Promise.all([pEmail, pPassword])
-        .then((data =>{      
-          this.savedEmail = data[0];
-          console.log(this.savedEmail);
-          this.savedPassword = data[1];
-          console.log(this.savedPassword);
-          return;
-        }))
-        .then(()=>{
-          if(this.savedEmail != "" && this.savedPassword != "" || this.savedEmail != undefined && this.savedPassword != undefined ){
-           // this.authService.login(this.savedEmail, this.savedPassword)
+    Promise.all([pEmail, pPassword])
+    .then((data =>{      
+      this.savedEmail = data[0];
+      console.log(this.savedEmail);
+      this.savedPassword = data[1];
+      console.log(this.savedPassword);
+      return;
+    }))
+    .then(()=>{
+      if(this.savedEmail == "" && this.savedPassword == "" || this.savedEmail == undefined && this.savedPassword == undefined ){
+        
+      }
+      else{
+        loader.present()
+          .then(()=>{
+            // this.authService.login(this.savedEmail, this.savedPassword)
             this.authService.login(this.savedEmail, this.savedPassword)
             .then(currentUser => {
               // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
@@ -73,13 +75,9 @@ export class LoginPage {
               this.alert(error.message)
               loader.dismiss();
             });
-          }
-          else{
-            //Mache nichts
-            loader.dismiss();
-          }    
-        })
-      });  
+          });
+      }   
+    }) 
   }
 
   /**
@@ -100,24 +98,33 @@ export class LoginPage {
   login(){
     this.authService.login(this.email, this.password)
       .then(currentUser => {
-      // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
-      if(currentUser.emailVerified == false){
-        this.alert("Email has not verified yet " + currentUser.email);
-      }
-      else{
-        // Wenn User eingeloggt bleiben möchte, werden Anmeldedaten im lokalen Speicher gespeichert
-        if(this.keepLoggedIn == true){
-          this.storageService.saveLocal(this.email, this.password);
-        }
-        // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
-        this.navCtrl.setRoot(HomePage);
-        // user is logged in
-        }
-      })
-      .catch(error => {
-        // Bei fehlerhaftem einloggen wird die error Nachricht angezeigt
-        this.alert(error.message)
-      });
+        let loader = this.loadCtrl.create({
+          content: "anmelden",
+        });
+        loader.present()
+          .then(()=>{
+                // Wenn Email noch nicht verifiziert wurde, schlägt der Login fehl
+            if(currentUser.emailVerified == false){
+              loader.dismiss();
+              this.alert("Email has not verified yet " + currentUser.email);
+            }
+            else{
+              // Wenn User eingeloggt bleiben möchte, werden Anmeldedaten im lokalen Speicher gespeichert
+              if(this.keepLoggedIn == true){
+                this.storageService.saveLocal(this.email, this.password);
+              }
+              // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
+              this.navCtrl.setRoot(HomePage);
+              loader.dismiss();
+              // user is logged in
+              }
+            })
+            .catch(error => {
+              // Bei fehlerhaftem einloggen wird die error Nachricht angezeigt
+              this.alert(error.message);
+              loader.dismiss();
+            });
+          });      
   }
 
   /**

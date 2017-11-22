@@ -18,10 +18,6 @@ export class RegisterPage {
               public navParams: NavParams, private authService: AuthentificationService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
-  }
-
    /**
    * Methode zum erzeugen einer InfoBox bzw. eines Alerts
    * @param message 
@@ -42,13 +38,13 @@ export class RegisterPage {
   register() {
     this.authService.register(this.email, this.password)
     .then (user =>{
-      user.currentUser.sendEmailVerification();
+      user.sendEmailVerification();  
       this.alert("User is created: " + user.email + "\n" + "A verification Email has ben send to your Email address.");
       this.navCtrl.pop();
     })
     .catch(error =>{
       console.log("Got an Error", error);
-      this.alert("User is created " + error);
+      this.alert("User is no created " + error);
     });
   }
 }

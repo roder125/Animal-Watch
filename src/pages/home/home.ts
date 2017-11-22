@@ -99,7 +99,6 @@ export class HomePage {
           this.animalArray = data.slice().reverse().map( c => ({
             key: c.payload.key, ... c.payload.val()
           }))
-          loader.dismiss();
         });
         loader.dismiss();
       });
