@@ -1,3 +1,4 @@
+import { AnimalDetailsPage } from './../animal-details/animal-details';
 import { SnapshotAction } from 'angularfire2/database';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component } from '@angular/core';
@@ -22,6 +23,7 @@ export class SearchResultPage {
   nameTag = this.navParams.get("nameTag");
   animalName = this.navParams.get("animalName");
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private listService: AnimalListService) {
     this.showResultList();
   }
@@ -35,7 +37,7 @@ export class SearchResultPage {
    */
   showResultList(){
     // es wird nach Tierart, Rasse und Name gesucht
-    if(this.animalSpecies != undefined && this.animalBreed != undefined && this.animalName != undefined){
+    if(this.animalSpecies != undefined && this.animalSpecies != "" && this.animalBreed != undefined && this.animalBreed != "" && this.animalName != undefined && this.animalName != ""){
       this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         if(val.breed == this.animalBreed){
@@ -46,7 +48,7 @@ export class SearchResultPage {
       });
     }
     // es wird nach der Tierart und Rasse gesucht
-    else if(this.animalSpecies != undefined && this.animalBreed != undefined){
+    else if(this.animalSpecies != undefined && this.animalSpecies != ""  && this.animalBreed != undefined && this.animalBreed != ""){
       this.listService.getListRef().orderByChild("breed").equalTo(this.animalBreed).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         if(val.species == this.animalSpecies){
@@ -55,7 +57,7 @@ export class SearchResultPage {
       });
     }
     //es wird nach Tierart und Name gesucht
-    else if(this.animalSpecies != undefined && this.animalName != undefined){
+    else if(this.animalSpecies != undefined && this.animalSpecies != "" && this.animalName != undefined && this.animalName != ""){
       this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         if(val.species == this.animalSpecies){
@@ -64,7 +66,7 @@ export class SearchResultPage {
       });
     }
     // es wird nach Rasse und Name gesucht
-    else if(this.animalBreed != undefined && this.animalName != undefined){
+    else if(this.animalBreed != undefined && this.animalBreed != "" && this.animalName != undefined && this.animalName != ""){
       this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         if(val.breed == this.animalBreed){
@@ -73,21 +75,21 @@ export class SearchResultPage {
       });
     }
     // es wird nur nach Tierart gesucht
-    else if(this.animalSpecies != undefined){
+    else if(this.animalSpecies != undefined && this.animalSpecies != ""){
       this.listService.getListRef().orderByChild("species").equalTo(this.animalSpecies).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         this.reverseArray(val);  
       });
     }
     // es wird nur nach Rasse gesucht
-    else if(this.animalBreed != undefined){
+    else if(this.animalBreed != undefined && this.animalBreed != ""){
       this.listService.getListRef().orderByChild("breed").equalTo(this.animalBreed).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         this.reverseArray(val);
       });
     }
     // es wird nur nach dem Namen gesucht
-    else if(this.animalName != undefined){
+    else if(this.animalName != undefined && this.animalName != ""){
       this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         this.reverseArray(val);
@@ -102,5 +104,9 @@ export class SearchResultPage {
   reverseArray(val){
     this.saveArray.push(val);
     this.resultArray = this.saveArray.slice().reverse();
+  }
+
+  showDetails(animal){
+    this.navCtrl.push(AnimalDetailsPage, {animal: animal});
   }
 }

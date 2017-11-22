@@ -10,12 +10,13 @@
 
 <ion-content>
   <ion-list>     
-    <button ion-item *ngFor="let animal of resultArray" navPush="AnimalDetailsPage" [navParams]="{animal: animal}">
+    <button ion-item *ngFor="let animal of resultArray" (click)="showDetails(animal)">
       <ion-thumbnail item-start>
         <img src={{animal.downloadUrl}} alt="kein Bild">
       </ion-thumbnail>
       <h2>{{animal.name}}</h2>
-      <p>{{animal.age}}</p>
+      <p>Alter: {{animal.age}} Jahre</p>
+      <p>Rasse: {{animal.breed}}</p>
     </button>
   </ion-list>
 </ion-content>

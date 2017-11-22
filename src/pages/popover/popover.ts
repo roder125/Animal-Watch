@@ -50,6 +50,6 @@ export class PopoverPage {
       nameTag: nameTag, 
       animalName: this.animalName
     });
-    this.viewCtrl.dismiss();
+    //this.viewCtrl.dismiss();
   }
 }
