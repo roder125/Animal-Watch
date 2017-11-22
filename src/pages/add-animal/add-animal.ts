@@ -51,7 +51,7 @@ export class AddAnimalPage {
       .then((imageData)=>{
         let base64Image = imageData;
         this.animal.imageUrl = base64Image;
-        this.imageShow = this.animal.imageUrl;
+        this.imageShow = "data:image/jpeg;base64," + this.animal.imageUrl;
       })
       .catch((error)=>{
         console.log(error);
@@ -69,8 +69,9 @@ export class AddAnimalPage {
       console.log("Keine gültigen eingaben");
     }
     else{
-      let loader = this.loadCtrl.create({
-        content: "speichert...",
+      let loader = this.loadCtrl.create({   
+        content: "speichert",
+        spinner: "dots"
       });
 
       loader.present()
@@ -90,10 +91,7 @@ export class AddAnimalPage {
           this.animalList.pushImageUpload(image, animal.animalName)
             .then((data)=>{
               var uId = this.authService.getUserId();
-              console.log("uid= " + uId);
-              console.log("uid= " + this.authService.getUserId());
               animal.imageUrl = this.animalList.getDownloadUrl();
-              // animal.imageUrl muss nachtäglich hinzugefügt werden
               this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, animal.imageUrl, animal.description, animal.animalSpecies, animal.animalBreed, uId);
               this.navCtrl.setRoot(HomePage);
               this.presentSuccessToast();
