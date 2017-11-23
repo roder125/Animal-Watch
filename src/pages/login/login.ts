@@ -96,7 +96,7 @@ export class LoginPage {
    * this.fire.auth.signInWithEmailAndPassword() erwartet eine rcihtige Email und Password
    */
   login(){
-    this.authService.login(this.email, this.password)
+    this.authService.login(this.email.replace(" ", "").toLowerCase(), this.password.replace(" ", ""))
       .then(currentUser => {
         let loader = this.loadCtrl.create({
           content: "anmelden",

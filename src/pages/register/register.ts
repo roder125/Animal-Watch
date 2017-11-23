@@ -36,7 +36,7 @@ export class RegisterPage {
    * Außerdem wird eine verifizierungs Email geschickt 
    */
   register() {
-    this.authService.register(this.email, this.password)
+    this.authService.register(this.email.replace(" ", "").toLowerCase(), this.password)
     .then (user =>{
       user.sendEmailVerification();  
       this.alert("User is created: " + user.email + "\n" + "A verification Email has ben send to your Email address.");
