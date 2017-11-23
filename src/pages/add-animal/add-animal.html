@@ -12,7 +12,7 @@
   <ion-list>
     <ion-item>
       <ion-label floating>Name</ion-label>
-      <ion-input type="text" [(ngModel)]="animal.animalName"></ion-input>
+      <ion-input type="text" [(ngModel)]="animal.animalName" autocomplete="on" autocorrect="on"></ion-input>
     </ion-item> 
     <ion-item>
       <ion-label floating>Alter</ion-label>
@@ -24,19 +24,21 @@
         [addOnBlur]="false"
         [autocomplete]="true"
         [autocompleteItems]="preparedTags"
-        placeholder="Tierart">
+        placeholder="Tierart"
+        autocomplete="on" autocorrect="on">
       </rl-tag-input>
     </ion-item>
     <ion-item>
       <rl-tag-input
         [(ngModel)]="breed"
         [addOnBlur]="false"
-        placeholder="Rasse">
+        placeholder="Rasse"
+        autocomplete="on" autocorrect="on">
       </rl-tag-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Beschreibung, {{textLeft}} Zeichen übrig</ion-label>
-      <ion-textarea rows="10" maxLength="500" type="text" [(ngModel)]="animal.description" (ionChange)='textCounter()'></ion-textarea>
+      <ion-textarea rows="10" maxLength="500" type="text" [(ngModel)]="animal.description" (ionChange)='textCounter()' autocomplete="on" autocorrect="on"></ion-textarea>
     </ion-item>
   </ion-list>
   <ion-slides pager="true" effect="slide" zoom="true" *ngIf="imageShow">

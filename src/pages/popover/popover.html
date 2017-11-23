@@ -12,15 +12,15 @@
   <ion-list>
     <ion-item>
       <ion-label floating>Tierart</ion-label>
-      <ion-input type="text" [(ngModel)]="animalSpecies"></ion-input>
+      <ion-input type="text" [(ngModel)]="animalSpecies" autocomplete="on" autocorrect="on"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Rasse</ion-label>
-      <ion-input type="text" [(ngModel)]="animalBreed"></ion-input>
+      <ion-input type="text" [(ngModel)]="animalBreed" autocomplete="on" autocorrect="on"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Name</ion-label>
-      <ion-input type="text" [(ngModel)]="animalName"></ion-input>
+      <ion-input type="text" [(ngModel)]="animalName" autocomplete="on" autocorrect="on"></ion-input>
     </ion-item>
     <ion-buttons>
         <button full ion-button color="brownLike" (click)="search()">suchen</button>
