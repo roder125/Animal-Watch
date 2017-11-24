@@ -42,11 +42,8 @@
     </ion-item>
   </ion-list>
   <ion-slides pager="true" effect="slide" zoom="true" *ngIf="imageShow">
-    <ion-slide>
-      <img src={{imageShow}} alt="kein Bild">
-    </ion-slide>
-    <ion-slide>
-      <img src={{imageShow}} alt="kein Bild">
+    <ion-slide *ngFor="let image of imageArray">
+      <img  [src]="_DomSanitizer.bypassSecurityTrustUrl(image)" alt="kein Bild"/>
     </ion-slide>
   </ion-slides>
   <ion-buttons text-center>
