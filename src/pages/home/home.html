@@ -27,8 +27,9 @@
           <ion-list>
             <button ion-item *ngFor="let animal of animalArray" (click)="showDetails(animal)">       
               <ion-thumbnail item-start>
-                <img src={{animal.downloadUrl}} alt="kein Bild">
+                <img src={{animal.downloadUrls}} alt="kein Bild">
               </ion-thumbnail>
+              <p>{{animal.downloadUrls}}</p>
               <h2>{{animal.name}}</h2>
               <p>Alter: {{animal.age}} Jahre</p>
               <p>Rasse: {{animal.breed}}</p>

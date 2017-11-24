@@ -14,7 +14,7 @@ export class AnimalListService{
     constructor(private db: AngularFireDatabase){
     }
 
-    downloadUrl;
+    downloadUrls =[];
 
     /**
      * Fügt ein Bild in den Storage von Firebase ein und speicher die download Url
@@ -22,22 +22,33 @@ export class AnimalListService{
      * @param name 
      */
     // https://angularfirebase.com/lessons/angular-file-uploads-to-firebase-storage/
-    pushImageUpload(result, name){
-        var storageRef$ = firebase.storage().ref(`pictures/${name}`);
-        var image = `data:image/jpeg;base64,${result}`;
-        return storageRef$.putString(image, "data_url")
+    pushImageUpload(imageArray, uId, name, date){
+        var images = [];
+        images = imageArray;
+        console.log("service " + images.length);
+        var idx = 0
+        for(idx; idx < images.length; idx ++){
+            console.log("for: " + idx);
+            var storageRef$ = firebase.storage().ref(`pictures/${uId}/${date}/${name}${idx}`);
+            storageRef$.putString(images[idx], "data_url")
+            .then((data)=>{
+                this.downloadUrls.push(data.downloadURL);
+            })
+          }
+          idx = 0;
+          	/*
             .then((data)=>{
                 let downloadUrl = data.downloadURL;
                 this.downloadUrl = downloadUrl;
             })
             .catch((error)=>{
                 console.log(error);
-            });
+            });*/
     }
 
 
-    getDownloadUrl(){
-        return this.downloadUrl;
+    getDownloadUrls(){
+        return this.downloadUrls;
     }
 
 
@@ -60,14 +71,14 @@ export class AnimalListService{
 
 
     // imageUrl muss noch hinzugefügt werden
-    addAnimal(name, age, date, downloadUrl, description, species, breed, uId){
+    addAnimal(name, age, date, downloadUrls, description, species, breed, uId){
         return this.animalListRef$.push({
             name:           name,
             age:            age,
             species:        species,
             breed:          breed,
             date:           date,
-            downloadUrl:    downloadUrl,
+            downloadUrls:    downloadUrls,
             description:    description,
             uId:            uId,
             //image: imageUrl
