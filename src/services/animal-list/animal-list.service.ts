@@ -14,8 +14,6 @@ export class AnimalListService{
     constructor(private db: AngularFireDatabase){
     }
 
-    downloadUrls =[];
-
     /**
      * Fügt ein Bild in den Storage von Firebase ein und speicher die download Url
      * @param result 
@@ -25,34 +23,9 @@ export class AnimalListService{
     pushImageUpload(image, uId, name, idx){
         console.log("idx service: " + idx);
         var images = image;
-        console.log("service " + images);
-        /*
-        for(var idx = 0; idx <= images.length; idx ++){
-            var storageRef$ = firebase.storage().ref(`pictures/${uId}/${date}/${name}${date}`);
-            console.log("for: " + idx);   
-            storageRef$.putString(images[idx], "data_url")
-            .then((data)=>{
-                this.downloadUrls.push(data.downloadURL);
-            })
-        }
-        */
-            var storageRef$ = firebase.storage().ref(`pictures/${uId}/${name}${idx}`);
-            return storageRef$.putString(image, "data_url");
-          	/*
-            .then((data)=>{
-                let downloadUrl = data.downloadURL;
-                this.downloadUrl = downloadUrl;
-            })
-            .catch((error)=>{
-                console.log(error);
-            });*/
+        var storageRef$ = firebase.storage().ref(`pictures/${uId}/${name}${idx}`);
+        return storageRef$.putString(image, "data_url");
     }
-
-
-    getDownloadUrls(){
-        return this.downloadUrls;
-    }
-
 
     /**
      * Return die animal-list der Datanbank

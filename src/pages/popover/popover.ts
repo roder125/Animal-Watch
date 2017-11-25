@@ -34,19 +34,14 @@ export class PopoverPage {
    * Öffnet die Searchresult Page und übergibt Suchparameter
    */
   search(){
-    /*
-    this.animalListService.getSearchResult("tag").orderByChild("name").equalTo("Skotty").on("child_added",(snapshot) =>{
-      var val = snapshot.val();
-      this.resultArray.push(val);
-    });*/
     var speciesTag = "animalSpecies";
     var breedTag = "animalBreed";
     var nameTag = "name";
     this.navCtrl.push(SearchResultPage, {
       speciesTag: speciesTag, 
-      aninmalSpecies: this.animalSpecies.replace(" ", ""),
+      aninmalSpecies: this.animalSpecies,
       breedTag: breedTag,
-      animalBreed: this.animalBreed.replace(" ", ""),
+      animalBreed: this.animalBreed,
       nameTag: nameTag, 
       animalName: this.animalName
     });
