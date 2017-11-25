@@ -9,11 +9,8 @@
   
   <ion-content>
     <ion-slides pager="true" effect="slide" zoom="true">
-      <ion-slide>
-        <img src={{animal.downloadUrl}} alt="kein Bild">
-      </ion-slide>
-      <ion-slide>
-        <img src={{animal.downloadUrl}} alt="kein Bild">
+      <ion-slide *ngFor="let url of animal.downloadUrls">
+        <img src={{url}} alt="kein Bild">
       </ion-slide>
   </ion-slides>
     

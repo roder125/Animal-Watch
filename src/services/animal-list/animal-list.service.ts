@@ -22,20 +22,22 @@ export class AnimalListService{
      * @param name 
      */
     // https://angularfirebase.com/lessons/angular-file-uploads-to-firebase-storage/
-    pushImageUpload(imageArray, uId, name, date){
-        var images = [];
-        images = imageArray;
-        console.log("service " + images.length);
-        var idx = 0
-        for(idx; idx < images.length; idx ++){
-            console.log("for: " + idx);
-            var storageRef$ = firebase.storage().ref(`pictures/${uId}/${date}/${name}${idx}`);
+    pushImageUpload(image, uId, name, idx){
+        console.log("idx service: " + idx);
+        var images = image;
+        console.log("service " + images);
+        /*
+        for(var idx = 0; idx <= images.length; idx ++){
+            var storageRef$ = firebase.storage().ref(`pictures/${uId}/${date}/${name}${date}`);
+            console.log("for: " + idx);   
             storageRef$.putString(images[idx], "data_url")
             .then((data)=>{
                 this.downloadUrls.push(data.downloadURL);
             })
-          }
-          idx = 0;
+        }
+        */
+            var storageRef$ = firebase.storage().ref(`pictures/${uId}/${name}${idx}`);
+            return storageRef$.putString(image, "data_url");
           	/*
             .then((data)=>{
                 let downloadUrl = data.downloadURL;
@@ -78,7 +80,7 @@ export class AnimalListService{
             species:        species,
             breed:          breed,
             date:           date,
-            downloadUrls:    downloadUrls,
+            downloadUrls:   downloadUrls,
             description:    description,
             uId:            uId,
             //image: imageUrl

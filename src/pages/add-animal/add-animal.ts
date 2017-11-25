@@ -90,30 +90,52 @@ export class AddAnimalPage {
           this.date = new Date().setDate(0);
           animal.entryDate =  this.date;
           animal.animalSpecies = this.species.toString().replace(" ", "");;
-          animal.animalBreed = this.breed.toString().replace(" ", "");;
-          var saveArray = [];
-          saveArray = this.imageArray;
-          var uId = this.authService.getUserId();
-          console.log("add view: " + saveArray)
-          this.animalList.pushImageUpload(saveArray, uId, animal.animalName, animal.entryDate);
-    
-          this.downloadUrls = this.animalList.getDownloadUrls();
+          animal.animalBreed = this.breed.toString().replace(" ", "");
 
-          while(this.downloadUrls == null || this.downloadUrls == undefined){
-              console.log(this.downloadUrls);
-            if(this.downloadUrls != undefined || this.downloadUrls != null){
-              this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, this.downloadUrls, animal.description, animal.animalSpecies, animal.animalBreed, uId);
-              //this.navCtrl.setRoot(HomePage);
-              this.presentSuccessToast();
-              loader.dismiss();  
-              
-              this.navCtrl.pop();
-              this.presentErrorToast();
-              loader.dismiss();
-              break;
-            }
+          var uId = this.authService.getUserId();
+          console.log("add view: " + this.imageArray.length);
+          
+          for(var idx = 0; idx < this.imageArray.length; idx ++){
+            this.animalList.pushImageUpload(this.imageArray[idx], uId, animal.animalName, idx)
+              .then(data => {
+                this.downloadUrls.push(data.downloadURL);
+                
+                if(this.downloadUrls.length -1 == this.imageArray.length -1){
+                  console.log("alle urls da: " + this.downloadUrls);
+                  this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, this.downloadUrls, animal.description, animal.animalSpecies, animal.animalBreed, uId)
+                    .then(()=>{
+                      this.navCtrl.setRoot(HomePage);
+                      this.presentSuccessToast();
+                      loader.dismiss();
+                    });                  
+                }
+              })
+              .catch((error) =>{
+                this.presentErrorToast();
+                loader.dismiss();
+              });
           }
-                   
+
+          /*
+          this.downloadUrls = this.animalList.getDownloadUrls();
+          console.log(this.downloadUrls);
+          
+          var keepGoing = true;
+          saveArray.forEach((data) => {
+            if(keepGoing){
+              if(this.downloadUrls.length == saveArray.length){
+                this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, this.downloadUrls, animal.description, animal.animalSpecies, animal.animalBreed, uId);
+                //this.navCtrl.setRoot(HomePage);
+                this.presentSuccessToast();
+                loader.dismiss();  
+                
+                this.navCtrl.pop();
+                this.presentErrorToast();
+                loader.dismiss();
+                keepGoing = false;
+              }
+            }
+          });*/              
       });   
     }
   }
