@@ -20,9 +20,9 @@
     </ion-toolbar> 
 </ion-header>
 
-<ion-content #content>
-    <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)">
-      <ion-slide>
+<ion-content id="content">
+    <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)" class="bigSlide">
+      <ion-slide >
         <ion-scroll id="scroll" class="smallList" scrollY="true">
           <ion-list>
             <button ion-item *ngFor="let animal of animalArray" (click)="showDetails(animal)">       

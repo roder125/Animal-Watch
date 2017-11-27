@@ -3,12 +3,22 @@ page-home {
     .showHeader{
         top: 0px;
         transition: top 0.2s ease-in-out;
+        //margin-bottom: 100px !important;
     }
 
     .hideHeader{
-        top: -115px;
+        top: -56px;
         transition: top 0.2s ease-in-out;
         position: fixed;
+    }
+
+    .smallContent{
+        transition: top 0.2s ease-in-out;
+    }
+    .bigContent{
+        top: -56px !important;
+        bottom: 56px !important;
+        transition: top 0.2s ease-in-out;
     }
 
     .smallList{
@@ -21,8 +31,7 @@ page-home {
 
     .bigList{
         width: 100% !important;
-        height:90vh !important;
-        top: 0px !important;
+        height:100vh !important;
     }
 
     .btnPos {

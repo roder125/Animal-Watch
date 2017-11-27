@@ -59,6 +59,7 @@ export class HomePage {
       document.getElementById('header').classList.add("hideHeader");
       document.getElementById('scroll').classList.remove("smallList");
       document.getElementById('scroll').classList.add("bigList");
+      document.getElementById('content').classList.add("bigContent");
       //this.header.remove("showHeader");
       //this.header.add("hideHeader");
     } 
@@ -67,6 +68,8 @@ export class HomePage {
       console.log("show");
       document.getElementById('header').classList.remove("hideHeader");
       document.getElementById('header').classList.add("showHeader");
+      document.getElementById('content').classList.remove("bigContent");
+      document.getElementById('content').classList.add("smallContent");
       //document.getElementById('scroll').classList.remove("bigList");
       //document.getElementById('scroll').classList.add("smallList");
     }    
