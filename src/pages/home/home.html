@@ -1,4 +1,4 @@
-<ion-header class="header">
+<ion-header id="header" class="showHeader">
   <ion-navbar color="brownLike">
     <ion-buttons end>
     <button ion-button icon-only clear="true" color="light" (click)="presentPopover($event)">
@@ -20,10 +20,10 @@
     </ion-toolbar> 
 </ion-header>
 
-<ion-content>
+<ion-content #content>
     <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)">
       <ion-slide>
-        <ion-scroll id="list" scrollY="true">
+        <ion-scroll id="scroll" class="smallList" scrollY="true">
           <ion-list>
             <button ion-item *ngFor="let animal of animalArray" (click)="showDetails(animal)">       
               <ion-thumbnail item-start>

@@ -6,7 +6,7 @@ import { AuthentificationService } from './../../services/authentification/authe
 import { Animal } from './../../models/add-animals/animal.interface';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Slides, List, PopoverController, LoadingController } from 'ionic-angular';
+import { NavController, Slides, List, PopoverController, LoadingController, Scroll } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { Observable } from 'rxjs/Observable';
@@ -15,6 +15,7 @@ import { AddAnimalPage } from '../add-animal/add-animal';
 import { AngularFireAction, SnapshotAction, AngularFireList } from 'angularfire2/database';
 import { PopoverPage } from '../popover/popover';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -22,6 +23,9 @@ import { PopoverPage } from '../popover/popover';
 export class HomePage {
 
   @ViewChild('pageSlider') pageSlider: Slides;
+  @ViewChild(Scroll) scroll: Scroll;
+ 
+  header;
   tabs: any = '0';
   animalList$: Observable<SnapshotAction[]>;
   result$ : Observable<any[]>;
@@ -31,7 +35,7 @@ export class HomePage {
   image;
   noImage;
 
-  constructor(public navCtrl: NavController, private animalListService: AnimalListService, public popoverCtrl: PopoverController,
+  constructor(public navCtrl: NavController, private animalListService: AnimalListService, public popoverCtrl: PopoverController, 
               private authService: AuthentificationService,private storageService: LocalstorageService, public loadCtrl: LoadingController) {
     
   }
@@ -40,6 +44,33 @@ export class HomePage {
     this.showList();
     this.showMyEntryList();
   }
+
+  ngAfterViewInit() {
+    this.header = document.getElementById('header');
+    this.scroll.addScrollEventListener(this.onScroll);
+  }
+
+  onScroll(event) {
+    console.log(event.target.scrollTop);
+    
+    if(event.target.scrollTop > 56){
+      console.log("hide");
+      document.getElementById('header').classList.remove("showHeader");
+      document.getElementById('header').classList.add("hideHeader");
+      document.getElementById('scroll').classList.remove("smallList");
+      document.getElementById('scroll').classList.add("bigList");
+      //this.header.remove("showHeader");
+      //this.header.add("hideHeader");
+    } 
+    //else if(event.target.scrollTop < 56){
+    else{  
+      console.log("show");
+      document.getElementById('header').classList.remove("hideHeader");
+      document.getElementById('header').classList.add("showHeader");
+      //document.getElementById('scroll').classList.remove("bigList");
+      //document.getElementById('scroll').classList.add("smallList");
+    }    
+}
   /**
    * Öffnet das Popover für die Suche
    * @param event 
