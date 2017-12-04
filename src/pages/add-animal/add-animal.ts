@@ -17,13 +17,16 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class AddAnimalPage {
 
   tags = [];
+  noImage: boolean;
+  haveImage: boolean;
   animal = {} as Animal;
   date: any;
   textLeft = 500;
   downloadUrls = [];
   imageArray = [];
   
-  species = [];
+  species;
+  breedArray =[];
   breed = [];
   preparedTags = [
     'Hund',
@@ -32,10 +35,31 @@ export class AddAnimalPage {
     'Ratte',
     'Pferd'
   ]
+  speciesArray = [
+    'Hund',
+    'Katze',
+    'Maus',
+    'Ratte',
+    'Pferd'
+  ]
+  dogBreedArray = [
+    'Bordercolli',
+    'Dalmertiner',
+    'Boxer',
+    'Bulldogge',
+    'Schäferhund'
+  ]
+  catBreedArray = [
+    'Nacktkatze',
+    'Tiger',
+    'Hauskatze'
+  ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthentificationService, public loadCtrl: LoadingController,
               private animalList: AnimalListService, private cameraService: CameraSerive, public toastCtrl: ToastController, public _DomSanitizer: DomSanitizer) {
-
+  
+                this.noImage = true;
+                this.haveImage = false;
   }
   /**
    * Zählt wie viele Buchstaben noch geschrieben werden können, max 500
@@ -45,14 +69,29 @@ export class AddAnimalPage {
     this.textLeft = 0;
     this.textLeft = maxLen - this.animal.description.length;
   }
+
+  /**
+   * Je nach dem, welche Rasse ausgewählt wird, werden Rassen verfügbar
+   * todo: weitere Rasse hinzufügen und später auslagern
+   */
+  onSelectChange(){
+    if(this.species == "Hund"){
+      this.breedArray = this.dogBreedArray;
+    }
+    if(this.species == "Katze"){
+      this.breedArray = this.catBreedArray;
+    }
+  }
   /**
    * Methode ruft den camera service auf und speichert das Bild als String in die Variable
-   */
+  */
   getPicture(){
     this.cameraService.takePicture()
       .then((imageData)=>{
         var base64Image = "data:image/jpeg;base64," + imageData;
         this.imageArray.push(base64Image);
+        this.haveImage = true;
+        this.noImage = false;
       })
       .catch((error)=>{
         console.log(error);
@@ -66,8 +105,11 @@ export class AddAnimalPage {
     
     var base64Image = "data:image/jpeg;base64," + image;
     this.imageArray.push(base64Image);
-  }*/
-  
+    this.haveImage = true;
+    this.noImage = false;
+    console.log(this.imageArray);
+  }
+  */
   /**
    * Parameter werden der Methode addAnimal des animalListServices übergeben und in die Datenbank gespeichert,
    * außerdem wird einer Loader angezeigt
@@ -82,12 +124,12 @@ export class AddAnimalPage {
       let loader = this.loadCtrl.create({   
         content: "speichert",
       });
-      loader.present()
-        .then(()=>{
+      //loader.present()
+        //.then(()=>{
           this.date = new Date().setDate(0);
           animal.entryDate =  this.date;
-          animal.animalSpecies = this.species.toString().replace(" ", "");;
-          animal.animalBreed = this.breed.toString().replace(" ", "");
+          animal.animalSpecies = this.species.toString();
+          animal.animalBreed = this.breed;
 
           var uId = this.authService.getUserId();
           console.log("add view: " + this.imageArray.length);
@@ -97,22 +139,22 @@ export class AddAnimalPage {
               .then(data => {
                 this.downloadUrls.push(data.downloadURL);
                 
-                if(this.downloadUrls.length -1 == this.imageArray.length -1){
+                if(this.downloadUrls.length  == this.imageArray.length ){
                   console.log("alle urls da: " + this.downloadUrls);
                   this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, this.downloadUrls, animal.description, animal.animalSpecies, animal.animalBreed, uId)
                     .then(()=>{
                       this.navCtrl.setRoot(HomePage);
                       this.presentSuccessToast();
-                      loader.dismiss();
+                      //loader.dismiss();
                     });                  
                 }
               })
               .catch((error) =>{
                 this.presentErrorToast();
-                loader.dismiss();
+                //loader.dismiss();
               });
           }            
-      });   
+      //});   
     }
   }
   /**

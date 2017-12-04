@@ -7,7 +7,7 @@ page-home {
     }
 
     .hideHeader{
-        top: -56px;
+        top: -111px;
         transition: top 0.2s ease-in-out;
         position: fixed;
     }
@@ -50,5 +50,12 @@ page-home {
         width: 65%;
         height: 100%;
         text-align: center;
+    }
+
+    .thumbnailImage{
+        width:auto;
+        height:auto;
+        max-width:MaxSize;
+        max-height:MaxSize;
     }
 }

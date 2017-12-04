@@ -17,7 +17,7 @@ import { SearchResultPage } from '../search-result/search-result';
 export class PopoverPage {
 
   animalSpecies;
-  animalBreed;
+  animalBreed = [];
   animalName;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {

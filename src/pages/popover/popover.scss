@@ -2,4 +2,22 @@ page-popover {
     ion-list{
         padding-top: 5vh !important;
     }
+    .scroll-content {
+        overflow: hidden;
+      }
+
+    .content-size{
+        height: 60vh !important;
+        max-height: 60vh !important;
+        //position: fixed !important;
+    }
+
+    .item{
+        margin-top:10px !important;
+    }
+
+    .name-item{
+        top: 0px !important;
+        margin-bottom:10px !important;
+    }
 }

@@ -45,11 +45,15 @@ export class HomePage {
     this.showMyEntryList();
   }
 
+  /*
   ngAfterViewInit() {
     this.header = document.getElementById('header');
     this.scroll.addScrollEventListener(this.onScroll);
   }
 
+  /**
+   * sollte dem weg scrollen des headers dienen
+   
   onScroll(event) {
     console.log(event.target.scrollTop);
     
@@ -73,7 +77,7 @@ export class HomePage {
       //document.getElementById('scroll').classList.remove("bigList");
       //document.getElementById('scroll').classList.add("smallList");
     }    
-}
+}*/
   /**
    * Öffnet das Popover für die Suche
    * @param event 
@@ -147,7 +151,9 @@ export class HomePage {
       this.saveArray.push(snapshot);
       this.myEntryArray = this.saveArray.slice().reverse().map( c => ({
         key: c.key, ... c.val()
-      }));    
+      }));
+      console.log("myEntrys");    
+      console.log(this.myEntryArray[0]);    
     });
   }
 

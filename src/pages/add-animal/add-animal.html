@@ -3,13 +3,24 @@
 
   <ion-navbar color="brownLike">
     <ion-title>Mein Tier vermitteln</ion-title>
+    <ion-buttons end>
+      <button ion-button clear="true" (click)="addAnimal(animal)">Speichern</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
+  <ion-slides pager="true" effect="slide" zoom="true" *ngIf="haveImage">
+    <ion-slide *ngFor="let image of imageArray">
+      <img [src]="_DomSanitizer.bypassSecurityTrustUrl(image)" alt="kein Bild"/>
+    </ion-slide>
+  </ion-slides>
   <ion-list>
+    <ion-item *ngIf="noImage" text-center no-lines>
+      <h2>Noch kein Bild <br> reingestellt</h2>
+    </ion-item>
     <ion-item>
       <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="animal.animalName" autocomplete="on" autocorrect="on"></ion-input>
@@ -18,7 +29,7 @@
       <ion-label floating>Alter</ion-label>
       <ion-input type="number" [(ngModel)]="animal.animalAge"></ion-input>
     </ion-item>
-    <ion-item>
+    <!--<ion-item>
       <rl-tag-input
         [(ngModel)]="species"
         [addOnBlur]="false"
@@ -35,17 +46,24 @@
         placeholder="Rasse"
         autocomplete="on" autocorrect="on">
       </rl-tag-input>
+    </ion-item>-->
+    <ion-item>
+      <ion-label>Tierart</ion-label>
+      <ion-select [(ngModel)]="species" (ionChange)="onSelectChange()">
+        <ion-option *ngFor="let species of speciesArray" value={{species}}>{{species}}</ion-option>
+      </ion-select>    
+    </ion-item>
+    <ion-item>
+      <ion-label>Rasse</ion-label>
+      <ion-select [(ngModel)]="breed" multiple="true">
+        <ion-option *ngFor="let breed of breedArray" value={{breed}}>{{breed}}</ion-option>
+      </ion-select>    
     </ion-item>
     <ion-item>
       <ion-label floating>Beschreibung, {{textLeft}} Zeichen übrig</ion-label>
       <ion-textarea rows="10" maxLength="500" type="text" [(ngModel)]="animal.description" (ionChange)='textCounter()' autocomplete="on" autocorrect="on"></ion-textarea>
     </ion-item>
   </ion-list>
-  <ion-slides pager="true" effect="slide" zoom="true" *ngIf="imageShow">
-    <ion-slide *ngFor="let image of imageArray">
-      <img  [src]="_DomSanitizer.bypassSecurityTrustUrl(image)" alt="kein Bild"/>
-    </ion-slide>
-  </ion-slides>
   <ion-buttons text-center>
     <button ion-button full color="lGrey"(click)="getPicture()">Stelle ein Foto rein</button>
     <button ion-button full color="lGrey" (click)="addAnimal(animal)">Speichern</button>
