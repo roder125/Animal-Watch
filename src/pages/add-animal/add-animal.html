@@ -64,8 +64,23 @@
       <ion-textarea rows="10" maxLength="500" type="text" [(ngModel)]="animal.description" (ionChange)='textCounter()' autocomplete="on" autocorrect="on"></ion-textarea>
     </ion-item>
   </ion-list>
+  <ion-fab bottom center>
+    <button ion-fab color="brownLike">Foto</button>
+    <ion-fab-list side="right">
+      <button ion-fab icon-only color="lGrey" (click)="takePicture()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+      <button ion-fab icon-only color="lGrey" (click)="getPicture()">
+        <ion-icon name="images"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+  <!--
   <ion-buttons text-center>
-    <button ion-button full color="lGrey"(click)="getPicture()">Stelle ein Foto rein</button>
+    <button ion-button full color="lGrey" (click)="getPicture()">Stelle ein Foto rein</button>
     <button ion-button full color="lGrey" (click)="addAnimal(animal)">Speichern</button>
-  </ion-buttons>
+  </ion-buttons>-->
 </ion-content>
+

@@ -19,18 +19,15 @@
       <ion-input type="text" [(ngModel)]="animalBreed" autocomplete="on" autocorrect="on"></ion-input>
     </ion-item>-->
     <ion-item class="item">
-      <ion-label>Tireart</ion-label>
-      <ion-select [(ngModel)]="animalSpecies">
-        <ion-option value="dog">Hund</ion-option>
-        <ion-option value="kat">Katze</ion-option>
+      <ion-label>Tierart</ion-label>
+      <ion-select [(ngModel)]="species" (ionChange)="onSelectChange()">
+        <ion-option *ngFor="let species of speciesArray" value={{species}}>{{species}}</ion-option>
       </ion-select>    
     </ion-item>
     <ion-item class="item">
       <ion-label>Rasse</ion-label>
-      <ion-select [(ngModel)]="animalBreed" multiple="true">
-        <ion-option value="Bordercolli">Bordercolli</ion-option>
-        <ion-option value="Bulldogge">Bulldogge</ion-option>
-        <ion-option value="Schäferhund">Schäferhund</ion-option>
+      <ion-select [(ngModel)]="breed" multiple="true">
+        <ion-option *ngFor="let breed of breedArray" value={{breed}}>{{breed}}</ion-option>
       </ion-select>    
     </ion-item> 
     <ion-item class="name-item">

@@ -24,6 +24,7 @@ import { HomePage } from '../pages/home/home';
 import { RegisterPage } from '../pages/register/register';
 import { AddAnimalPage } from '../pages/add-animal/add-animal';
 import { SearchResultPage } from '../pages/search-result/search-result';
+import { SpeciesAndBreedService } from '../services/species-and-breed.service/speciesAndBreed.service';
 
 
 export const environment = {
@@ -82,6 +83,7 @@ export const environment = {
     AuthentificationService,
     LocalstorageService,
     CameraSerive,
+    SpeciesAndBreedService,
     Camera
   ]
 })

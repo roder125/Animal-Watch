@@ -13,7 +13,7 @@
   </ion-navbar> 
     <ion-toolbar color="brownLike">
       <ion-segment color="light" [(ngModel)]="tabs">
-        <ion-segment-button (click)="selectTab(0)" value="0">Tier finden</ion-segment-button>
+        <ion-segment-button (click)="selectTab(0)" value="0">Neuzugänge</ion-segment-button>
         <ion-segment-button (click)="selectTab(1)" value="1">Favouriten</ion-segment-button>
         <ion-segment-button (click)="selectTab(2)" value="2">Meine Einträge</ion-segment-button>
       </ion-segment>
@@ -25,6 +25,18 @@
       <ion-slide >
         <ion-scroll id="scroll" class="smallList" scrollY="true">
           <ion-list>
+            <!--
+            <ion-card *ngFor="let animal of animalArray" (click)="showDetails(animal)">
+                <img class="image" src={{animal.downloadUrls[0]}} alt="kein Bild">
+                <ion-card-content>
+                  <ion-card-title>
+                    <h2>{{animal.name}}</h2>
+                  </ion-card-title>
+                  <p>Rasse: {{animal.breed}}</p>
+                  <p>Alter: {{animal.age}} Jahre</p> 
+                </ion-card-content>
+              </ion-card>-->
+            
             <button ion-item *ngFor="let animal of animalArray" (click)="showDetails(animal)">       
               <ion-thumbnail item-start>
                 <img src={{animal.downloadUrls[0]}} alt="kein Bild">
@@ -32,7 +44,7 @@
               <h2>{{animal.name}}</h2>
               <!--<h2>Rasse: <p *ngFor="let breed of animal.breed">{{breed}}</p></h2>-->
               <p>Rasse: {{animal.breed}}</p>
-              <p>Alter: {{animal.age}} Jahre</p>             
+              <p>Alter: {{animal.age}} Jahre</p>      
             </button>
           </ion-list>
         </ion-scroll>

@@ -12,13 +12,30 @@ export class CameraSerive{
     takePicture(){
         const options: CameraOptions = {
             quality: 100,
-            targetHeight: 400,
-            targetWidth: 300,
+            targetWidth: 1920,
+            targetHeight: 1080,
             //sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             correctOrientation: true,
+            allowEdit: false,
+            //saveToPhotoAlbum: true
+          }
+        return this.camera.getPicture(options);
+    }
+
+    
+    getPicture(){
+        const options: CameraOptions = {
+            quality: 100,
+            targetWidth: 1920,
+            targetHeight: 1080,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            correctOrientation: true,
+            allowEdit: false,
             //saveToPhotoAlbum: true
           }
         return this.camera.getPicture(options);
