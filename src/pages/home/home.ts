@@ -151,9 +151,7 @@ export class HomePage {
       this.saveArray.push(snapshot);
       this.myEntryArray = this.saveArray.slice().reverse().map( c => ({
         key: c.key, ... c.val()
-      }));
-      console.log("myEntrys");    
-      console.log(this.myEntryArray[0]);    
+      }));   
     });
   }
 

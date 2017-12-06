@@ -1,3 +1,4 @@
+import { AuthentificationService } from './../../services/authentification/authentification.service';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
@@ -13,7 +14,8 @@ export class MyEntryDetailsPage {
 
   animal: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public databaseService: AnimalListService, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public databaseService: AnimalListService, 
+              public toastCtrl: ToastController, public authService: AuthentificationService) {
     this.animal = this.navParams.get("animal");
   }
 
@@ -27,14 +29,15 @@ export class MyEntryDetailsPage {
    * @param name 
    */
   delete(key, name){
-    this.databaseService.deleteAnimal(key, name)
+    console.log("delete this: " + this.animal.pathUrls);
+    this.databaseService.deleteAnimal(key, this.animal.pathUrls)
       .then((data)=>{
         this.navCtrl.setRoot(HomePage);
         this.showSuccesToast(name);
       })
       .catch((data)=>{
         this.showErrorToast(name);
-      })    
+      })
   }
 
   showSuccesToast(name){

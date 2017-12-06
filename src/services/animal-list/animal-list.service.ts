@@ -20,10 +20,9 @@ export class AnimalListService{
      * @param name 
      */
     // https://angularfirebase.com/lessons/angular-file-uploads-to-firebase-storage/
-    pushImageUpload(image, uId, name, idx){
-        console.log("idx service: " + idx);
+    pushImageUpload(image, uId, name, idx, date){
         var images = image;
-        var storageRef$ = firebase.storage().ref(`pictures/${uId}/${name}${idx}`);
+        var storageRef$ = firebase.storage().ref(`pictures/${uId}/${name}${date}/${name}${idx}`);
         return storageRef$.putString(image, "data_url");
     }
 
@@ -46,7 +45,9 @@ export class AnimalListService{
 
 
     // imageUrl muss noch hinzugefügt werden
-    addAnimal(name, age, date, downloadUrls, description, species, breed, uId){
+    addAnimal(name, age, date, downloadUrls, pathUrls , description, species, breed, uId){
+        console.log("paths");
+        console.log(pathUrls);
         return this.animalListRef$.push({
             name:           name,
             age:            age,
@@ -54,18 +55,22 @@ export class AnimalListService{
             breed:          breed,
             date:           date,
             downloadUrls:   downloadUrls,
+            pathUrls:       pathUrls,
             description:    description,
-            uId:            uId,
-            //image: imageUrl
+            uId:            uId
         });
     }
 
     /**
      * Löscht ein Tier aus der Datenbank Liste und dessen Bilder aus dem Storage
      */
-    deleteAnimal(key, name){
-        this.animalListRef$.remove(key);
-        var storageRef$ = firebase.storage().ref(`pictures/${name}`);
-        return storageRef$.delete();
+    deleteAnimal(key, refArray : string[]){
+        refArray.forEach((ref) => {
+            let storageRef$ = firebase.storage().ref(ref);
+            storageRef$.delete();
+            console.log("storageRef-------------------------------------------------");
+            console.log(storageRef$)
+        });  
+        return this.animalListRef$.remove(key);
     }
 }
