@@ -29,7 +29,6 @@ export class MyEntryDetailsPage {
    * @param name 
    */
   delete(key, name){
-    console.log("delete this: " + this.animal.pathUrls);
     this.databaseService.deleteAnimal(key, this.animal.pathUrls)
       .then((data)=>{
         this.navCtrl.setRoot(HomePage);

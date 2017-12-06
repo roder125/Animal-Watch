@@ -1,7 +1,9 @@
 import { AuthentificationService } from './../../services/authentification/authentification.service';
 
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { AnimalListService } from '../../services/animal-list/animal-list.service';
+import { User } from '../../models/user-interface/user.interface';
 
 
 @IonicPage()
@@ -11,11 +13,10 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 })
 export class RegisterPage {
 
-  email;
-  password;
+  user = {} as User;
 
-  constructor(private alertCtrl: AlertController, public navCtrl: NavController, 
-              public navParams: NavParams, private authService: AuthentificationService) {
+  constructor(private alertCtrl: AlertController, public navCtrl: NavController, public toastCtrl: ToastController,
+              public navParams: NavParams, private authService: AuthentificationService, private listService: AnimalListService) {
   }
 
    /**
@@ -35,16 +36,27 @@ export class RegisterPage {
    * Diese erwartet eine email und ein passwort
    * Außerdem wird eine verifizierungs Email geschickt 
    */
-  register() {
-    this.authService.register(this.email.replace(" ", "").toLowerCase(), this.password)
+  register(newUser) {
+    console.log("user "+ newUser.email);
+    this.authService.register(this.user.email.replace(" ", "").toLowerCase(), this.user.password)
     .then (user =>{
-      user.sendEmailVerification();  
-      this.alert("User is created: " + user.email + "\n" + "A verification Email has ben send to your Email address.");
+      user.sendEmailVerification();
+      this.listService.createUser(newUser);
       this.navCtrl.pop();
     })
     .catch(error =>{
-      console.log("Got an Error", error);
-      this.alert("User is no created " + error);
+      console.log("error" + error);
     });
+  }
+
+  /**
+   * Zeigt einen Toast bei erfolgreichen Speichern
+   */
+  presentSuccessToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Account erfolgreich erstellt. Bitte bestätigen sie die verifizierungs Email, die sie erhalten werden.',
+      duration: 3000
+    });
+    toast.present();
   }
 }

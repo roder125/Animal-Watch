@@ -9,8 +9,8 @@ import * as firebase from 'firebase';
 export class AnimalListService{    
 
     private animalListRef$ = this.db.list<any>('animal-list');
+    private userListRef$ = this.db.list<any>('user-list');
     
-
     constructor(private db: AngularFireDatabase){
     }
 
@@ -46,8 +46,6 @@ export class AnimalListService{
 
     // imageUrl muss noch hinzugefügt werden
     addAnimal(name, age, date, downloadUrls, pathUrls , description, species, breed, uId){
-        console.log("paths");
-        console.log(pathUrls);
         return this.animalListRef$.push({
             name:           name,
             age:            age,
@@ -68,9 +66,12 @@ export class AnimalListService{
         refArray.forEach((ref) => {
             let storageRef$ = firebase.storage().ref(ref);
             storageRef$.delete();
-            console.log("storageRef-------------------------------------------------");
-            console.log(storageRef$)
         });  
         return this.animalListRef$.remove(key);
+    }
+
+    createUser(user){
+        console.log(user);
+        return this.userListRef$.push({user : user});
     }
 }

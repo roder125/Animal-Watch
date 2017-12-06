@@ -10,25 +10,64 @@
 <ion-content padding>
   <ion-list>
       <ion-item>
-        <ion-icon name="contact" item-start></ion-icon>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="text" [(ngModel)]="email" autocomplete="on " autocorrect="on"></ion-input>
+        <ion-label floating>Email*</ion-label>
+        <ion-input type="text" [(ngModel)]="user.email" autocomplete="on " autocorrect="on"></ion-input>
       </ion-item>
       
       <ion-item>
-        <ion-icon name="key" item-start></ion-icon>
-        <ion-label floating>Passwort</ion-label>
-        <ion-input type="password" [(ngModel)]="password"></ion-input>
+        <ion-label floating>Passwort*</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Name*</ion-label>
+        <ion-input type="text" [(ngModel)]="user.lastName" autocomplete="on" autocorrect="on"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Vorname*</ion-label>
+        <ion-input type="text" [(ngModel)]="user.name" autocomplete="on" autocorrect="on"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Unternehmen/ Verein</ion-label>
+        <ion-input type="text" [(ngModel)]="user.company" autocomplete="on" autocorrect="on"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Telefon</ion-label>
+        <ion-input type="text" [(ngModel)]="user.phone" autocomplete="on" autocorrect="on"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Straße</ion-label>
+        <ion-input type="text" [(ngModel)]="user.street" autocomplete="on" autocorrect="on"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Nr.</ion-label>
+        <ion-input type="text" [(ngModel)]="user.nr" autocomplete="on" autocorrect="on"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>PLZ</ion-label>
+        <ion-input type="text" [(ngModel)]="user.plz" autocomplete="on" autocorrect="on"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Ort</ion-label>
+        <ion-input type="text" [(ngModel)]="user.place" autocomplete="on" autocorrect="on"></ion-input>
       </ion-item>
 
       <ion-buttons text-center no-lines>
-          <button id="button" full ion-button block color="lGrey" (click)="register()">Registrieren</button>
+          <button id="button" full ion-button block color="lGrey" (click)="register(user)">Registrieren</button>
       </ion-buttons>
     </ion-list>
 
     <ion-card color="light">
       <ion-card-content>
         Erstellen Sie einen neuen Accout und bestätigen Sie die Email Addresse.
+        Alle Felder mit einem ' * ' müssen befüllt sein.
       </ion-card-content>
     </ion-card>
 </ion-content>

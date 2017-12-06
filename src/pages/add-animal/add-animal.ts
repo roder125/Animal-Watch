@@ -123,8 +123,6 @@ export class AddAnimalPage {
           animal.animalBreed = this.breed;
 
           var uId = this.authService.getUserId();
-          console.log("add view: " + this.imageArray.length);
-          
           for(var idx = 0; idx < this.imageArray.length; idx ++){
             this.animalList.pushImageUpload(this.imageArray[idx], uId, animal.animalName, idx, animal.entryDate)
               .then(data => {
