@@ -43,9 +43,11 @@ export class RegisterPage {
       user.sendEmailVerification();
       this.listService.createUser(newUser);
       this.navCtrl.pop();
+      this.presentSuccessToast();
     })
     .catch(error =>{
       console.log("error" + error);
+      this.presentErrorToast(error);
     });
   }
 
@@ -56,6 +58,17 @@ export class RegisterPage {
     let toast = this.toastCtrl.create({
       message: 'Account erfolgreich erstellt. Bitte bestätigen sie die verifizierungs Email, die sie erhalten werden.',
       duration: 3000
+    });
+    toast.present();
+  }
+
+  /**
+   * Zeigt einen Toast bei erfolgreichen Speichern
+   */
+  presentErrorToast(error) {
+    let toast = this.toastCtrl.create({
+      message: 'Fehler! Bitte überprüfen Sie Ihre eingaben erneut. ' + error,
+      duration: 5000
     });
     toast.present();
   }

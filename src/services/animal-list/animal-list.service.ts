@@ -63,6 +63,8 @@ export class AnimalListService{
      * Löscht ein Tier aus der Datenbank Liste und dessen Bilder aus dem Storage
      */
     deleteAnimal(key, refArray : string[]){
+        console.log("Delete---------------------");
+        console.log(refArray);
         refArray.forEach((ref) => {
             let storageRef$ = firebase.storage().ref(ref);
             storageRef$.delete();
