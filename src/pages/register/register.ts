@@ -37,18 +37,22 @@ export class RegisterPage {
    * Außerdem wird eine verifizierungs Email geschickt 
    */
   register(newUser) {
-    console.log("user "+ newUser.email);
-    this.authService.register(this.user.email.replace(" ", "").toLowerCase(), this.user.password)
-    .then (user =>{
-      user.sendEmailVerification();
-      this.listService.createUser(newUser);
-      this.navCtrl.pop();
-      this.presentSuccessToast();
-    })
-    .catch(error =>{
-      console.log("error" + error);
-      this.presentErrorToast(error);
-    });
+    if(newUser.email == undefined || newUser.email == "" || newUser.password == undefined || newUser.password == "" || newUser.lastName == undefined || newUser.lastName == "" || newUser.name == undefined || newUser.name == ""){
+      this.presentErrorToast("Alle Felder mit einem ' * ' müssen befüllt werden.");
+    }
+    else{
+      this.authService.register(this.user.email.replace(" ", "").toLowerCase(), this.user.password)
+      .then (user =>{
+        user.sendEmailVerification();
+        this.listService.createUser(newUser);
+        this.navCtrl.pop();
+        this.presentSuccessToast();
+      })
+      .catch(error =>{
+        console.log("error" + error);
+        this.presentErrorToast(error);
+      });
+    }
   }
 
   /**
@@ -56,7 +60,7 @@ export class RegisterPage {
    */
   presentSuccessToast() {
     let toast = this.toastCtrl.create({
-      message: 'Account erfolgreich erstellt. Bitte bestätigen sie die verifizierungs Email, die sie erhalten werden.',
+      message: 'Account erfolgreich erstellt. Bitte bestätigen sie die verifizierungs Email, die sie erhalten haben.',
       duration: 3000
     });
     toast.present();
@@ -67,7 +71,7 @@ export class RegisterPage {
    */
   presentErrorToast(error) {
     let toast = this.toastCtrl.create({
-      message: 'Fehler! Bitte überprüfen Sie Ihre eingaben erneut. ' + error,
+      message: error,
       duration: 5000
     });
     toast.present();
