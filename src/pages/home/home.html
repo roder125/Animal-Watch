@@ -39,7 +39,7 @@
             
             <button ion-item *ngFor="let animal of animalArray" (click)="showDetails(animal)">       
               <ion-thumbnail item-start>
-                <img src={{animal.downloadUrls[0]}} alt="kein Bild">
+                <img src={{animal.downloadUrls[0]}} alt="kein Bild" *ngIf="animal.downloadUrls">
               </ion-thumbnail>
               <h2>{{animal.name}}</h2>
               <!--<h2>Rasse: <p *ngFor="let breed of animal.breed">{{breed}}</p></h2>-->
@@ -59,7 +59,7 @@
           <ion-list>
             <button ion-item *ngFor="let animal of myEntryArray" (click)="showMyEntryDetails(animal)">       
               <ion-thumbnail item-start>
-                <img src={{animal.downloadUrls[0]}} alt="kein Bild">
+                <img src={{animal.downloadUrls[0]}} alt="kein Bild" *ngIf="animal.downloadUrls">
               </ion-thumbnail>
               <h2>{{animal.name}}</h2>        
               <p>Rasse: {{animal.breed}}</p>

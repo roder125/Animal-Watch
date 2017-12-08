@@ -59,6 +59,18 @@ export class AnimalListService{
         });
     }
 
+    addAnimalWithoutPicture(name, age, date, description, species, breed, uId){
+        return this.animalListRef$.push({
+            name:           name,
+            age:            age,
+            species:        species,
+            breed:          breed,
+            date:           date,
+            description:    description,
+            uId:            uId
+        });
+    }
+
     /**
      * Löscht ein Tier aus der Datenbank Liste und dessen Bilder aus dem Storage
      */

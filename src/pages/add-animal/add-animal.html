@@ -22,11 +22,11 @@
       <h2>Noch kein Bild <br> reingestellt</h2>
     </ion-item>
     <ion-item>
-      <ion-label floating>Name</ion-label>
+      <ion-label floating>Name*</ion-label>
       <ion-input type="text" [(ngModel)]="animal.animalName" autocomplete="on" autocorrect="on"></ion-input>
     </ion-item> 
     <ion-item>
-      <ion-label floating>Alter</ion-label>
+      <ion-label floating>Alter*</ion-label>
       <ion-input type="number" [(ngModel)]="animal.animalAge"></ion-input>
     </ion-item>
     <!--<ion-item>
@@ -48,14 +48,14 @@
       </rl-tag-input>
     </ion-item>-->
     <ion-item>
-      <ion-label>Tierart</ion-label>
-      <ion-select [(ngModel)]="species" (ionChange)="onSelectChange()">
+      <ion-label>Tierart*</ion-label>
+      <ion-select [(ngModel)]="animal.animalSpecies" (ionChange)="onSelectChange(animal)">
         <ion-option *ngFor="let species of speciesArray" value={{species}}>{{species}}</ion-option>
       </ion-select>    
     </ion-item>
     <ion-item>
       <ion-label>Rasse</ion-label>
-      <ion-select [(ngModel)]="breed" multiple="true">
+      <ion-select [(ngModel)]="animal.animalBreed" multiple="true">
         <ion-option *ngFor="let breed of breedArray" value={{breed}}>{{breed}}</ion-option>
       </ion-select>    
     </ion-item>

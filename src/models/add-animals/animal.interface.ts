@@ -4,7 +4,9 @@ export interface Animal{
     animalSpecies: string;
     animalBreed: string[];
     animalAge: number;
-    imageUrl: string;
+    pathUrls;
+    downloadUrls;
     entryDate: any;
     description: string;
+    uId: string;
 }
