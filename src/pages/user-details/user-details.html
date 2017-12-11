@@ -19,16 +19,16 @@
       <ion-item>
         <h2>Email: <h2><button ion-button clear (click)="mailto(user.user.email)">{{user.user.email}}</button></h2></h2>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="user.user.phone">
         <h2>Telefon: <h2>{{user.user.phone}}</h2></h2>
       </ion-item>
-      <ion-item-divider class="header">
+      <ion-item-divider class="header" *ngIf="user.user.street || user.user.plz">
         Standort
       </ion-item-divider>
-      <ion-item>
+      <ion-item *ngIf="user.user.street">
         <h2>Staße: <h2>{{user.user.street}} {{user.user.nr}}</h2></h2>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="user.user.plz && user.user.place" >
         <h2>Ort: <h2>{{user.user.plz}} {{user.user.place}}</h2></h2>
       </ion-item>
   </ion-list>

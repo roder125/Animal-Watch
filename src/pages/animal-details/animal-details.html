@@ -41,7 +41,7 @@
       <ion-item *ngIf="user.user.street && showPos">
         <h2>Straße: <h2>{{user.user.street}} {{user.user.nr}}</h2></h2>
       </ion-item>
-      <ion-item no-lines *ngIf="user.user.place">
+      <ion-item no-lines *ngIf="user.user.place && user.user.plz">
         <h2>Ort: <h2>{{user.user.plz}} {{user.user.place}}</h2></h2>
       </ion-item>
 
