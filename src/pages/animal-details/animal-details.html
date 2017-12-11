@@ -17,7 +17,7 @@
 
   <ion-list>
     <ion-item>
-      <h2>Rasse: <h2>{{animal.breed}}</h2></h2>
+      <h2>Rasse: <h2>{{breed}}</h2></h2>
     </ion-item>
     <ion-item>
       <h2>Alter: {{animal.age}}</h2>
@@ -28,27 +28,45 @@
       </h2>
     </ion-item>
     <div *ngFor="let user of user">
-    <ion-item-divider class="header">
-        Standort
-        <button ion-button clear item-end color="dark">anzeigen</button>
-    </ion-item-divider>
-    <ion-item *ngIf="user.user.street">
-      <h2>Straße: <h2>{{user.user.street}} {{user.user.nr}}</h2></h2>
-    </ion-item>
-    <ion-item no-lines *ngIf="user.user.place">
-      <h2>Ort: <h2>{{user.user.plz}} {{user.user.place}}</h2></h2>
-    </ion-item>
-    
+
+      <ion-item-divider class="header">
+          Standort
+          <button *ngIf="hidePos" ion-button clear icon-only item-end color="dark" (click)="showPosition()">
+            <ion-icon name="arrow-dropdown"></ion-icon>         
+          </button>
+          <button *ngIf="showPos" ion-button clear icon-only item-end color="dark" (click)="hidePosition()">
+            <ion-icon name="arrow-dropup"></ion-icon>         
+          </button>
+      </ion-item-divider>
+      <ion-item *ngIf="user.user.street && showPos">
+        <h2>Straße: <h2>{{user.user.street}} {{user.user.nr}}</h2></h2>
+      </ion-item>
+      <ion-item no-lines *ngIf="user.user.place">
+        <h2>Ort: <h2>{{user.user.plz}} {{user.user.place}}</h2></h2>
+      </ion-item>
+
+      <button *ngIf="showPos" ion-button clear color="dark">anzeigen</button>
+
       <ion-item-divider class="header">
           Anbieter
-          <button ion-button clear item-end color="dark" (click)="showUserDetails(user)">anzeigen</button>
+          <button *ngIf="hideU" ion-button clear icon-only item-end color="dark" (click)="showUser()">
+            <ion-icon name="arrow-dropdown"></ion-icon>         
+          </button>
+          <button *ngIf="showU" ion-button clear icon-only item-end color="dark" (click)="hideUser()">
+            <ion-icon name="arrow-dropup"></ion-icon>         
+          </button>
       </ion-item-divider>    
-      <ion-item>
+      <ion-item *ngIf="showU">
         <h2>Name: {{user.user.name}} {{user.user.lastName}}</h2>
       </ion-item>
-      <ion-item *ngIf="user.user.company">
+      <ion-item *ngIf="user.user.company && showU">
         <h2>Unternehmen/ Verein: <h2>{{user.user.company}}</h2></h2>
       </ion-item>
+      
+      <ion-buttons>
+        <button *ngIf="showU" ion-button clear item-end color="dark" (click)="showUserDetails(user)">anzeigen</button>
+        <button *ngIf="showU" ion-button clear color="dark">kontaktieren</button> 
+      </ion-buttons> 
     </div>   
   </ion-list>
   <div>
