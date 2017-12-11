@@ -19,4 +19,8 @@ export class UserDetailsPage {
     
   }
 
+  mailto(email) {
+    window.open(`mailto:${email}`, '_system');
+ }
+
 }

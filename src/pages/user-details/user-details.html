@@ -17,7 +17,7 @@
         Kontakt
       </ion-item-divider>
       <ion-item>
-        <h2>Email: <h2>{{user.user.email}}</h2></h2>
+        <h2>Email: <h2><button ion-button clear (click)="mailto(user.user.email)">{{user.user.email}}</button></h2></h2>
       </ion-item>
       <ion-item>
         <h2>Telefon: <h2>{{user.user.phone}}</h2></h2>
