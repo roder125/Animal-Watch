@@ -17,14 +17,39 @@
 
   <ion-list>
     <ion-item>
+      <h2>Rasse: <h2>{{animal.breed}}</h2></h2>
+    </ion-item>
+    <ion-item>
       <h2>Alter: {{animal.age}}</h2>
+    </ion-item> 
+    <ion-item no-lines>
+      <h2>Beschreibung: 
+        <div id="description">{{animal.description}}</div>
+      </h2>
     </ion-item>
-    <ion-item>
-      <h2>Rasse: {{animal.breed}}</h2>
+    <div *ngFor="let user of user">
+    <ion-item-divider class="header">
+        Standort
+        <button ion-button clear item-end color="dark">anzeigen</button>
+    </ion-item-divider>
+    <ion-item *ngIf="user.user.street">
+      <h2>Straße: <h2>{{user.user.street}} {{user.user.nr}}</h2></h2>
     </ion-item>
-    <ion-item>
-      <div id="description">{{animal.description}}</div>
+    <ion-item no-lines *ngIf="user.user.place">
+      <h2>Ort: <h2>{{user.user.plz}} {{user.user.place}}</h2></h2>
     </ion-item>
+    
+      <ion-item-divider class="header">
+          Anbieter
+          <button ion-button clear item-end color="dark" (click)="showUserDetails(user)">anzeigen</button>
+      </ion-item-divider>    
+      <ion-item>
+        <h2>Name: {{user.user.name}} {{user.user.lastName}}</h2>
+      </ion-item>
+      <ion-item *ngIf="user.user.company">
+        <h2>Unternehmen/ Verein: <h2>{{user.user.company}}</h2></h2>
+      </ion-item>
+    </div>   
   </ion-list>
   <div>
     <ion-buttons text-center>

@@ -39,7 +39,7 @@ export class SearchResultPage {
   showResultList(){
     // es wird nach Tierart, Rasse und Name gesucht
     if(this.animalSpecies != undefined && this.animalSpecies != "" && this.animalBreed != undefined && this.animalBreed != "" && this.animalBreed != null && this.animalName != undefined && this.animalName != ""){
-      this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
+      this.listService.getAnimalListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         if(val.breed.in(this.animalBreed)){
           if(val.species == this.animalSpecies){
@@ -50,7 +50,7 @@ export class SearchResultPage {
     }
     // es wird nach der Tierart und Rasse gesucht
     else if(this.animalSpecies != undefined && this.animalSpecies != ""  && this.animalBreed != undefined && this.animalBreed != "" && this.animalBreed != null){
-      this.listService.getListRef().orderByChild("breed").equalTo(this.animalBreed).on("child_added",(snapshot) =>{
+      this.listService.getAnimalListRef().orderByChild("breed").equalTo(this.animalBreed).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         if(val.species == this.animalSpecies){
           this.reverseArray(val);
@@ -59,7 +59,7 @@ export class SearchResultPage {
     }
     //es wird nach Tierart und Name gesucht
     else if(this.animalSpecies != undefined && this.animalSpecies != "" && this.animalName != undefined && this.animalName != ""){
-      this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
+      this.listService.getAnimalListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         if(val.species == this.animalSpecies){
           this.reverseArray(val);
@@ -68,7 +68,7 @@ export class SearchResultPage {
     }
     // es wird nach Rasse und Name gesucht
     else if(this.animalBreed != undefined && this.animalBreed != "" && this.animalBreed != null && this.animalName != undefined && this.animalName != ""){
-      this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
+      this.listService.getAnimalListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         if(val.breed == this.animalBreed){
           this.reverseArray(val);
@@ -77,7 +77,7 @@ export class SearchResultPage {
     }
     // es wird nur nach Tierart gesucht
     else if(this.animalSpecies != undefined && this.animalSpecies != ""){
-      this.listService.getListRef().orderByChild("species").equalTo(this.animalSpecies).on("child_added",(snapshot) =>{
+      this.listService.getAnimalListRef().orderByChild("species").equalTo(this.animalSpecies).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         this.reverseArray(val);  
       });
@@ -86,14 +86,14 @@ export class SearchResultPage {
     else if(this.animalBreed != undefined && this.animalBreed != "" && this.animalBreed != null){
       this.animalBreed.forEach(element => {
         console.log(element);
-        this.listService.getListRef().orderByChild("breed").equalTo(element).on("child_added",(snapshot) =>{
+        this.listService.getAnimalListRef().orderByChild("breed").equalTo(element).on("child_added",(snapshot) =>{
           var val = snapshot.val();
         });
       });
     }
     // es wird nur nach dem Namen gesucht
     else if(this.animalName != undefined && this.animalName != ""){
-      this.listService.getListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
+      this.listService.getAnimalListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
         this.reverseArray(val);
       });

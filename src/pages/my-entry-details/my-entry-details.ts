@@ -41,7 +41,7 @@ export class MyEntryDetailsPage {
 
   showSuccesToast(name){
     var toast = this.toastCtrl.create({
-      message: name + "wurde erfolgreich entfernt.",
+      message: name + " wurde erfolgreich entfernt.",
       duration: 3000
     }) 
     toast.present();

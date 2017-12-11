@@ -36,10 +36,18 @@ export class AnimalListService{
     }
 
     /**
-     * Returnt das Result einer Datenbankabfrage
+     * Returnt das Result einer Datenbankabfrage für Tiere
      */
-    getListRef(){
+    getAnimalListRef(){
         var ref =firebase.database().ref("animal-list");
+        return ref;
+    }
+
+    /**
+     * Returnt das Result einer Datenbankabfrage für User
+     */
+    getUserListRef(){
+        var ref =firebase.database().ref("user-list");
         return ref;
     }
 
@@ -74,18 +82,22 @@ export class AnimalListService{
     /**
      * Löscht ein Tier aus der Datenbank Liste und dessen Bilder aus dem Storage
      */
-    deleteAnimal(key, refArray : string[]){
+    deleteAnimal(key, refArray){
         console.log("Delete---------------------");
-        console.log(refArray);
-        refArray.forEach((ref) => {
-            let storageRef$ = firebase.storage().ref(ref);
-            storageRef$.delete();
-        });  
+        if(refArray != undefined){
+            refArray.forEach((ref) => {
+                        let storageRef$ = firebase.storage().ref(ref);
+                        storageRef$.delete();
+                    });  
+        }
         return this.animalListRef$.remove(key);
     }
 
-    createUser(user){
+    createUser(user, uId){
         console.log(user);
-        return this.userListRef$.push({user : user});
+        return this.userListRef$.push({
+            user : user,
+            uId  : uId
+        });
     }
 }

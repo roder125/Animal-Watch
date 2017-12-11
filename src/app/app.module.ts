@@ -25,6 +25,7 @@ import { RegisterPage } from '../pages/register/register';
 import { AddAnimalPage } from '../pages/add-animal/add-animal';
 import { SearchResultPage } from '../pages/search-result/search-result';
 import { SpeciesAndBreedService } from '../services/species-and-breed.service/speciesAndBreed.service';
+import { UserDetailsPage } from '../pages/user-details/user-details';
 
 
 export const environment = {
@@ -48,7 +49,8 @@ export const environment = {
     SearchResultPage,
     PopoverPage,
     AnimalDetailsPage,
-    MyEntryDetailsPage
+    MyEntryDetailsPage,
+    UserDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ export const environment = {
     SearchResultPage,
     PopoverPage,
     AnimalDetailsPage,
-    MyEntryDetailsPage
+    MyEntryDetailsPage,
+    UserDetailsPage
   ],
   providers: [
     StatusBar,

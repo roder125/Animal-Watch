@@ -137,8 +137,8 @@ export class HomePage {
           this.animalArray = data.slice().reverse().map( c => ({
             key: c.payload.key, ... c.payload.val()
           }))
+          loader.dismiss();
         });
-        loader.dismiss();
       });
   }
   
@@ -147,7 +147,7 @@ export class HomePage {
    */
   showMyEntryList(){
     var uId = this.authService.getUserId()
-    this.animalListService.getListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {  
+    this.animalListService.getAnimalListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {  
       this.saveArray.push(snapshot);
       this.myEntryArray = this.saveArray.slice().reverse().map( c => ({
         key: c.key, ... c.val()

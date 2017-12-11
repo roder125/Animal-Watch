@@ -44,7 +44,8 @@ export class RegisterPage {
       this.authService.register(this.user.email.replace(" ", "").toLowerCase(), this.user.password)
       .then (user =>{
         user.sendEmailVerification();
-        this.listService.createUser(newUser);
+        let uId = this.authService.getUserId();
+        this.listService.createUser(newUser, uId);
         this.navCtrl.pop();
         this.presentSuccessToast();
       })

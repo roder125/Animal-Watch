@@ -1,0 +1,36 @@
+
+<ion-header>
+
+  <ion-navbar color="brownLike">
+    <ion-title>{{user.user.name}} {{user.user.lastName}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+      <ion-item *ngIf="user.user.company">
+        <h2>Unternehmen/ Verein: <h2>{{user.user.company}}</h2></h2>
+      </ion-item>
+      <ion-item-divider class="header">
+        Kontakt
+      </ion-item-divider>
+      <ion-item>
+        <h2>Email: <h2>{{user.user.email}}</h2></h2>
+      </ion-item>
+      <ion-item>
+        <h2>Telefon: <h2>{{user.user.phone}}</h2></h2>
+      </ion-item>
+      <ion-item-divider class="header">
+        Standort
+      </ion-item-divider>
+      <ion-item>
+        <h2>Staße: <h2>{{user.user.street}} {{user.user.nr}}</h2></h2>
+      </ion-item>
+      <ion-item>
+        <h2>Ort: <h2>{{user.user.plz}} {{user.user.place}}</h2></h2>
+      </ion-item>
+  </ion-list>
+
+</ion-content>

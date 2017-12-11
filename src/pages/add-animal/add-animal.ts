@@ -139,7 +139,7 @@ export class AddAnimalPage {
             this.animalList.pushImageUpload(this.imageArray[idx], animal.uId, animal.animalName, idx, animal.entryDate)
               .then(data => {
                 this.downloadUrls.push(data.downloadURL);
-                animal.downloadUrls = this.downloadUrls;
+                animal.downloadUrls = this.downloadUrls.slice().reverse();
                 this.pathUrls.push(data.ref.fullPath);
                 animal.pathUrls = this.pathUrls;
                 console.log(animal.downloadUrls);
