@@ -29,7 +29,6 @@ export class UserDetailsPage {
     //window.open(mailto:${email}, '_system', `subject:${name}`);
     let Link=`mailto:${email}?subject=${this.animalName}`;
     window.open(Link, "_system");
-    console.log(Link);
  }
 
   /**
@@ -37,8 +36,7 @@ export class UserDetailsPage {
     */
   call(number){
     let Link=`tel:${number}`;
-    window.open(Link, "_system");
-    console.log(Link);    
+    window.open(Link, "_system");   
   }
 
   }
