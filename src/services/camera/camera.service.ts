@@ -9,6 +9,9 @@ export class CameraSerive{
 
     }
 
+    /**
+     * Schießt ein Foto
+     */
     takePicture(){
         let options: CameraOptions = {
             quality: 100,
@@ -25,7 +28,9 @@ export class CameraSerive{
         return this.camera.getPicture(options);
     }
 
-    
+    /**
+     * Holt Bild aus der Foto Galerie
+     */
     getPicture(){
         let options: CameraOptions = {
             sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
