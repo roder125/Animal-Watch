@@ -50,8 +50,8 @@ export class AnimalDetailsPage {
    * Öffnet die UserDetailsPage und übergibt einen user
    * @param user 
    */
-  showUserDetails(user){
-    this.navCtrl.push(UserDetailsPage, {user: user});
+  showUserDetails(user, name){
+    this.navCtrl.push(UserDetailsPage, {user: user, animalName: name});
   }
 
   /**

@@ -20,7 +20,7 @@
         <h2>Email: <h2><button ion-button clear (click)="mailto(user.user.email)">{{user.user.email}}</button></h2></h2>
       </ion-item>
       <ion-item *ngIf="user.user.phone">
-        <h2>Telefon: <h2>{{user.user.phone}}</h2></h2>
+        <h2>Telefon: <h2><button ion-button clear (click)="call(user.user.phone)">{{user.user.phone}}</button></h2></h2>
       </ion-item>
       <ion-item-divider class="header" *ngIf="user.user.street || user.user.plz">
         Standort
