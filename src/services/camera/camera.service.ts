@@ -10,7 +10,7 @@ export class CameraSerive{
     }
 
     takePicture(){
-        const options: CameraOptions = {
+        let options: CameraOptions = {
             quality: 100,
             targetWidth: 1920,
             targetHeight: 1080,
@@ -27,15 +27,14 @@ export class CameraSerive{
 
     
     getPicture(){
-        const options: CameraOptions = {
+        let options: CameraOptions = {
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType: this.camera.DestinationType.FILE_URI,      
             quality: 100,
             targetWidth: 1920,
             targetHeight: 1080,
-            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE,
-            //saveToPhotoAlbum: true
+            encodingType: this.camera.EncodingType.JPEG,      
+            correctOrientation: true
           }
         return this.camera.getPicture(options);
     }
