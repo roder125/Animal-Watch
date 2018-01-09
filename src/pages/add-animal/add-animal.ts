@@ -1,4 +1,4 @@
-import { HomePage } from './../home/home';
+
 import { AuthentificationService } from './../../services/authentification/authentification.service';
 import { CameraSerive } from './../../services/camera/camera.service';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
@@ -120,7 +120,7 @@ export class AddAnimalPage {
       console.log("alle nötigen Eingaben da");
       this.animalList.addAnimalWithoutPicture(animal.animalName, animal.animalAge, animal.entryDate , animal.description, animal.animalSpecies, animal.animalBreed, animal.uId)
       .then(()=>{
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot("TabsPage");
         this.presentSuccessToast();
         //loader.dismiss();
       });                 

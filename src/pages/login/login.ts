@@ -4,8 +4,6 @@ import { AuthentificationService } from './../../services/authentification/authe
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { RegisterPage } from '../register/register';
-import { HomePage } from "../home/home"
 
 @IonicPage()
 @Component({
@@ -66,7 +64,7 @@ export class LoginPage {
               else{
                 loader.dismiss();
                 // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
-                this.navCtrl.setRoot(HomePage);
+                this.navCtrl.setRoot("TabsPage");
                 // user is logged in
               }
             })
@@ -114,7 +112,7 @@ export class LoginPage {
                 this.storageService.saveLocal(this.email, this.password);
               }
               // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
-              this.navCtrl.setRoot(HomePage);
+              this.navCtrl.setRoot("TabsPage");
               loader.dismiss();
               // user is logged in
               }
@@ -131,7 +129,7 @@ export class LoginPage {
    * Öffnet die Register Page
    */
   register() {
-  	this.navCtrl.push(RegisterPage);
+  	this.navCtrl.push("RegisterPage");
   }
 }
 

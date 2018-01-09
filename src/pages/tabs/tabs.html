@@ -1,0 +1,77 @@
+<ion-header id="header" class="showHeader">
+  <ion-navbar color="brownLike">
+    <ion-buttons end>
+      <button ion-button icon-only clear="true" color="light" (click)="presentPopover($event)">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons>
+      <button ion-button icon-only clear (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar> 
+    <ion-toolbar color="brownLike">
+      <ion-segment color="light" [(ngModel)]="tabs">
+        <ion-segment-button (click)="selectTab(0)" value="0">Neuzugänge</ion-segment-button>
+        <ion-segment-button (click)="selectTab(1)" value="1">Favouriten</ion-segment-button>
+        <ion-segment-button (click)="selectTab(2)" value="2">Meine Einträge</ion-segment-button>
+      </ion-segment>
+    </ion-toolbar> 
+</ion-header>
+
+<ion-content id="content">
+    <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)" class="bigSlide">
+      <ion-slide >
+        <ion-scroll id="scroll" class="smallList" scrollY="true">
+          <ion-list>
+            <!--
+            <ion-card *ngFor="let animal of animalArray" (click)="showDetails(animal)">
+                <img class="image" src={{animal.downloadUrls[0]}} alt="kein Bild">
+                <ion-card-content>
+                  <ion-card-title>
+                    <h2>{{animal.name}}</h2>
+                  </ion-card-title>
+                  <p>Rasse: {{animal.breed}}</p>
+                  <p>Alter: {{animal.age}} Jahre</p> 
+                </ion-card-content>
+              </ion-card>-->
+            
+            <button ion-item *ngFor="let animal of animalArray" (click)="showDetails(animal)">       
+              <ion-thumbnail item-start>
+                <img src={{animal.downloadUrls[0]}} alt="kein Bild" *ngIf="animal.downloadUrls">
+              </ion-thumbnail>
+              <h2>{{animal.name}}</h2>
+              <!--<h2>Rasse: <p *ngFor="let breed of animal.breed">{{breed}}</p></h2>-->
+              <p>Rasse: {{animal.breed}}</p>
+              <p>Alter: {{animal.age}} Jahre</p>      
+            </button>
+          </ion-list>
+        </ion-scroll>
+      </ion-slide>
+     
+      <ion-slide>
+        <h1>ContentTab 2</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-scroll id="list" class="smallList" scrollY="true">
+          <ion-list>
+            <button ion-item *ngFor="let animal of myEntryArray" (click)="showMyEntryDetails(animal)">       
+              <ion-thumbnail item-start>
+                <img src={{animal.downloadUrls[0]}} alt="kein Bild" *ngIf="animal.downloadUrls">
+              </ion-thumbnail>
+              <h2>{{animal.name}}</h2>        
+              <p>Rasse: {{animal.breed}}</p>
+              <p>Alter: {{animal.age}}</p>
+            </button>
+          </ion-list>
+        </ion-scroll>
+        <ion-buttons end class="btnPos">
+          <button ion-fab color="brownLike"  (click)="addAnimal()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-slide>    
+    </ion-slides>
+</ion-content>

@@ -47,7 +47,7 @@ export class PopoverPage {
     var speciesTag = "animalSpecies";
     var breedTag = "animalBreed";
     var nameTag = "name";
-    this.navCtrl.push(SearchResultPage, {
+    this.navCtrl.push("SearchResultPage", {
       speciesTag: speciesTag, 
       aninmalSpecies: this.species,
       breedTag: breedTag,

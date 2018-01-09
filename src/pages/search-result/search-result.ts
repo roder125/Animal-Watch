@@ -110,6 +110,6 @@ export class SearchResultPage {
   }
 
   showDetails(animal){
-    this.navCtrl.push(AnimalDetailsPage, {animal: animal});
+    this.navCtrl.push("AnimalDetailsPage", {animal: animal});
   }
 }

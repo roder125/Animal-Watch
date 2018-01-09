@@ -1,6 +1,3 @@
-import { MyEntryDetailsPage } from './../pages/my-entry-details/my-entry-details';
-import { AnimalDetailsPage } from './../pages/animal-details/animal-details';
-import { PopoverPage } from './../pages/popover/popover';
 
 import { CameraSerive } from './../services/camera/camera.service';
 import { LocalstorageService } from './../services/localstorage/localstorage.service';
@@ -19,13 +16,8 @@ import { Camera } from '@ionic-native/camera';
 import { RlTagInputModule } from 'angular2-tag-input';
 
 import { MyApp } from './app.component';
-import { LoginPage } from '../pages/login/login';
-import { HomePage } from '../pages/home/home';
-import { RegisterPage } from '../pages/register/register';
-import { AddAnimalPage } from '../pages/add-animal/add-animal';
-import { SearchResultPage } from '../pages/search-result/search-result';
+
 import { SpeciesAndBreedService } from '../services/species-and-breed.service/speciesAndBreed.service';
-import { UserDetailsPage } from '../pages/user-details/user-details';
 
 
 export const environment = {
@@ -41,16 +33,7 @@ export const environment = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    LoginPage,
-    HomePage,
-    RegisterPage,
-    AddAnimalPage,
-    SearchResultPage,
-    PopoverPage,
-    AnimalDetailsPage,
-    MyEntryDetailsPage,
-    UserDetailsPage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -66,16 +49,7 @@ export const environment = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    LoginPage,
-    HomePage,
-    RegisterPage,
-    AddAnimalPage,
-    SearchResultPage,
-    PopoverPage,
-    AnimalDetailsPage,
-    MyEntryDetailsPage,
-    UserDetailsPage
+    MyApp
   ],
   providers: [
     StatusBar,

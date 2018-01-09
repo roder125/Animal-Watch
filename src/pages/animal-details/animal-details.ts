@@ -1,8 +1,6 @@
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UserDetailsPage } from '../user-details/user-details';
-
 
 @IonicPage()
 @Component({
@@ -51,7 +49,7 @@ export class AnimalDetailsPage {
    * @param user 
    */
   showUserDetails(user, name){
-    this.navCtrl.push(UserDetailsPage, {user: user, animalName: name});
+    this.navCtrl.push("UserDetailsPage", {user: user, animalName: name});
   }
 
   /**

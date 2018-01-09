@@ -17,10 +17,6 @@ export class UserDetailsPage {
     this.animalName = this.navParams.get("animalName");
   }
 
-  ionViewDidLoad() {
-    
-  }
-
   /**
    * Öffnet das standart Email Programm und setzt automatisch Empfänger und Betreff
    * @param email 
