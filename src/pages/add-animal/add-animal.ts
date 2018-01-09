@@ -149,7 +149,7 @@ export class AddAnimalPage {
                   //console.log("alle path da: " + this.pathUrls);
                   this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, animal.downloadUrls, animal.pathUrls , animal.description, animal.animalSpecies, animal.animalBreed, animal.uId)
                     .then(()=>{
-                      this.navCtrl.setRoot(HomePage);
+                      this.navCtrl.setRoot("TabsPage");
                       this.presentSuccessToast();
                       //loader.dismiss();
                     });                  
