@@ -1,6 +1,4 @@
-import { MyEntryDetailsPage } from './../my-entry-details/my-entry-details';
-import { SearchResultPage } from './../search-result/search-result';
-import { AnimalDetailsPage } from './../animal-details/animal-details';
+
 import { LocalstorageService } from './../../services/localstorage/localstorage.service';
 import { AuthentificationService } from './../../services/authentification/authentification.service';
 import { Animal } from './../../models/add-animals/animal.interface';
@@ -8,12 +6,10 @@ import { AnimalListService } from './../../services/animal-list/animal-list.serv
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides, List, PopoverController, LoadingController, Scroll } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { LoginPage } from '../login/login';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { AddAnimalPage } from '../add-animal/add-animal';
 import { AngularFireAction, SnapshotAction, AngularFireList } from 'angularfire2/database';
-import { PopoverPage } from '../popover/popover';
 
 
 @IonicPage()
@@ -117,7 +113,6 @@ export class TabsPage {
     let loader = this.loadCtrl.create({
       content:  "lädt..",
     });
-
     loader.present()
       .then(()=>{
         this.animalListService
@@ -147,8 +142,9 @@ export class TabsPage {
    * Zeigt die Einträge, die ein User gemacht hat
    */
   showMyEntryList(){
-    var uId = this.authService.getUserId()
-    this.animalListService.getAnimalListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {  
+    var uId = this.authService.getUserId();
+    this.animalListService.getAnimalListRef().orderByChild("animal/uId").equalTo(uId).on("child_added", snapshot => {
+      console.log("Hier müsste es klappen");
       this.saveArray.push(snapshot);
       this.myEntryArray = this.saveArray.slice().reverse().map( c => ({
         key: c.key, ... c.val()

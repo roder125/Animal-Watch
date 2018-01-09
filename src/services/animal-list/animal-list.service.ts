@@ -39,7 +39,8 @@ export class AnimalListService{
      * Returnt das Result einer Datenbankabfrage für Tiere
      */
     getAnimalListRef(){
-        var ref =firebase.database().ref("animal-list");
+        var ref = firebase.database().ref("animal-list");
+        console.log(ref);
         return ref;
     }
 
@@ -53,29 +54,15 @@ export class AnimalListService{
 
 
     // imageUrl muss noch hinzugefügt werden
-    addAnimal(name, age, date, downloadUrls, pathUrls , description, species, breed, uId){
+    addAnimal(animal){
         return this.animalListRef$.push({
-            name:           name,
-            age:            age,
-            species:        species,
-            breed:          breed,
-            date:           date,
-            downloadUrls:   downloadUrls,
-            pathUrls:       pathUrls,
-            description:    description,
-            uId:            uId
+            animal: animal
         });
     }
 
-    addAnimalWithoutPicture(name, age, date, description, species, breed, uId){
+    addAnimalWithoutPicture(animal){
         return this.animalListRef$.push({
-            name:           name,
-            age:            age,
-            species:        species,
-            breed:          breed,
-            date:           date,
-            description:    description,
-            uId:            uId
+            animal: animal
         });
     }
 

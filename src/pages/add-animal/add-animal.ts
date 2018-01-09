@@ -108,7 +108,8 @@ export class AddAnimalPage {
    * @param animal 
    */
   addAnimal(animal: Animal){
-    this.date = new Date().setDate(0);
+    //this.date = new Date().setDate(0);
+    this.date = new Date();
     animal.entryDate = this.date;
     animal.uId = this.authService.getUserId();
 
@@ -118,7 +119,7 @@ export class AddAnimalPage {
     // Es wurde kein Foto reingestellt
     else if(this.imageArray.length == null || this.imageArray.length == 0){
       console.log("alle nötigen Eingaben da");
-      this.animalList.addAnimalWithoutPicture(animal.animalName, animal.animalAge, animal.entryDate , animal.description, animal.animalSpecies, animal.animalBreed, animal.uId)
+      this.animalList.addAnimalWithoutPicture(animal)
       .then(()=>{
         this.navCtrl.setRoot("TabsPage");
         this.presentSuccessToast();
@@ -147,7 +148,7 @@ export class AddAnimalPage {
                 if(animal.downloadUrls.length  == this.imageArray.length ){
                   //console.log("alle urls da: " + this.downloadUrls);
                   //console.log("alle path da: " + this.pathUrls);
-                  this.animalList.addAnimal(animal.animalName, animal.animalAge, animal.entryDate, animal.downloadUrls, animal.pathUrls , animal.description, animal.animalSpecies, animal.animalBreed, animal.uId)
+                  this.animalList.addAnimal(animal)
                     .then(()=>{
                       this.navCtrl.setRoot("TabsPage");
                       this.presentSuccessToast();
