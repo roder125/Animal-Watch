@@ -1,16 +1,25 @@
 page-login {
-
+    /*
     button{
         width: 23vh;
         height: 7vh; 
-    }
-
-    ion-list{
-        padding-top: 15vh;
-    }
+    }*/
 
     ion-card{
         color: grey; 
     }
+
+    .logo{
+        margin: 0auto;
+        display: block;
+    }
     
+    #helpButton{
+        left: 0px !important;
+    }
+
+    ion-card ion-row{
+        padding: 10px;
+        float: center;
+    }
 }

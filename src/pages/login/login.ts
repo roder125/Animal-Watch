@@ -23,10 +23,6 @@ export class LoginPage {
               public navParams: NavParams, private authService: AuthentificationService, private storageService: LocalstorageService) {
   }
 
-  ionViewDidLoad() {
-    
-  }
-
   /**
    * Bevor die Seite geladen wird, wir geprüft, ob Login Daten gespeichert wurden
    * Wenn ja, wird automatisch eingeloggt
@@ -130,6 +126,14 @@ export class LoginPage {
    */
   register() {
   	this.navCtrl.push("RegisterPage");
+  }
+
+  /**
+   * Sendet email an den Helpdesk
+   */
+  help(){
+    let Link=`mailto:${"roderick.schuessler8@googlemail.com"}?subject=${"Login Problem"}`;
+    window.open(Link, "_system");
   }
 }
 
