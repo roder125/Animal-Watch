@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar color="brownLike">
-    <ion-title>{{animal.name}}</ion-title>
+    <ion-title>{{animal.animal.animalName}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,21 +10,21 @@
 
 <ion-content>
     <ion-slides pager="true" effect="slide" zoom="true">
-      <ion-slide *ngFor="let url of animal.downloadUrls">    
+      <ion-slide *ngFor="let url of animal.animal.downloadUrls">    
         <img src={{url}} alt="kein Bild">
       </ion-slide>
   </ion-slides>
 
   <ion-list>
     <ion-item>
-      <h2>Rasse: <h2>{{breed}}</h2></h2>
+      <h2>Rasse: <h2>{{animal.animal.animalBreed}}</h2></h2>
     </ion-item>
     <ion-item>
-      <h2>Alter: {{animal.age}}</h2>
+      <h2>Alter: {{animal.animal.animalAge}}</h2>
     </ion-item> 
     <ion-item no-lines>
       <h2>Beschreibung: 
-        <div id="description">{{animal.description}}</div>
+        <div id="description">{{animal.animal.animalDescription}}</div>
       </h2>
     </ion-item>
     <div *ngFor="let user of user">
@@ -37,7 +37,7 @@
           Standort
           <ion-icon item-end name="arrow-dropup"></ion-icon>         
       </ion-item-divider>
-          
+      <ion-item *ngIf="!user.user.street && user.user.place">Kein Standort verfügbar</ion-item>
       <ion-item *ngIf="user.user.street && showPos">
         <h2>Straße: <h2>{{user.user.street}} {{user.user.nr}}</h2></h2>
       </ion-item>

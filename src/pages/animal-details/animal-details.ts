@@ -35,7 +35,8 @@ export class AnimalDetailsPage {
    * Holt sich die User Details aus der Datenbank
    */
   fillUserArray(){
-    let uId = this.animal.uId;
+    let uId = this.animal.animal.uId;
+    console.log("userid" + uId);
     this.listService.getUserListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {  
       this.saveArray.push(snapshot);
       this.user = this.saveArray.slice().reverse().map( c => ({
@@ -56,7 +57,7 @@ export class AnimalDetailsPage {
    * Zeigt die Rassen mit Leerzeichen und Komma getrennt
    */
   showBreed(){
-    this.breed = this.animal.breed.toString();
+    this.breed = this.animal.animal.animalBreed.toString();
     this.breed.replace(",", ", ");
     console.log(this.breed.replace(",", ", "));
   }
