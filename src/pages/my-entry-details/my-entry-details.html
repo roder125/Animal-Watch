@@ -1,7 +1,7 @@
 <ion-header>
   
     <ion-navbar color="brownLike">
-      <ion-title>{{animal.name}}</ion-title>
+      <ion-title>{{animal.animal.animalName}}</ion-title>
     </ion-navbar>
   
 </ion-header>
@@ -9,26 +9,26 @@
   
   <ion-content>
     <ion-slides pager="true" effect="slide" zoom="true">
-      <ion-slide *ngFor="let url of animal.downloadUrls">
+      <ion-slide *ngFor="let url of animal.animal.downloadUrls">
         <img src={{url}} alt="kein Bild">
       </ion-slide>
   </ion-slides>
     
   <ion-list>
     <ion-item>
-      <h2>Alter: {{animal.age}}</h2>
+      <h2>Alter: {{animal.animal.animalAge}}</h2>
     </ion-item>
     <ion-item>
-      <h2>Rasse: {{animal.breed}}</h2>
+      <h2>Rasse: {{animal.animal.animalBreed}}</h2>
     </ion-item>
     <ion-item>
-      <div id="description">{{animal.description}}</div>
+      <div id="description">{{animal.animal.description}}</div>
     </ion-item>
   </ion-list>
   <div>
     <ion-buttons text-center>
-      <button ion-button full color="lGrey" (click)="delete(animal.key, animal.name)">
-        {{animal.name}} wurde erfolgreich vermittelt<br/>(Eintrag löschen)
+      <button ion-button full color="lGrey" (click)="delete(animal.animal.key, animal.animal.animalName)">
+        {{animal.animal.animalName}} wurde erfolgreich vermittelt<br/>(Eintrag löschen)
       </button>
     </ion-buttons>
   </div>

@@ -57,9 +57,11 @@ export class AnimalDetailsPage {
    * Zeigt die Rassen mit Leerzeichen und Komma getrennt
    */
   showBreed(){
-    this.breed = this.animal.animal.animalBreed.toString();
-    this.breed.replace(",", ", ");
-    console.log(this.breed.replace(",", ", "));
+    if(this.animal.animal.animalBreed != "" || this.animal.animal.animalBreed != undefined ){
+      this.breed = this.animal.animal.animalBreed.toString();
+      this.breed.replace(",", ", ");
+      console.log(this.breed.replace(",", ", "));  
+    }
   }
 
   /**

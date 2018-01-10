@@ -29,9 +29,9 @@ export class MyEntryDetailsPage {
    * @param name 
    */
   delete(key, name){
-    this.databaseService.deleteAnimal(key, this.animal.pathUrls)
+    this.databaseService.deleteAnimal(key, this.animal.animal.pathUrls)
       .then((data)=>{
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot("TabsPage");
         this.showSuccesToast(name);
       })
       .catch((data)=>{
