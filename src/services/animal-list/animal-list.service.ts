@@ -53,7 +53,6 @@ export class AnimalListService{
     }
 
 
-    // imageUrl muss noch hinzugefügt werden
     addAnimal(animal){
         return this.animalListRef$.push({
             animal: animal

@@ -2,7 +2,7 @@
 export interface Animal{
     animalName: string;
     animalSpecies: string;
-    animalBreed: string[];
+    animalBreed: string;
     animalAge: number;
     pathUrls;
     downloadUrls;

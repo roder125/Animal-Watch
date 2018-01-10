@@ -27,6 +27,7 @@ export class AddAnimalPage {
   pathUrls = [];
   imageArray = [];
   
+  tmpBreed = [];
   species;
   breedArray =[];
   breed = [];
@@ -112,6 +113,10 @@ export class AddAnimalPage {
     this.date = new Date();
     animal.entryDate = this.date;
     animal.uId = this.authService.getUserId();
+
+
+    animal.animalBreed = this.tmpBreed.toString()
+    console.log("Was geht " + animal.animalBreed);
 
     if(animal.animalName == undefined || animal.animalName == "" || animal.animalAge == null || animal.animalAge == undefined || animal.animalSpecies == undefined || animal.animalSpecies == ""){
       this.presentErrorToast("Alle Felder mit einem ' * ' müssen befüllt sein.");
