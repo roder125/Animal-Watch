@@ -13,7 +13,9 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleBlackTranslucent();
+      //statusBar.styleBlackTranslucent();
+      statusBar.backgroundColorByHexString("#333333");
+      console.log("statusbar");
       splashScreen.hide();
     });
   }

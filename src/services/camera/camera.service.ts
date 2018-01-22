@@ -36,8 +36,6 @@ export class CameraSerive{
             sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             destinationType: this.camera.DestinationType.FILE_URI,      
             quality: 100,
-            targetWidth: 1920,
-            targetHeight: 1080,
             encodingType: this.camera.EncodingType.JPEG,      
             correctOrientation: true
           }
