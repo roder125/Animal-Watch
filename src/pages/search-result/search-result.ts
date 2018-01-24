@@ -56,18 +56,33 @@ export class SearchResultPage {
     }
     // es wird nach der Tierart und Rasse gesucht
     else if(this.animalSpecies != undefined && this.animalSpecies != ""  && this.animalBreed != undefined && this.animalBreed != "" && this.animalBreed != null){     
+      this.listService.getAnimalListRef().orderByChild("animal/animalSpecies").equalTo(this.animalSpecies).on("child_added",(snapshot) =>{
+        var val = snapshot.val()
+        var breedString : string = val.animal.animalBreed;
+
+        this.animalBreed.forEach(breed => {
+          if(breedString.includes(breed)){
+            this.reverseArray(val);
+          }
+        });      
+      }
+      
+      /*
       this.animalBreed.forEach(breed => {
         console.log(breed);
         this.listService.getAnimalListRef().orderByChild("animal/animalBreed").equalTo(breed).on("child_added",(snapshot) =>{
-          console.log(snapshot);
-          console.log("TESSSSTTTT");
-          var val = snapshot.val();
+          
+          var val = snapshot.val()
+          console.log("bin in der query");
+          console.log("Name: " + val.animal.name)
+
+          ;
           if(val.animal.animalSpecies == this.animalSpecies){
             this.reverseArray(val);
           }
         });
-      });
-      
+      }*/
+      );  
     }
     //es wird nach Tierart und Name gesucht
     else if(this.animalSpecies != undefined && this.animalSpecies != "" && this.animalName != undefined && this.animalName != ""){
@@ -103,6 +118,10 @@ export class SearchResultPage {
         });
       });
     }*/
+    else if(this.animalBreed != undefined && this.animalBreed != "" && this.animalBreed != null){
+      console.log(this.animalBreed);
+    }
+
     // es wird nur nach dem Namen gesucht
     else if(this.animalName != undefined && this.animalName != ""){
       this.listService.getAnimalListRef().orderByChild("animal/animalName").equalTo(this.animalName).on("child_added",(snapshot) =>{

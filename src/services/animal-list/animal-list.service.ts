@@ -40,7 +40,6 @@ export class AnimalListService{
      */
     getAnimalListRef(){
         var ref = firebase.database().ref("animal-list");
-        console.log(ref);
         return ref;
     }
 
