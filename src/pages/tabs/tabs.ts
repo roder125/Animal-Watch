@@ -4,11 +4,10 @@ import { AuthentificationService } from './../../services/authentification/authe
 import { Animal } from './../../models/add-animals/animal.interface';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Slides, List, PopoverController, LoadingController, Scroll } from 'ionic-angular';
+import { NavController, Slides, List, PopoverController, LoadingController, Scroll, IonicPage } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { AddAnimalPage } from '../add-animal/add-animal';
 import { AngularFireAction, SnapshotAction, AngularFireList } from 'angularfire2/database';
 
 

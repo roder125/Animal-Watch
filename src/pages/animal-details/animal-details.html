@@ -27,7 +27,7 @@
         <div id="description">{{animal.animal.animalDescription}}</div>
       </h2>
     </ion-item>
-    <div *ngFor="let user of user">
+    <div *ngFor="let user of userArray">
 
       <ion-item-divider *ngIf="hidePos" class="header" (click)="showPosition()">
           Standort
@@ -45,7 +45,7 @@
         <h2>Ort: <h2>{{user.user.plz}} {{user.user.place}}</h2></h2>
       </ion-item>
 
-      <button *ngIf="showPos" ion-button clear color="dark">anzeigen</button>
+      <button *ngIf="showPos" ion-button clear color="dark" (click)="showMaps()">anzeigen</button>
 
       <ion-item-divider *ngIf="hideU" class="header" (click)="showUser()">
           Anbieter

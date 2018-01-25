@@ -1,6 +1,7 @@
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { User } from '../../models/user-interface/user.interface';
 
 @IonicPage()
 @Component({
@@ -11,14 +12,16 @@ export class AnimalDetailsPage {
 
   animal: any;
   saveArray =[];
-  user = [];
+  user = {} as User;
+  userArray = [];
   breed: string;
   showPos;
   hidePos;
   showU;
   hideU;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public listService: AnimalListService) {
+  constructor(private navCtrl: NavController, private navParams: NavParams, private listService: AnimalListService) 
+  {
     this.animal = this.navParams.get("animal");
     this.showPos= false;
     this.hidePos= true;
@@ -32,6 +35,23 @@ export class AnimalDetailsPage {
   }
 
   /**
+   * Öffnet eine Seite für Google Maps und übergibt die Addresse
+   */
+  showMaps(){
+    var street: string;
+    var city: string;
+    this.userArray.forEach((user)=>{
+      street = user.user.street + " " + user.user.nr;
+      city = user.user.plz + " " + user.user.place;
+    })
+
+    this.navCtrl.push("GoogleMapsPage", {
+      street: street,
+      city: city
+    })
+  }
+
+  /**
    * Holt sich die User Details aus der Datenbank
    */
   fillUserArray(){
@@ -39,7 +59,7 @@ export class AnimalDetailsPage {
     console.log("userid" + uId);
     this.listService.getUserListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {  
       this.saveArray.push(snapshot);
-      this.user = this.saveArray.slice().reverse().map( c => ({
+      this.userArray = this.saveArray.slice().reverse().map( c => ({
         key: c.key, ... c.val()
       }));
     });
