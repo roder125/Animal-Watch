@@ -26,8 +26,7 @@ export class SearchResultPage {
     
     this.speciesTag = this.navParams.get("speciesTag");
     this.animalSpecies = this.navParams.get("aninmalSpecies");
-    console.log(this.animalSpecies);
- 
+   
     this.breedTag = this.navParams.get("breedTag");
     this.animalBreed = this.navParams.get("animalBreed");
 
@@ -43,15 +42,17 @@ export class SearchResultPage {
    * Ergebis der Suche werden in Array gespeichert und ausgegeben
    */
   showResultList(){
-    // es wird nach Tierart, Rasse und Name gesucht
+    // es wird nach Tierart, Rasse und Name gesucht ist eigentlich doppelt gemoppelt
     if(this.animalSpecies != undefined && this.animalSpecies != "" && this.animalBreed != undefined && this.animalBreed != "" && this.animalBreed != null && this.animalName != undefined && this.animalName != ""){
-      this.listService.getAnimalListRef().orderByChild("name").equalTo(this.animalName).on("child_added",(snapshot) =>{
+      this.listService.getAnimalListRef().orderByChild("animal/animalName").equalTo(this.animalName).on("child_added",(snapshot) =>{
         var val = snapshot.val();
-        if(val.animal.animalBreed.in(this.animalBreed)){
-          if(val.animal.animalSpecies == this.animalSpecies){
+        var breedString : string = val.animal.animalBreed;
+
+        this.animalBreed.forEach(breed => {
+          if(breedString.includes(breed)){
             this.reverseArray(val);
           }
-        }
+        });
       });
     }
     // es wird nach der Tierart und Rasse gesucht
@@ -65,24 +66,7 @@ export class SearchResultPage {
             this.reverseArray(val);
           }
         });      
-      }
-      
-      /*
-      this.animalBreed.forEach(breed => {
-        console.log(breed);
-        this.listService.getAnimalListRef().orderByChild("animal/animalBreed").equalTo(breed).on("child_added",(snapshot) =>{
-          
-          var val = snapshot.val()
-          console.log("bin in der query");
-          console.log("Name: " + val.animal.name)
-
-          ;
-          if(val.animal.animalSpecies == this.animalSpecies){
-            this.reverseArray(val);
-          }
-        });
-      }*/
-      );  
+      });  
     }
     //es wird nach Tierart und Name gesucht
     else if(this.animalSpecies != undefined && this.animalSpecies != "" && this.animalName != undefined && this.animalName != ""){
@@ -108,18 +92,6 @@ export class SearchResultPage {
         var val = snapshot.val();
         this.reverseArray(val);  
       });
-    }
-    /* es wird nur nach Rasse gesucht
-    else if(this.animalBreed != undefined && this.animalBreed != "" && this.animalBreed != null){
-      this.animalBreed.forEach(element => {
-        console.log(element);
-        this.listService.getAnimalListRef().orderByChild("animal/animalBreed").equalTo(element).on("child_added",(snapshot) =>{
-          var val = snapshot.val();
-        });
-      });
-    }*/
-    else if(this.animalBreed != undefined && this.animalBreed != "" && this.animalBreed != null){
-      console.log(this.animalBreed);
     }
 
     // es wird nur nach dem Namen gesucht
