@@ -14,9 +14,9 @@
       <ion-thumbnail item-start>
         <img src={{animal.animal.downloadUrls[0]}} alt="kein Bild" *ngIf="animal.animal.downloadUrls">
       </ion-thumbnail>
-      <h2>{{animal.animal.animalName}}</h2>
+      <h2>{{animal.animal.animalName}}</h2>     
+      <p>Rasse: {{animal.animal.animalBreed | seperator : animal.animal.animalBreed }}</p>
       <p>Alter: {{animal.animal.animalAge}} Jahre</p>
-      <p>Rasse: {{animal.animal.animalBreed}}</p>
     </button>
   </ion-list>
 </ion-content>

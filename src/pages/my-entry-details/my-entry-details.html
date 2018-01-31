@@ -19,7 +19,7 @@
       <h2>Alter: {{animal.animal.animalAge}}</h2>
     </ion-item>
     <ion-item>
-      <h2>Rasse: {{animal.animal.animalBreed}}</h2>
+      <h2>Rasse: {{animal.animal.animalBreed  | seperator : animal.animal.animalBreed }}</h2>
     </ion-item>
     <ion-item>
       <div id="description">{{animal.animal.description}}</div>
