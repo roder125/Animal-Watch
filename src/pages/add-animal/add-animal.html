@@ -53,9 +53,16 @@
         <ion-option *ngFor="let species of speciesArray" value={{species}}>{{species}}</ion-option>
       </ion-select>    
     </ion-item>
+    
     <ion-item>
       <ion-label>Rasse</ion-label>
       <ion-select [(ngModel)]="tmpBreed" multiple="true">
+          <ion-searchbar
+          [(ngModel)]="myInput"
+          [showCancelButton]="shouldShowCancel"
+          (ionInput)="onInput($event)"
+          (ionCancel)="onCancel($event)">
+        </ion-searchbar>
         <ion-option *ngFor="let breed of breedArray" value={{breed}}>{{breed}}</ion-option>
       </ion-select>    
     </ion-item>
