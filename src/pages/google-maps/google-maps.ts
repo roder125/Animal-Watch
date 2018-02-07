@@ -18,6 +18,7 @@ export class GoogleMapsPage {
   end;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
+  hide : Boolean = false;
 
   constructor(private navCtrl: NavController, private navParams: NavParams) {
     this.street = this.navParams.get("street");
@@ -42,6 +43,7 @@ export class GoogleMapsPage {
   }
 
   calculateAndDisplayRoute() {
+    this.removeBar();
     this.directionsService.route({
       origin: this.start,
       destination: this.end,
@@ -56,7 +58,6 @@ export class GoogleMapsPage {
   }
 
   geocodeAdress(geocoder, resultsMap){
-
     var address = this.end;
     geocoder.geocode({'address': address}, function(results, status) {
       if (status === 'OK') {
@@ -69,7 +70,20 @@ export class GoogleMapsPage {
         alert('Geocode was not successful for the following reason: ' + status);
       }
     });
+  }
 
+  removeBar(){
+    var bar = document.getElementById('floating-panel');
+    bar.classList.add("upMove");
+    bar.classList.remove("downMove");
+    this.hide = true;
+  }
+
+  showBar(){
+    var bar = document.getElementById('floating-panel');
+    bar.classList.add("downMove");
+    bar.classList.remove("upMove");
+    this.hide = false;
   }
 
 }

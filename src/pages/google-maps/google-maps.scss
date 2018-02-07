@@ -15,4 +15,20 @@ page-google-maps {
       #map {
         height: 100%;
       }
+
+      #button{
+        margin-bottom: 0px !important;
+      }
+      
+      .upMove{
+        top: -140px;
+        transition: top 0.2s ease-in-out;
+        position: fixed;
+      }
+
+      .downMove{ 
+        top: 0px;
+        transition: bottom 0.2s ease-in-out;
+        position: fixed;
+      }
 }

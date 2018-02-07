@@ -10,10 +10,23 @@
 
 <ion-content>
   <div id="floating-panel">
-    <b>Start: </b>
-    <ion-input type="text" (change)="calculateAndDisplayRoute()" [(ngModel)]="start"></ion-input>
-    <b>End: </b>
-    {{end}}
+    <ion-list id="button">  
+      <ion-item>
+        <ion-label>Start</ion-label>
+        <ion-input type="text" [(ngModel)]="start"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ende</ion-label>
+        <ion-input type="text" [(ngModel)]="end" placeholder="{{end}}"></ion-input>       
+      </ion-item>
+      <ion-item >
+        <button ion-button item-end color="lGrey" (click)="calculateAndDisplayRoute()">Route berechnen</button>
+      </ion-item>
+      <ion-item *ngIf="hide">
+        <ion-icon item-end name="arrow-dropdown" (click)="showBar()"></ion-icon>
+      </ion-item>
+    </ion-list>
+    
   </div>
   <div #map id="map"></div>  
 </ion-content>
