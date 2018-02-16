@@ -16,6 +16,8 @@ export class GoogleMapsPage {
   city: string;
   start;
   end;
+  distance;
+  duration;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   hide : Boolean = false;
@@ -44,6 +46,7 @@ export class GoogleMapsPage {
 
   calculateAndDisplayRoute() {
     this.removeBar();
+    this.calculateDistance(this.start, this.end);
     this.directionsService.route({
       origin: this.start,
       destination: this.end,
@@ -56,6 +59,29 @@ export class GoogleMapsPage {
       }
     });
   }
+
+  /**
+   * Berechnet die Distanz und Zeit der Route
+   * @param start 
+   * @param end 
+   */
+  calculateDistance(start, end){
+    var distanceService = new google.maps.DistanceMatrixService();
+    distanceService.getDistanceMatrix({
+      origins: [start],
+      destinations: [end],
+      travelMode: google.maps.TravelMode.DRIVING
+    }, (response, status) => {
+      if (status === 'OK') {
+        var result = response.rows[0].elements[0];
+        this.distance = result.distance.text
+        console.log(result.distance.text);
+        this.duration = result.duration.text;
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+  } 
 
   geocodeAdress(geocoder, resultsMap){
     var address = this.end;

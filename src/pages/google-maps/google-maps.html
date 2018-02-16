@@ -23,10 +23,11 @@
         <button ion-button item-end color="lGrey" (click)="calculateAndDisplayRoute()">Route berechnen</button>
       </ion-item>
       <ion-item *ngIf="hide">
+        <p item-start>Distanz: {{distance}}, Zeit: {{duration}}</p>
         <ion-icon item-end name="arrow-dropdown" (click)="showBar()"></ion-icon>
       </ion-item>
-    </ion-list>
-    
+    </ion-list> 
   </div>
-  <div #map id="map"></div>  
+  
+  <div #map id="map"></div>
 </ion-content>
