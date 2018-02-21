@@ -11,6 +11,7 @@ export class UserDetailsPage {
   user;
   animalName;
   company: boolean;
+  userArray = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.user = this.navParams.get("user");
@@ -35,4 +36,17 @@ export class UserDetailsPage {
     window.open(Link, "_system");   
   }
 
+   /**
+   * Öffnet eine Seite für Google Maps und übergibt die Addresse
+   */
+  showMaps(){
+    var street: string = this.user.user.street + " " + this.user.user.nr;
+    var city: string = this.user.user.plz + " " + this.user.user.place;
+    
+    this.navCtrl.push("GoogleMapsPage", {
+      street: street,
+      city: city
+    })
   }
+
+}

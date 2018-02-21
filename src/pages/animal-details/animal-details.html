@@ -45,7 +45,7 @@
         <h2>Ort: <h2>{{user.user.plz}} {{user.user.place}}</h2></h2>
       </ion-item>
 
-      <button *ngIf="showPos" ion-button clear color="dark" (click)="showMaps()">anzeigen</button>
+      <button *ngIf="showPos" ion-button clear color="dark" (click)="showMaps()">Auf Karte anzeigen</button>
 
       <ion-item-divider *ngIf="hideU" class="header" (click)="showUser()">
           Anbieter
@@ -64,7 +64,7 @@
       </ion-item>
       
       <ion-buttons>
-        <button *ngIf="showU" ion-button clear item-end color="dark" (click)="showUserDetails(user, animal.name)">anzeigen</button>
+        <button *ngIf="showU" ion-button clear item-end color="dark" (click)="showUserDetails(user, animal.animal.name)">anzeigen</button>
         <button *ngIf="showU" ion-button clear color="dark">kontaktieren</button> 
       </ion-buttons> 
     </div>   
