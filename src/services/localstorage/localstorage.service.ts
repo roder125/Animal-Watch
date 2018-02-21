@@ -20,4 +20,12 @@ export class LocalstorageService{
     getSavedPassword() :Promise<any>{
         return this.storage.get("password");
     }
+
+    keepLoggedIn(status: Boolean){
+        this.storage.set("keepLoggedIn", status);
+    }
+
+    getLogginStatus(){
+        return this.storage.get("keepLoggedIn");
+    }
 }

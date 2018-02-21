@@ -27,6 +27,7 @@ export class LoginPage {
    * Bevor die Seite geladen wird, wir geprüft, ob Login Daten gespeichert wurden
    * Wenn ja, wird automatisch eingeloggt
    */
+  /** 
   ionViewWillEnter() {
     let loader = this.loadCtrl.create({
       content: "anmelden",
@@ -73,7 +74,7 @@ export class LoginPage {
       }   
     }) 
   }
-
+  */
   /**
    * Methode zum erzeugen einer InfoBox bzw. eines Alerts
    * @param message 
@@ -105,7 +106,11 @@ export class LoginPage {
             else{
               // Wenn User eingeloggt bleiben möchte, werden Anmeldedaten im lokalen Speicher gespeichert
               if(this.keepLoggedIn == true){
-                this.storageService.saveLocal(this.email, this.password);
+                //this.storageService.saveLocal(this.email, this.password);
+                this.storageService.keepLoggedIn(this.keepLoggedIn);
+              }
+              else{
+                this.storageService.keepLoggedIn(this.keepLoggedIn);
               }
               // Bei erfolgreichem einloggen wird der User angezeigt und die neue Seite HomePage angezeigt
               this.navCtrl.setRoot("TabsPage");

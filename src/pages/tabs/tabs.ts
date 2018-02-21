@@ -100,9 +100,9 @@ export class TabsPage {
     * Logged den aktuellen user aus und resetet die anmelde Variablen im Storage
     */
   logout(){
-    this.authService.logout();
-    this.storageService.saveLocal("","");
     this.navCtrl.setRoot("LoginPage");
+    this.authService.logout();
+    this.storageService.keepLoggedIn(false);
   }
   
   /**

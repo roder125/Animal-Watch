@@ -8,6 +8,13 @@ export class AuthentificationService{
 
     constructor(private fireAuth: AngularFireAuth){}
 
+    /** 
+     * Gibt den Auth Status zurück für den Login
+    */
+    getAuthenticatedUser(){
+        return this.fireAuth.authState;
+      }
+
     /**
      * login user with email and password
      * @param email 
