@@ -31,6 +31,7 @@ export class AddAnimalPage {
   species;
   breedArray =[];
   breed = [];
+  showButton : Boolean = false;
   
   speciesArray = this.speciesAndBreedService.getSpeciesArray();
   
@@ -189,5 +190,9 @@ export class AddAnimalPage {
       duration: 4000
     });
     toast.present();
+  }
+
+  showAddButton(){
+    this.showButton = true;
   }
 }

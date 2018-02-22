@@ -17,10 +17,25 @@
       <img [src]="_DomSanitizer.bypassSecurityTrustUrl(image)" alt="kein Bild"/>
     </ion-slide>
   </ion-slides>
+  
+  <label class="uploader" *ngIf="noImage" (click)="showAddButton()">                   
+    <ion-icon name="add" *ngIf="!showButton"></ion-icon>
+    <ion-fab center *ngIf="showButton">
+      <button ion-fab color="brownLike">Foto</button>
+      <ion-fab-list side="right">
+        <button ion-fab icon-only color="lGrey" (click)="takePicture()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-fab-list>
+      <ion-fab-list side="left">
+        <button ion-fab icon-only color="lGrey" (click)="getPicture()">
+          <ion-icon name="images"></ion-icon>
+        </button>
+      </ion-fab-list>
+    </ion-fab>    
+  </label>
+  
   <ion-list>
-    <ion-item *ngIf="noImage" text-center no-lines>
-      <h2>Noch kein Bild <br> reingestellt</h2>
-    </ion-item>
     <ion-item>
       <ion-label floating>Name*</ion-label>
       <ion-input type="text" [(ngModel)]="animal.animalName" autocomplete="on" autocorrect="on"></ion-input>
@@ -79,6 +94,7 @@
   </ion-buttons>-->
 </ion-content>
 
+<!--
 <ion-footer>
   <ion-fab bottom center>
     <button ion-fab color="brownLike">Foto</button>
@@ -93,5 +109,5 @@
       </button>
     </ion-fab-list>
   </ion-fab>
-</ion-footer>
+</ion-footer>-->
 
