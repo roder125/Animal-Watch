@@ -26,7 +26,7 @@ page-tabs {
                 //top: 3vh !important;
                 //margin-bottom: 5vh !important;
                 width: 100% !important;
-                height:83vh !important;
+                height:90vh !important;
             }
         
             .bigList{
@@ -57,6 +57,10 @@ page-tabs {
                 height:auto;
                 max-width:MaxSize;
                 max-height:MaxSize;
+            }
+
+            .card{
+                padding: 0px !important;
             }
         
         }

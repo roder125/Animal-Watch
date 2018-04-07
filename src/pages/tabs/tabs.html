@@ -1,21 +1,19 @@
 <ion-header id="header" class="showHeader">
-  <ion-navbar color="brownLike">
+  <!--<ion-navbar color="brownLike">
     <ion-buttons end>
       <button ion-button icon-only clear="true" color="light" (click)="presentPopover($event)">
         <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons>
-      <button ion-button icon-only clear (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar> 
+    
+  </ion-navbar> -->
     <ion-toolbar color="brownLike">
       <ion-segment color="light" [(ngModel)]="tabs">
-        <ion-segment-button (click)="selectTab(0)" value="0">Neuzugänge</ion-segment-button>
-        <ion-segment-button (click)="selectTab(1)" value="1">Favouriten</ion-segment-button>
-        <ion-segment-button (click)="selectTab(2)" value="2">Meine Einträge</ion-segment-button>
+        <ion-segment-button (click)="selectTab(0)" value="0"><ion-icon name="home"></ion-icon></ion-segment-button>
+        <ion-segment-button (click)="selectTab(1)" value="1"><ion-icon name="person"></ion-icon></ion-segment-button>
+        <ion-segment-button (click)="selectTab(2)" value="2"><ion-icon name="chatboxes"></ion-icon></ion-segment-button>
+        <ion-segment-button (click)="selectTab(3)" value="3"><ion-icon name="settings"></ion-icon></ion-segment-button>
+        <ion-segment-button (click)="selectTab(4)" value="4"><ion-icon name="search"></ion-icon></ion-segment-button>     
       </ion-segment>
     </ion-toolbar> 
 </ion-header>
@@ -53,11 +51,33 @@
       </ion-slide>
      
       <ion-slide>
-        <h1>ContentTab 2</h1>
-      </ion-slide>
-
-      <ion-slide>
         <ion-scroll id="list" class="smallList" scrollY="true">
+
+          <ion-row>
+            <ion-col col-6>
+              <ion-card class="card">
+                <ion-card-header>
+                  Meine Einträge
+                </ion-card-header>
+                <ion-card-content>
+                  
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col col-6>
+              <ion-card class="card">
+                <ion-card-header>
+                  Meine Favouriten
+                </ion-card-header>
+                <ion-card-content>
+                  
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+          
+
           <ion-list>
             <button ion-item *ngFor="let animal of myEntryArray" (click)="showMyEntryDetails(animal)">       
               <ion-thumbnail item-start *ngIf="animal.animal.downloadUrls">
@@ -77,6 +97,53 @@
             <ion-icon name="add"></ion-icon>
           </button>
         </ion-buttons>
-      </ion-slide>    
+      </ion-slide>
+      
+      <ion-slide>
+        <h1>Messages</h1>
+      </ion-slide>
+
+      <ion-slide>
+        <h1>Settings</h1>
+        <ion-buttons>
+          <button ion-button icon-only clear (click)="logout()">
+            <ion-icon name="log-out"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-list scroll="false">
+          <!--<ion-item>
+            <ion-label floating>Tierart</ion-label>
+            <ion-input type="text" [(ngModel)]="animalSpecies" autocomplete="on" autocorrect="on"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Rasse</ion-label>
+            <ion-input type="text" [(ngModel)]="animalBreed" autocomplete="on" autocorrect="on"></ion-input>
+          </ion-item>-->
+
+          <ion-item class="item">
+            <ion-label>Tierart</ion-label>
+            <ion-select [(ngModel)]="species" (ionChange)="onSelectChange()">
+              <ion-option *ngFor="let species of speciesArray" value={{species}}>{{species}}</ion-option>
+            </ion-select>    
+          </ion-item>
+          <ion-item class="item">
+            <ion-label>Rasse</ion-label>
+            <ion-select [(ngModel)]="breed" multiple="true">
+              <ion-option *ngFor="let breed of breedArray" value={{breed}}>{{breed}}</ion-option>
+            </ion-select>    
+          </ion-item> 
+          <ion-item class="name-item">
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" [(ngModel)]="animalName" autocomplete="on" autocorrect="on"></ion-input>
+          </ion-item>
+          <ion-buttons>
+              <button ion-button full color="brownLike" (click)="search()">suchen</button>
+              <button ion-button full color="brownLike" (click)="cancel()">abbrechen</button>
+          </ion-buttons>
+        </ion-list>
+      </ion-slide>
     </ion-slides>
 </ion-content>

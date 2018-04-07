@@ -9,6 +9,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { AngularFireAction, SnapshotAction, AngularFireList } from 'angularfire2/database';
+import { SpeciesAndBreedService } from '../../services/species-and-breed.service/speciesAndBreed.service';
 
 
 @IonicPage()
@@ -30,9 +31,16 @@ export class TabsPage {
   saveArray = [];
   image;
   noImage;
+  species;
+  breed = [];
+  animalName;
+
+  breedArray =[];
+  speciesArray = this.speciesAndBreedService.getSpeciesArray();
 
   constructor(public navCtrl: NavController, private animalListService: AnimalListService, public popoverCtrl: PopoverController, 
-              private authService: AuthentificationService,private storageService: LocalstorageService, public loadCtrl: LoadingController) {
+              private authService: AuthentificationService,private storageService: LocalstorageService, public loadCtrl: LoadingController,
+              private speciesAndBreedService: SpeciesAndBreedService) {
     
   }
   
@@ -41,39 +49,6 @@ export class TabsPage {
     this.showMyEntryList();
   }
 
-  /*
-  ngAfterViewInit() {
-    this.header = document.getElementById('header');
-    this.scroll.addScrollEventListener(this.onScroll);
-  }
-
-  /**
-   * sollte dem weg scrollen des headers dienen
-   
-  onScroll(event) {
-    console.log(event.target.scrollTop);
-    
-    if(event.target.scrollTop > 56){
-      console.log("hide");
-      document.getElementById('header').classList.remove("showHeader");
-      document.getElementById('header').classList.add("hideHeader");
-      document.getElementById('scroll').classList.remove("smallList");
-      document.getElementById('scroll').classList.add("bigList");
-      document.getElementById('content').classList.add("bigContent");
-      //this.header.remove("showHeader");
-      //this.header.add("hideHeader");
-    } 
-    //else if(event.target.scrollTop < 56){
-    else{  
-      console.log("show");
-      document.getElementById('header').classList.remove("hideHeader");
-      document.getElementById('header').classList.add("showHeader");
-      document.getElementById('content').classList.remove("bigContent");
-      document.getElementById('content').classList.add("smallContent");
-      //document.getElementById('scroll').classList.remove("bigList");
-      //document.getElementById('scroll').classList.add("smallList");
-    }    
-}*/
   /**
    * Öffnet das Popover für die Suche
    * @param event 
@@ -168,5 +143,36 @@ export class TabsPage {
    */
   showMyEntryDetails(animal){
     this.navCtrl.push("MyEntryDetailsPage",{animal: animal});
+  }
+
+  /**
+   * Je nach dem, welche Rasse ausgewählt wird, werden Rassen verfügbar
+   * todo: weitere Rasse hinzufügen und später auslagern
+   */
+  onSelectChange(){
+    if(this.species == "Hund"){
+      this.breedArray = this.speciesAndBreedService.getDogBreedArray();
+    }
+    if(this.species == "Katze"){
+      this.breedArray = this.speciesAndBreedService.getCatBreedArray();
+    }
+  }
+
+  /**
+   * Öffnet die Searchresult Page und übergibt Suchparameter
+   */
+  search(){
+    var speciesTag = "animalSpecies";
+    var breedTag = "animalBreed";
+    var nameTag = "name";
+    this.navCtrl.push("SearchResultPage", {
+      speciesTag: speciesTag, 
+      aninmalSpecies: this.species,
+      breedTag: breedTag,
+      animalBreed: this.breed,
+      nameTag: nameTag, 
+      animalName: this.animalName
+    });
+    //this.viewCtrl.dismiss();
   }
 }
