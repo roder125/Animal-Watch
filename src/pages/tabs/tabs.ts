@@ -1,3 +1,4 @@
+import { User } from './../../models/user-interface/user.interface';
 
 import { LocalstorageService } from './../../services/localstorage/localstorage.service';
 import { AuthentificationService } from './../../services/authentification/authentification.service';
@@ -28,12 +29,13 @@ export class TabsPage {
   result$ : Observable<any[]>;
   animalArray = [];
   myEntryArray = [];
+  myEntryArrayLength: number = 0;
   saveArray = [];
-  image;
-  noImage;
   species;
   breed = [];
   animalName;
+  user;
+  userSaveArray = [];
 
   breedArray =[];
   speciesArray = this.speciesAndBreedService.getSpeciesArray();
@@ -47,6 +49,7 @@ export class TabsPage {
   ionViewDidLoad() {
     this.showList();
     this.showMyEntryList();
+    this.showUser();
   }
 
   /**
@@ -118,11 +121,11 @@ export class TabsPage {
   showMyEntryList(){
     var uId = this.authService.getUserId();
     this.animalListService.getAnimalListRef().orderByChild("animal/uId").equalTo(uId).on("child_added", snapshot => {
-      console.log("Hier müsste es klappen");
       this.saveArray.push(snapshot);
       this.myEntryArray = this.saveArray.slice().reverse().map( c => ({
         key: c.key, ... c.val()
-      }));   
+      }));
+      this.myEntryArrayLength = this.myEntryArray.length;
     });
   }
 
@@ -135,14 +138,6 @@ export class TabsPage {
 
   showDetails(animal){
     this.navCtrl.push( "AnimalDetailsPage", {animal: animal});
-  }
-
-  /**
-   * Zeigt die Details der eigenen Einträge
-   * @param animal 
-   */
-  showMyEntryDetails(animal){
-    this.navCtrl.push("MyEntryDetailsPage",{animal: animal});
   }
 
   /**
@@ -160,7 +155,7 @@ export class TabsPage {
 
   /**
    * Öffnet die Searchresult Page und übergibt Suchparameter
-   */
+  **/
   search(){
     var speciesTag = "animalSpecies";
     var breedTag = "animalBreed";
@@ -174,5 +169,29 @@ export class TabsPage {
       animalName: this.animalName
     });
     //this.viewCtrl.dismiss();
+  }
+
+  /**
+   * Opens the definded Page
+   */
+  openPage(pageName : string){
+   
+    if(pageName == "MyEntrysPage"){
+      this.navCtrl.push(pageName, {myEntryArray : this.myEntryArray});
+    }
+    else{
+      this.navCtrl.push(pageName);
+    }
+  }
+
+  showUser(){
+    var curUser = this.authService.getUserId();
+    this.animalListService.getUserListRef().orderByChild("user/uId").equalTo(curUser).on("child_added", snapshot => {  
+      this.userSaveArray.push(snapshot);   
+      this.user = this.userSaveArray.map( c => ({
+        key: c.key, ... c.val()
+      }));
+      console.log(this.user)
+    });
   }
 }

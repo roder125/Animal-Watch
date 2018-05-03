@@ -1,67 +1,70 @@
 page-tabs {
         
-            .showHeader{
-                top: 0px;
-                transition: top 0.2s ease-in-out;
-                //margin-bottom: 100px !important;
-            }
-        
-            .hideHeader{
-                top: -111px;
-                transition: top 0.2s ease-in-out;
-                position: fixed;
-            }
-        
-            .smallContent{
-                transition: top 0.2s ease-in-out;
-            }
-            .bigContent{
-                top: -56px !important;
-                bottom: 56px !important;
-                transition: top 0.2s ease-in-out;
-            }
-        
-            .smallList{
-                //display:block;
-                //top: 3vh !important;
-                //margin-bottom: 5vh !important;
-                width: 100% !important;
-                height:90vh !important;
-            }
-        
-            .bigList{
-                width: 100% !important;
-                height:100vh !important;
-            }
-        
-            .btnPos {
-                position: fixed;
-                bottom: 15px;
-                right: 15px;    
-              }
-            
-            ion-searchbar {
-                margin: 0 auto;
-                position: absolute;
-                top: 0px;
-                left: 0%;
-                right: 0%;
-                //padding: 0 90px 1px;
-                width: 65%;
-                height: 100%;
-                text-align: center;
-            }
-        
-            .thumbnailImage{
-                width:auto;
-                height:auto;
-                max-width:MaxSize;
-                max-height:MaxSize;
-            }
+    #content{
+        background-color: rgb(185, 185, 185) !important;
+    }
+    .showHeader{
+        top: 0px;
+        transition: top 0.2s ease-in-out;
+        //margin-bottom: 100px !important;
+    }
 
-            .card{
-                padding: 0px !important;
-            }
-        
+    .hideHeader{
+        top: -111px;
+        transition: top 0.2s ease-in-out;
+        position: fixed;
+    }
+
+    .smallContent{
+        transition: top 0.2s ease-in-out;
+    }
+    .bigContent{
+        top: -56px !important;
+        bottom: 56px !important;
+        transition: top 0.2s ease-in-out;
+    }
+
+    .smallList{
+        //display:block;
+        //top: 3vh !important;
+        //margin-bottom: 5vh !important;
+        width: 100% !important;
+        height:90vh !important;
+    }
+
+    .bigList{
+        width: 100% !important;
+        height:100vh !important;
+    }
+
+    .btnPos {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;    
         }
+    
+    ion-searchbar {
+        margin: 0 auto;
+        position: absolute;
+        top: 0px;
+        left: 0%;
+        right: 0%;
+        //padding: 0 90px 1px;
+        width: 65%;
+        height: 100%;
+        text-align: center;
+    }
+
+    .thumbnailImage{
+        width:auto;
+        height:auto;
+        max-width:MaxSize;
+        max-height:MaxSize;
+    }
+
+    .card{
+        
+    }
+    
+}
         

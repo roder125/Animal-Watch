@@ -47,7 +47,7 @@ export class AnimalListService{
      * Returnt das Result einer Datenbankabfrage für User
      */
     getUserListRef(){
-        var ref =firebase.database().ref("user-list");
+        var ref = firebase.database().ref("user-list");
         return ref;
     }
 
@@ -78,11 +78,10 @@ export class AnimalListService{
         return this.animalListRef$.remove(key);
     }
 
-    createUser(user, uId){
+    createUser(user){
         console.log(user);
         return this.userListRef$.push({
-            user : user,
-            uId  : uId
+            user : user
         });
     }
 }

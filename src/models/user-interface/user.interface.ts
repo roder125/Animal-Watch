@@ -3,6 +3,7 @@
  * Interface für User
  */
 export interface User{
+    uId: string;
     email: string;
     password;
     lastName: string;

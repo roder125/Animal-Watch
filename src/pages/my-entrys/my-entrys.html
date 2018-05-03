@@ -1,0 +1,29 @@
+
+<ion-header>
+
+  <ion-navbar color="brownLike">
+    <ion-title>Meine Einträge</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-scroll id="list" class="smallList" scrollY="true">
+    <ion-list>
+      <button ion-item *ngFor="let animal of myEntrysArray" (click)="showMyEntryDetails(animal)">       
+        <ion-thumbnail item-start *ngIf="animal.animal.downloadUrls">
+          <img src={{animal.animal.downloadUrls[0]}} alt="kein Bild">
+        </ion-thumbnail>
+        <ion-thumbnail item-start *ngIf="!animal.animal.downloadUrls">
+          <img src="assets/img/haase.png" alt="kein Bild">
+        </ion-thumbnail>
+        <h2>{{animal.animal.animalName}}</h2>        
+        <p>Rasse: {{animal.animal.animalBreed | seperator : animal.animal.animalBreed }}</p>
+        <p>Alter: {{animal.animal.animalAge}} Jahre</p>
+      </button>
+    </ion-list>
+  </ion-scroll>
+
+</ion-content>

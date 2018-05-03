@@ -36,7 +36,7 @@ export class RegisterPage {
    * Diese erwartet eine email und ein passwort
    * Außerdem wird eine verifizierungs Email geschickt 
    */
-  register(newUser) {
+  register(newUser: User) {
     if(newUser.email == undefined || newUser.email == "" || newUser.password == undefined || newUser.password == "" || newUser.lastName == undefined || newUser.lastName == "" || newUser.name == undefined || newUser.name == ""){
       this.presentErrorToast("Alle Felder mit einem ' * ' müssen befüllt werden.");
     }
@@ -45,7 +45,8 @@ export class RegisterPage {
       .then (user =>{
         user.sendEmailVerification();
         let uId = this.authService.getUserId();
-        this.listService.createUser(newUser, uId);
+        newUser.uId = uId;
+        this.listService.createUser(newUser);
         this.navCtrl.pop();
         this.presentSuccessToast();
       })
