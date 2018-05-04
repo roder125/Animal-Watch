@@ -22,27 +22,22 @@
     <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)" class="bigSlide">
       <ion-slide >
         <ion-scroll id="scroll" class="smallList" scrollY="true">
-          <ion-card *ngFor="let animal of animalArray" (click)="showDetails(animal)">
-            <ion-card-header>
+          <ion-list>
+          
+            <ion-card *ngFor="let animal of animalArray" (click)="showDetails(animal)">
+            <ion-thumbnail item-start *ngIf="animal.animal.downloadUrls">
               <img src={{animal.animal.downloadUrls[0]}} alt="kein Bild">
-            </ion-card-header>
+            </ion-thumbnail>
             <ion-card-content>
-              
+              <ion-card-title>
+                {{animal.animal.animalName}}
+              </ion-card-title>
+              <p>
+                {{animal.animal.animalBreed | seperator : animal.animal.animalBreed }}
+              </p>
             </ion-card-content>
           </ion-card>
-          <ion-list>
-            <!--
-            <ion-card *ngFor="let animal of animalArray" (click)="showDetails(animal)">
-                <img class="image" src={{animal.downloadUrls[0]}} alt="kein Bild">
-                <ion-card-content>
-                  <ion-card-title>
-                    <h2>{{animal.name}}</h2>
-                  </ion-card-title>
-                  <p>Rasse: {{animal.breed}}</p>
-                  <p>Alter: {{animal.age}} Jahre</p> 
-                </ion-card-content>
-              </ion-card>-->
-            
+
             <!--<button ion-item *ngFor="let animal of animalArray" (click)="showDetails(animal)">       
               <ion-thumbnail item-start *ngIf="animal.animal.downloadUrls">
                 <img src={{animal.animal.downloadUrls[0]}} alt="kein Bild">
@@ -109,7 +104,7 @@
           </ion-card>
         </ion-scroll> 
         <ion-buttons end class="btnPos">
-          <button ion-fab color="brownLike"  (click)="addAnimal()">
+          <button ion-fab color="sGreen"  (click)="addAnimal()">
             <ion-icon name="add"></ion-icon>
           </button>
         </ion-buttons>
