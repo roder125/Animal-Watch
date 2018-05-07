@@ -31,7 +31,6 @@ export class AnimalDetailsPage {
 
   ionViewDidLoad() {
     this.fillUserArray();
-    this.showBreed();
   }
 
   /**
@@ -56,8 +55,7 @@ export class AnimalDetailsPage {
    */
   fillUserArray(){
     let uId = this.animal.animal.uId;
-    console.log("userid" + uId);
-    this.listService.getUserListRef().orderByChild("uId").equalTo(uId).on("child_added", snapshot => {  
+    this.listService.getUserListRef().orderByChild("user/uId").equalTo(uId).on("child_added", snapshot => {  
       this.saveArray.push(snapshot);
       this.userArray = this.saveArray.slice().reverse().map( c => ({
         key: c.key, ... c.val()
@@ -71,17 +69,6 @@ export class AnimalDetailsPage {
    */
   showUserDetails(user, name){
     this.navCtrl.push("UserDetailsPage", {user: user, animalName: name});
-  }
-
-  /**
-   * Zeigt die Rassen mit Leerzeichen und Komma getrennt
-   */
-  showBreed(){
-    if(this.animal.animal.animalBreed != "" || this.animal.animal.animalBreed != undefined ){
-      this.breed = this.animal.animal.animalBreed.toString();
-      this.breed.replace(",", ", ");
-      console.log(this.breed.replace(",", ", "));  
-    }
   }
 
   /**
