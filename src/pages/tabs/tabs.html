@@ -78,24 +78,25 @@
               </ion-card>
             </ion-col>
           </ion-row>
+
+          <div *ngIf="!edit">
           <ion-card *ngFor="let user of user">
-            <ion-row>
-              <ion-col ion-col-10>
-                <ion-card-header>
-                  {{user.user.name}} {{user.user.lastName}}
-                </ion-card-header>   
-              </ion-col>
-              <ion-col ion-col-2>
-                <button ion-button icon-only clear><ion-icon name="nutrition"></ion-icon></button>
-              </ion-col>
-            </ion-row>
+
+            <ion-item>
+              <button item-end ion-button icon-only clear (click)="editProfile(user)">
+                <ion-icon name="nutrition"></ion-icon>
+              </button>
+            </ion-item>
 
             <ion-card-content>
+              <ion-card-title>
+                {{user.user.name}} {{user.user.lastName}}  
+              </ion-card-title>
               <ion-list>
                 <ion-item-divider *ngIf="user.user.company">
                     Firma/ Verein
                 </ion-item-divider>
-                <ion-item *ngIf="user.user.company">
+                <ion-item *ngIf="user.user.company" text-center>
                   {{user.user.company}}
                 </ion-item>
                 <ion-item-divider>
@@ -116,17 +117,14 @@
                 <ion-row>
                   <ion-col >
                     <ion-item *ngIf="user.user.street">
-                      <h2 *ngIf="!editProfile">Straße</h2>
-                      <h2 *ngIf="!editProfile">{{user.user.street}}</h2>
-                      <ion-label *ngIf="editProfile"class="blackLabel" floating>Straße</ion-label>
-                      <ion-input *ngIf="editProfile" type="text" [(ngModel)]="user.user.street" ></ion-input>
+                      <h2 >Straße</h2>
+                      <h2 >{{user.user.street}}</h2>
                     </ion-item>  
                   </ion-col>
                   <ion-col>
                     <ion-item *ngIf="user.user.nr">
-                      <ion-label class="blackLabel" floating>Nr.</ion-label>
-                      <h2>{{user.user.nr}}</h2>
-                      <ion-input type="text" [(ngModel)]="user.user.nr" ></ion-input>
+                      <h2 >Nr.</h2>
+                      <h2 >{{user.user.nr}}</h2>
                     </ion-item>
                   </ion-col>
                 </ion-row>
@@ -134,16 +132,14 @@
                 <ion-row>
                   <ion-col >
                     <ion-item *ngIf="user.user.plz">
-                      <ion-label class="blackLabel" floating>PLZ</ion-label>
+                      <h2 >PLZ.</h2>
                       <h2>{{user.user.plz}}</h2>
-                      <ion-input type="text" [(ngModel)]="user.user.plz" ></ion-input>
                     </ion-item>  
                   </ion-col>
                   <ion-col>
                     <ion-item *ngIf="user.user.place">
-                      <ion-label class="blackLabel" floating>Ort</ion-label>
+                      <h2>Ort</h2>
                       <h2>{{user.user.place}}</h2>
-                      <ion-input type="text" [(ngModel)]="user.user.place" ></ion-input>
                     </ion-item>
                   </ion-col>
                 </ion-row>
@@ -151,8 +147,86 @@
               </ion-list>
             </ion-card-content>
           </ion-card>
+          </div>
+
+          <!-- Card für das Editieren des Profils -->
+          <div *ngIf="edit">
+          <ion-card *ngFor="let user of user">
+            <ion-item>
+              <button item-end ion-button (click)="saveProfileChanges(user)">
+                  Speichern
+              </button>
+            </ion-item>
+
+            <ion-card-content>
+              <ion-card-header>
+                <ion-item>
+                  <ion-label class="blackLabel">Vorname*:</ion-label>
+                  <ion-input type="text" [(ngModel)]="user.user.name"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label class="blackLabel">Nachname*:</ion-label>
+                  <ion-input type="text" [(ngModel)]="user.user.lastName"></ion-input>
+                </ion-item>
+              </ion-card-header>
+              <ion-list>
+                <ion-item-divider>
+                    Firma/ Verein
+                </ion-item-divider>
+                <ion-item>
+                  <ion-label class="blackLabel" floating>Name:</ion-label>
+                  <ion-input type="text" [(ngModel)]="user.user.company"></ion-input>
+                </ion-item>
+                <ion-item-divider>
+                  Kontakt
+                </ion-item-divider>
+                <ion-item>
+                  <h2>Email:</h2>
+                  {{user.user.email}}
+                </ion-item>
+                <ion-item>
+                  <ion-label class="blackLabel" floating>Telefon:</ion-label>
+                  <ion-input type="text" [(ngModel)]="user.user.phone"></ion-input>
+                </ion-item>
+                <ion-item-divider>
+                  Adresse
+                </ion-item-divider>
+                <ion-row>
+                  <ion-col >
+                    <ion-item>
+                      <ion-label class="blackLabel" floating>Straße</ion-label>
+                      <ion-input type="text" [(ngModel)]="user.user.street" ></ion-input>
+                    </ion-item>  
+                  </ion-col>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label class="blackLabel" floating>Nr.</ion-label>
+                      <ion-input type="text" [(ngModel)]="user.user.nr">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col >
+                    <ion-item>
+                      <ion-label class="blackLabel" floating>PLZ.</ion-label>
+                      <ion-input type="text" [(ngModel)]="user.user.plz" ></ion-input>
+                    </ion-item>  
+                  </ion-col>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label class="blackLabel" floating>Ort</ion-label>
+                      <ion-input type="text" [(ngModel)]="user.user.place">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+          </div>
         </ion-scroll> 
-        <ion-buttons end class="btnPos">
+        <ion-buttons *ngIf="!edit" end class="btnPos">
           <button ion-fab color="sGreen"  (click)="addAnimal()">
             <ion-icon name="add"></ion-icon>
           </button>

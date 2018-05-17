@@ -9,7 +9,6 @@ import { NavController, Slides, List, PopoverController, LoadingController, Scro
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { AngularFireAction, SnapshotAction, AngularFireList } from 'angularfire2/database';
 import { SpeciesAndBreedService } from '../../services/species-and-breed.service/speciesAndBreed.service';
 
 
@@ -23,11 +22,8 @@ export class TabsPage {
   @ViewChild('pageSlider') pageSlider: Slides;
   @ViewChild(Scroll) scroll: Scroll;
  
-  editProfile : boolean = false;
-  header;
+  edit : boolean = false;
   tabs: any = '0';
-  animalList$: Observable<SnapshotAction[]>;
-  result$ : Observable<any[]>;
   animalArray = [];
   myEntryArray = [];
   myEntryArrayLength: number = 0;
@@ -194,5 +190,24 @@ export class TabsPage {
       }));
       console.log(this.user)
     });
+  }
+
+  /**
+   * Wird aufgerufen, wenn der Nutzer den Edit Button betätigt
+   * @param user 
+   */
+  editProfile(user){
+    this.edit = true;    
+    console.log(user.user.nr);
+  }
+
+
+  /**
+   * Speichert die Änderungen, die vom Nutzer getätigt wurden 
+   * @param user 
+   */
+  saveProfileChanges(user){
+    this.edit = false;
+    console.log(user)
   }
 }
