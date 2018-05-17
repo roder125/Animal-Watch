@@ -23,6 +23,7 @@ export class TabsPage {
   @ViewChild('pageSlider') pageSlider: Slides;
   @ViewChild(Scroll) scroll: Scroll;
  
+  editProfile : boolean = false;
   header;
   tabs: any = '0';
   animalList$: Observable<SnapshotAction[]>;

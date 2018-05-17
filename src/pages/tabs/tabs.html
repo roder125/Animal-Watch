@@ -79,9 +79,17 @@
             </ion-col>
           </ion-row>
           <ion-card *ngFor="let user of user">
-            <ion-card-header>
-              {{user.user.name}} {{user.user.lastName}}
-            </ion-card-header>
+            <ion-row>
+              <ion-col ion-col-10>
+                <ion-card-header>
+                  {{user.user.name}} {{user.user.lastName}}
+                </ion-card-header>   
+              </ion-col>
+              <ion-col ion-col-2>
+                <button ion-button icon-only clear><ion-icon name="nutrition"></ion-icon></button>
+              </ion-col>
+            </ion-row>
+
             <ion-card-content>
               <ion-list>
                 <ion-item-divider *ngIf="user.user.company">
@@ -94,11 +102,52 @@
                   Kontakt
                 </ion-item-divider>
                 <ion-item>
+                  <h2>Email:</h2>
                   {{user.user.email}}
                 </ion-item>
                 <ion-item *ngIf="user.user.phone">
+                  <h2>Telefon:</h2>
                   {{user.user.phone}}
                 </ion-item>
+                <ion-item-divider>
+                  Adresse
+                </ion-item-divider>
+
+                <ion-row>
+                  <ion-col >
+                    <ion-item *ngIf="user.user.street">
+                      <h2 *ngIf="!editProfile">Straße</h2>
+                      <h2 *ngIf="!editProfile">{{user.user.street}}</h2>
+                      <ion-label *ngIf="editProfile"class="blackLabel" floating>Straße</ion-label>
+                      <ion-input *ngIf="editProfile" type="text" [(ngModel)]="user.user.street" ></ion-input>
+                    </ion-item>  
+                  </ion-col>
+                  <ion-col>
+                    <ion-item *ngIf="user.user.nr">
+                      <ion-label class="blackLabel" floating>Nr.</ion-label>
+                      <h2>{{user.user.nr}}</h2>
+                      <ion-input type="text" [(ngModel)]="user.user.nr" ></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col >
+                    <ion-item *ngIf="user.user.plz">
+                      <ion-label class="blackLabel" floating>PLZ</ion-label>
+                      <h2>{{user.user.plz}}</h2>
+                      <ion-input type="text" [(ngModel)]="user.user.plz" ></ion-input>
+                    </ion-item>  
+                  </ion-col>
+                  <ion-col>
+                    <ion-item *ngIf="user.user.place">
+                      <ion-label class="blackLabel" floating>Ort</ion-label>
+                      <h2>{{user.user.place}}</h2>
+                      <ion-input type="text" [(ngModel)]="user.user.place" ></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
               </ion-list>
             </ion-card-content>
           </ion-card>
