@@ -79,6 +79,7 @@
             </ion-col>
           </ion-row>
 
+          <!-- Standart Card, wenn nicht editiert werden soll-->
           <div *ngIf="!edit">
           <ion-card *ngFor="let user of user">
 
@@ -210,7 +211,7 @@
                   <ion-col >
                     <ion-item>
                       <ion-label class="blackLabel" floating>PLZ.</ion-label>
-                      <ion-input type="text" [(ngModel)]="user.user.plz" ></ion-input>
+                      <ion-input type="number" [(ngModel)]="user.user.plz" ></ion-input>
                     </ion-item>  
                   </ion-col>
                   <ion-col>
@@ -233,10 +234,12 @@
         </ion-buttons>
       </ion-slide>
       
+      <!-- Hier werden alle Nachrichten verwaltet-->
       <ion-slide>
         <h1>Messages</h1>
       </ion-slide>
 
+      <!-- Allgemeine Einstellung, bsp. Sprache oder Loggout-->
       <ion-slide>
         <h1>Settings</h1>
         <ion-buttons>
@@ -246,6 +249,7 @@
         </ion-buttons>
       </ion-slide>
 
+      <!-- Suchfunktion -->
       <ion-slide>
         <ion-list scroll="false">
           <!--<ion-item>
