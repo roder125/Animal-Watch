@@ -1,13 +1,9 @@
-import { User } from './../../models/user-interface/user.interface';
 
 import { LocalstorageService } from './../../services/localstorage/localstorage.service';
 import { AuthentificationService } from './../../services/authentification/authentification.service';
-import { Animal } from './../../models/add-animals/animal.interface';
 import { AnimalListService } from './../../services/animal-list/animal-list.service';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides, List, PopoverController, LoadingController, Scroll, IonicPage } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { SpeciesAndBreedService } from '../../services/species-and-breed.service/speciesAndBreed.service';
 
@@ -20,6 +16,7 @@ import { SpeciesAndBreedService } from '../../services/species-and-breed.service
 export class TabsPage {
 
   @ViewChild('pageSlider') pageSlider: Slides;
+  @ViewChild('newbieSlides') newbieSlides: Slides;
   @ViewChild(Scroll) scroll: Scroll;
  
   edit : boolean = false;
@@ -209,5 +206,13 @@ export class TabsPage {
   saveProfileChanges(user){
     this.edit = false;
     console.log(user)
+  }
+
+  nextNewbieSlide() {
+    this.newbieSlides.slideNext();
+  }
+
+  prevNewbieSlide() {
+    this.newbieSlides.slidePrev();
   }
 }

@@ -20,11 +20,66 @@
 
 <ion-content id="content">
     <ion-slides #pageSlider (ionSlideWillChange)="changeWillSlide($event)" class="bigSlide">
-      <ion-slide >
+      <ion-slide>
         <ion-scroll id="scroll" class="smallList" scrollY="true">
+
+          <ion-item-divider>
+            Neuzugänge
+          </ion-item-divider>
+
+          <div class="newbieSlides">
+            <ion-slides #newbieSlides slidesPerView=2>
+              <ion-slide *ngFor="let animal of animalArray" (click)="showDetails(animal)">
+                <ion-card >
+                  <ion-thumbnail item-start *ngIf="animal.animal.downloadUrls">
+                    <img src={{animal.animal.downloadUrls[0]}} alt="kein Bild">
+                  </ion-thumbnail>
+                  <ion-card-content>
+                    <ion-card-title>
+                      {{animal.animal.animalName}}
+                    </ion-card-title>
+                    <p>
+                      {{animal.animal.animalBreed | seperator : animal.animal.animalBreed }}
+                    </p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-slide>
+            </ion-slides>
+            <div id="slideArrows" class="swiper-button-next" (click)="nextNewbieSlide()"></div>
+            <div id="slideArrows" class="swiper-button-prev" (click)="prevNewbieSlide()"></div>
+          </div>
+
+          <ion-item-divider>
+            In deiner Nähe
+          </ion-item-divider>
+
+          <div class="newbieSlides">
+            <ion-slides #newbieSlides slidesPerView=2>
+              <ion-slide *ngFor="let animal of animalArray" (click)="showDetails(animal)">
+                <ion-card >
+                  <ion-thumbnail item-start *ngIf="animal.animal.downloadUrls">
+                    <img src={{animal.animal.downloadUrls[0]}} alt="kein Bild">
+                  </ion-thumbnail>
+                  <ion-card-content>
+                    <ion-card-title>
+                      {{animal.animal.animalName}}
+                    </ion-card-title>
+                    <p>
+                      {{animal.animal.animalBreed | seperator : animal.animal.animalBreed }}
+                    </p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-slide>
+            </ion-slides>
+            <div id="slideArrows" class="swiper-button-next" (click)="nextNewbieSlide()"></div>
+            <div id="slideArrows" class="swiper-button-prev" (click)="prevNewbieSlide()"></div>
+          </div>
+  
+          
+          <!--
           <ion-list>
           
-            <ion-card *ngFor="let animal of animalArray" (click)="showDetails(animal)">
+          <ion-card *ngFor="let animal of animalArray" (click)="showDetails(animal)">
             <ion-thumbnail item-start *ngIf="animal.animal.downloadUrls">
               <img src={{animal.animal.downloadUrls[0]}} alt="kein Bild">
             </ion-thumbnail>
@@ -48,8 +103,9 @@
               <h2>{{animal.animal.animalName}}</h2>
               <p>Rasse: {{animal.animal.animalBreed | seperator : animal.animal.animalBreed }}</p>
               <p>Alter: {{animal.animal.animalAge}} Jahre</p>      
-            </button>-->
-          </ion-list>
+            </button>
+          </ion-list>-->
+        
         </ion-scroll>
       </ion-slide>
      
