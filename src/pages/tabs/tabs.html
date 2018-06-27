@@ -28,7 +28,7 @@
           </ion-item-divider>
 
           <div class="newbieSlides">
-            <ion-slides #newbieSlides slidesPerView=2>
+            <ion-slides #newbieSlides slidesPerView=2 (ionSlideWillChange)="getSlideIndex($event, 'newbie')">
               <ion-slide *ngFor="let animal of animalArray" (click)="showDetails(animal)">
                 <ion-card >
                   <ion-thumbnail item-start *ngIf="animal.animal.downloadUrls">
@@ -45,16 +45,23 @@
                 </ion-card>
               </ion-slide>
             </ion-slides>
-            <div id="slideArrows" class="swiper-button-next" (click)="nextNewbieSlide()"></div>
-            <div id="slideArrows" class="swiper-button-prev" (click)="prevNewbieSlide()"></div>
+            <!-- Add Pagination -->
+            <div id="slideArrow" *ngIf="newbieSlideIndex > 0"
+              class="swiper-button-prev swiper-button-black"
+              (click)="prevSlide('newbie')">
+            </div>
+            <div id="slideArrow"
+              class="swiper-button-next swiper-button-black"
+              (click)="nextSlide('newbie')">
+            </div>
           </div>
 
           <ion-item-divider>
             In deiner Nähe
           </ion-item-divider>
 
-          <div class="newbieSlides">
-            <ion-slides #newbieSlides slidesPerView=2>
+          <div class="nearbySlides">
+            <ion-slides #nearbySlides slidesPerView=2 (ionSlideWillChange)="getSlideIndex($event, 'nearby')">
               <ion-slide *ngFor="let animal of animalArray" (click)="showDetails(animal)">
                 <ion-card >
                   <ion-thumbnail item-start *ngIf="animal.animal.downloadUrls">
@@ -71,8 +78,15 @@
                 </ion-card>
               </ion-slide>
             </ion-slides>
-            <div id="slideArrows" class="swiper-button-next" (click)="nextNewbieSlide()"></div>
-            <div id="slideArrows" class="swiper-button-prev" (click)="prevNewbieSlide()"></div>
+            <!-- Add Pagination -->
+            <div id="slideArrow" *ngIf="nearbySlideIndex > 0"
+              class="swiper-button-prev swiper-button-black"
+              (click)="prevSlide('nearby')">
+            </div>
+            <div id="slideArrow"
+              class="swiper-button-next swiper-button-black"
+              (click)="nextSlide('nearby')">
+            </div>
           </div>
   
           

@@ -17,6 +17,7 @@ export class TabsPage {
 
   @ViewChild('pageSlider') pageSlider: Slides;
   @ViewChild('newbieSlides') newbieSlides: Slides;
+  @ViewChild('nearbySlides') nearbySlides: Slides;
   @ViewChild(Scroll) scroll: Scroll;
  
   edit : boolean = false;
@@ -30,6 +31,8 @@ export class TabsPage {
   animalName;
   user;
   userSaveArray = [];
+  newbieSlideIndex: any;
+  nearbySlideIndex: any;
 
   breedArray =[];
   speciesArray = this.speciesAndBreedService.getSpeciesArray();
@@ -208,11 +211,41 @@ export class TabsPage {
     console.log(user)
   }
 
-  nextNewbieSlide() {
-    this.newbieSlides.slideNext();
+  /**
+   * Holt sich den index der aktuellen Slide
+   * @param $event 
+   */
+  getSlideIndex($event, name: string){
+    if(name == "newbie")
+      this.newbieSlideIndex = $event._snapIndex.toString();
+
+    if(name == "nearby")
+      this.nearbySlideIndex = $event._snapIndex.toString();
   }
 
-  prevNewbieSlide() {
-    this.newbieSlides.slidePrev();
+  /**
+   * Spring zu der nächsten Slide
+   * @param slide 
+   */
+  nextSlide(slide: string) {
+    if(slide == "newbie"){
+      this.newbieSlides.slideNext();
+    }
+    else if(slide == "nearby"){
+      this.nearbySlides.slideNext();
+    }   
+  }
+
+  /**
+   * Spring zu der vorherigen Slide
+   * @param slide 
+   */
+  prevSlide(slide: string) {
+    if(slide == "newbie"){
+      this.newbieSlides.slidePrev();
+    }   
+    else if(slide == "nearby"){
+      this.nearbySlides.slidePrev();
+    } 
   }
 }

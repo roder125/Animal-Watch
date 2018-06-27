@@ -88,22 +88,22 @@ page-tabs {
       
       }
 
-      .blackLabel{
-          color: black !important;
-      }
+    .blackLabel{
+        color: black !important;
+    }
 
-      .newbieSlides{
-        height: 50vh !important;
-        vertical-align: middle;
-        text-align: center;
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-
-      #slideArrows{
-        top: 37%;
-      }
-
+    .newbieSlides{
+    height: 50vh !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: relative;
     
+    }
+    .nearbySlides{
+    height: 50vh !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: relative;
+    } 
 }
         
