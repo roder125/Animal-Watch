@@ -12,13 +12,12 @@
 
 
 <ion-content>
-  <ion-slides pager="true" effect="slide" zoom="true" *ngIf="haveImage">
+  <!--<ion-slides pager="true" effect="slide" zoom="true" *ngIf="haveImage">
     <ion-slide *ngFor="let image of imageArray">
       <img [src]="_DomSanitizer.bypassSecurityTrustUrl(image)" alt="kein Bild"/>
     </ion-slide>
-  </ion-slides>
-  
-  <label class="uploader" *ngIf="noImage" (click)="showAddButton()">                   
+  </ion-slides>-->
+  <label class="uploader" (click)="showAddButton()" *ngIf="!haveImage">                   
     <ion-icon name="add" *ngIf="!showButton"></ion-icon>
     <ion-fab center *ngIf="showButton">
       <button ion-fab color="brownLike">Foto</button>
@@ -34,6 +33,31 @@
       </ion-fab-list>
     </ion-fab>    
   </label>
+  
+  <ion-slides slidesPerView=2 *ngIf="haveImage">
+    <ion-slide>
+      <label class="uploader" (click)="showAddButton()">                   
+        <ion-icon name="add" *ngIf="!showButton"></ion-icon>
+        <ion-fab center *ngIf="showButton">
+          <button ion-fab color="brownLike">Foto</button>
+          <ion-fab-list side="right">
+            <button ion-fab icon-only color="sGreen" (click)="takePicture()">
+              <ion-icon name="camera"></ion-icon>
+            </button>
+          </ion-fab-list>
+          <ion-fab-list side="left">
+            <button ion-fab icon-only color="sGreen" (click)="getPicture()">
+              <ion-icon name="images"></ion-icon>
+            </button>
+          </ion-fab-list>
+        </ion-fab>    
+      </label>
+    </ion-slide>
+    <ion-slide *ngFor="let image of imageArray">
+      <img [src]="_DomSanitizer.bypassSecurityTrustUrl(image)" alt="kein Bild"/>
+    </ion-slide>
+  </ion-slides>
+  
   
   <ion-list>
     <ion-item>
